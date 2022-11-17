@@ -1,0 +1,9 @@
+vista ingresar token
+	modulos 
+	proyecto esta cadamodulo 
+	imput porsentaje avance
+
+calendario (libreria full calendar)
+
+PROYETOS->vista proyecto(con lista de modulos y lista de usuarios->crud usuarios 
+	
