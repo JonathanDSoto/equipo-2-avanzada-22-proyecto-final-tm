@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Auth
 Route::get('/', function(){
     return view('auth.welcome');
 })->name('login');
@@ -25,9 +26,12 @@ Route::get('/users', function () {
     return view('usuarios.index');
 })->name('usuarios');
 
+// proyectos
+
 Route::get('/proyectos', function () {
     return view('proyectos.index');
 })->name('proyectos');
+
 
 Route::get('/proyectos/usuario/', function () {
     return view('proyectos.usuarios');
@@ -36,3 +40,15 @@ Route::get('/proyectos/usuario/', function () {
 Route::get('/proyectos/modulo/{id}', function () {
     return view('proyectos.modulos');
 })->name('moduloProyect');
+
+//modulos
+
+//chacador 
+
+Route::get('/checador', function () {
+    return view('checador.index');
+})->name('authChecador');
+
+Route::get('/checador/detalles-usuario', function () {
+    return view('checador.detalles');
+})->name('detallesChecador');

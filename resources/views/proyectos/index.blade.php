@@ -27,7 +27,11 @@
 
                     <tbody>
                     <tr>
-                        <td>proyecton</td>
+                        <td> 
+                            <a href="https://laravel.com/docs/9.x/migrations#roll-back-migrate-using-a-single-command" class="text-body fw-bold text-decoration-underline">
+                                <span>Proyectito</span>
+                            </a>
+                        </td>
                         <td>no es un proyecto es "EL proyecto"</td>
                         <td>BUGisoft</td>
                         <td>Brundo "god" Alejandro</td>
@@ -36,13 +40,30 @@
                         <td>activo</td>
                         <td>2020</td>
                         <td>Pendiente</td>
-                        <td>          
+                        <td>
                             <button type="button" class="btn btn-success waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
                                 <i class="bx bxs-pencil label-icon"></i>Editar
                             </button>
                             <button type="button" class="btn btn-danger waves-effect btn-label waves-light">
                                 <i class="bx bx-trash label-icon "></i> eliminar
                             </button>
+                            {{-- <div class="row">
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-warning waves-effect waves-light btn-label">
+                                        <i class="bx bxs-error label-icon"></i> Detalles
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-success waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+                                        <i class="bx bxs-pencil label-icon"></i>Editar
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-danger waves-effect btn-label waves-light">
+                                        <i class="bx bx-trash label-icon "></i> eliminar
+                                    </button>
+                                </div>
+                            </div>    --}}
                         </td>
                     </tr>
 

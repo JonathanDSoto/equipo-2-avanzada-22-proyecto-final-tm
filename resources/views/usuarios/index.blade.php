@@ -33,15 +33,31 @@
                         <td>das</td>
                         <td>$320,800</td>
                         <td>          
-                            <button type="button" class="btn btn-success waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon">
-                                </i>Editar usuario
+                            {{-- <button type="button" class="btn btn-success waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+                                <i class="bx bxs-pencil label-icon"></i>Editar
                             </button>
                             <button type="button" class="btn btn-danger waves-effect btn-label waves-light">
                                 <i class="bx bx-trash label-icon "></i> eliminar
-                            </button>
+                            </button> --}}
+                             <div class="row">
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-warning waves-effect waves-light btn-label">
+                                        <i class="bx bxs-error label-icon"></i> Detalles
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-success waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+                                        <i class="bx bxs-pencil label-icon"></i>Editar
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-danger waves-effect btn-label waves-light">
+                                        <i class="bx bx-trash label-icon "></i> eliminar
+                                    </button>
+                                </div>
+                            </div>   
                         </td>
                     </tr>
-
                     </tbody>
                 </table>
 
