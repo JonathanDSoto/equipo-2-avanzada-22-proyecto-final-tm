@@ -32,6 +32,9 @@ Route::get('/proyectos', function () {
     return view('proyectos.index');
 })->name('proyectos');
 
+Route::get('/proyectos/detalles/', function () {
+    return view('proyectos.detalles');
+})->name('userProyect');
 
 Route::get('/proyectos/usuario/', function () {
     return view('proyectos.usuarios');

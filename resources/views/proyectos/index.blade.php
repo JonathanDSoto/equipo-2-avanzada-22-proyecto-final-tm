@@ -8,7 +8,7 @@
             <div class="card-body">
 
                 <h4 class="card-title">Proyectos</h4>
-                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-user-plus label-icon"></i>Crear nuevo proyecto</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo proyecto</button>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
