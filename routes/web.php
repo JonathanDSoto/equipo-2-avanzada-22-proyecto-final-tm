@@ -26,29 +26,29 @@ Route::get('/createAccount', function(){
 // proyectos
 
 Route::get('/proyectos', function () {
-    return view('proyectos.index');
+    return view('proyects.index');
 })->name('proyectos');
 
 Route::get('/proyectos/detalles/', function () {
-    return view('proyectos.detalles');
+    return view('proyects.show');
 })->name('userProyect');
 
 Route::get('/proyectos/usuario/', function () {
-    return view('proyectos.usuarios');
+    return view('proyects.usuarios');
 })->name('userProyect');
 
 Route::get('/proyectos/modulo/{id}', function () {
-    return view('proyectos.modulos');
+    return view('proyects.modulos');
 })->name('moduloProyect');
 
 // usuarios
 Route::get('/usuarios', function () {
-    return view('usuarios.index');
+    return view('users.index');
 })->name('users');
 
 
 Route::get('/usuarios/detalles', function () {
-    return view('usuarios.detalles');
+    return view('users.show');
 })->name('detallesUsuario');
 
 //modulos
@@ -57,7 +57,7 @@ Route::get('/Modulos', function () {
 })->name('modulos');
 
 Route::get('/Modulos/detalles', function () {
-    return view('modules.detalles');
+    return view('modules.show');
 })->name('detallesModulos');
 
 //chacador 
