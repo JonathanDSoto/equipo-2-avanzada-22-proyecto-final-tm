@@ -123,6 +123,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Modulos</h4>
+                <a type="button" href=" "  class="btn btn-soft-info waves-effect waves-light">Mas informacion</a>
 
                 <div class="table-responsive">
                     <table class="table align-middle table-nowrap">
@@ -130,8 +131,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Prioridad</th> 
-                                <th>accion</th>                            
+                                <th>Prioridad</th>    
+                                <th>Avance</th>                       
                             </tr>
                         </thead>
                         <tbody>
@@ -140,7 +141,7 @@
                                     <h5 class="font-size-14 m-0 text-primary"><a href=" " class="text-dark ">#1</a></h5>
                                 </td>
                                 <td>
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class="text-dark text-primary">Modulo 1</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class=" text-primary">Modulo 1</a></h5>
                                 </td>
                                 <td>
                                     <div>
@@ -148,17 +149,15 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success waves-effect waves-light">
-                                        <i class="bx bxs-info-circle font-size-16 align-middle me-2"></i>
-                                    </button>
+                                    <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="width: 50px;">
-                                    <h5 class="font-size-14 m-0"><a href=" " class="text-dark">#2</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class="text-dark ">#1</a></h5>
                                 </td>
                                 <td>
-                                    <h5 class="font-size-14 m-0"><a href=" " class="text-dark">loren</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class=" text-primary">Modulo 1</a></h5>
                                 </td>
                                 <td>
                                     <div>
@@ -166,17 +165,15 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success waves-effect waves-light">
-                                        <i class="bx bxs-info-circle font-size-16 align-middle me-2"></i>
-                                    </button>
+                                    <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="width: 50px;">
-                                    <h5 class="font-size-14 m-0"><a href=" " class="text-dark">#3</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class="text-dark ">#1</a></h5>
                                 </td>
                                 <td>
-                                    <h5 class="font-size-14 m-0"><a href=" " class="text-dark">Usuarios</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class=" text-primary">Modulo 1</a></h5>
                                 </td>
                                 <td>
                                     <div>
@@ -184,9 +181,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success waves-effect waves-light">
-                                        <i class="bx bxs-info-circle font-size-16 align-middle me-2"></i>
-                                    </button>
+                                    <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
                                 </td>
                             </tr>
                            

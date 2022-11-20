@@ -1,0 +1,131 @@
+@extends('layouts.app')
+
+@section('contenido')
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Modulos del proyecto</h4>
+                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
+                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Prioridad</th>
+                        <th>Proyecto</th>                     
+                        <th>accion</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td> 
+                            <a href=" " class="text-body fw-bold ">
+                                <span class="text-primary">#240</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href=" " class="text-body fw-bold ">
+                                <span >Proyectito</span>
+                            </a>
+                        </td>
+                        <td>Alta</td>                        
+                        <td>BUGisoft</td>
+                        <td>                            
+                            <button type="button" class="btn btn-success waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+                                <i class="bx bxs-pencil label-icon"></i>Editar
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect btn-label waves-light">
+                                <i class="bx bx-trash label-icon "></i> eliminar
+                            </button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> 
+
+{{-- modal --}}
+<div>
+    
+
+    <!-- sample modal content -->
+    <div id="modalUsuarios" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Modulo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <form>
+                        
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Nombre del modulo">
+                        </div>                        
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Prioridad</label>
+                            <div class="col-md-10">
+                                <select class="form-select">
+                                    <option>Select</option>
+                                    <option>Alta</option>
+                                    <option>Media</option>
+                                    <option>Baja</option>
+
+                                </select>
+                            </div>
+                        </div>  
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Encargado del modulo</label>
+                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Nombre del encargado">
+                        </div>                                                  
+                        
+                         
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        </div>
+                    </form>
+
+                </div>
+                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div> 
+{{-- end modal --}}
+
+    
+    
+@endsection
+
+@section('scripts')
+          <!-- Required datatable js -->
+          <script src="{{asset('libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+          <script src="{{asset('libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+          <!-- Buttons examples -->
+          <script src="{{asset('libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+          <script src="{{asset('libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+          <script src="{{asset('libs/jszip/jszip.min.js')}}"></script>
+          <script src="{{asset('libs/pdfmake/build/pdfmake.min.js')}}"></script>
+          <script src="{{asset('libs/pdfmake/build/vfs_fonts.js')}}"></script>
+          <script src="{{asset('libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+          <script src="{{asset('libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+          <script src="{{asset('libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+          
+          <!-- Responsive examples -->
+          <script src="{{asset('libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+          <script src="{{asset('libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+  
+          <!-- Datatable init js -->
+          <script src="{{asset('js/pages/datatables.init.js')}}"></script>    
+@endsection

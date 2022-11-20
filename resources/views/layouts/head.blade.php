@@ -6,6 +6,8 @@
 <!-- App favicon -->
 <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
 
+@yield('head')
+
 <!-- Bootstrap Css -->
 <link href="{{asset('css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
 <!-- Icons Css -->

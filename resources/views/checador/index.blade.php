@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-7">
                                 <div class="text-primary p-4">
-                                    <h5 class="text-primary">Chacador</h5>
+                                    <h5 class="text-primary">Chacador de entrada</h5>
                                     <p>Escriba su Token de usuario</p>
                                 </div>
                             </div>
@@ -22,7 +22,8 @@
                     </div>
                     <div class="card-body pt-0"> 
                         <div class="p-2">
-                            <form action="">    
+                            <form action="">
+
                                 <div class="mb-3">
                                     <label for="userpassword">Token de usuario</label>
                                     <input type="password" class="form-control" id="userpassword" placeholder="Escriba su token aqui">

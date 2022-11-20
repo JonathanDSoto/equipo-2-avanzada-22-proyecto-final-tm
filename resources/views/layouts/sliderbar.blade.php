@@ -18,25 +18,11 @@
                     </ul>
                 </li> --}}
                 <li>
-                    <a href=" {{ route('usuarios') }} " class="waves-effect">
+                    <a href="{{route('users')}}" class="waves-effect">
                         <i class="bx bx-user-circle"></i>
                         <span key="t-authentication">Usuarios</span>
                     </a>
-                </li>
-                
-                {{-- <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-briefcase-alt-2"></i>
-                        <span key="t-projects">Proyectos</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=" {{ route('usuarios') }} " key="t-p-grid">Projects Grid</a></li>
-                        <li><a href=" {{ route('proyectos') }} " key="t-p-list">Projects List</a></li>
-                        <li><a href="  " key="t-p-overview">Project Overview</a></li>
-                        <li><a href="projects-create.html" key="t-create-new">Create New</a></li>
-                    </ul>
-                </li> --}}
-                
+                </li>                
                 <li>
                     <a href=" {{ route('proyectos') }} " class="waves-effect">
                         <i class="bx bx-briefcase-alt-2"></i>
@@ -50,13 +36,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="waves-effect">
+                    <a href=" {{route('calendario')}}" class="waves-effect">
                         <i class="bx bx-file"></i>
                         <span key="t-file-manager">Reportes</span>
                     </a>
                 </li>
                 <li>
-                    <a href="  " class="waves-effect">
+                    <a href="{{route('modulos')}}" class="waves-effect">
                         <i class="bx bx-calendar"></i>
                         <span key="t-file-manager">Calendarios</span>
                     </a>
