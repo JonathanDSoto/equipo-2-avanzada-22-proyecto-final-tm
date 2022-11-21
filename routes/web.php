@@ -18,7 +18,7 @@ Route::get('/', function(){
     return view('auth.welcome');
 })->name('login');
 
-Route::get('/createAccount', function(){
+Route::get('/crear-cuenta', function(){
     return view('auth.create');
 })->name('create'); 
 
@@ -33,13 +33,9 @@ Route::get('/proyectos/detalles/', function () {
     return view('proyects.show');
 })->name('showProyect');
 
-Route::get('/proyectos/usuario/', function () {
-    return view('proyects.usuarios');
-})->name('userProyect');
-
 Route::get('/proyectos/modulo/{id}', function () {
     return view('proyects.modulos');
-})->name('moduloProyect');
+})->name('modulo.proyect');
 
 // usuarios
 Route::get('/usuarios', function () {
@@ -74,7 +70,7 @@ Route::get('/checador', function () {
     return view('check.index');
 })->name('authChecador');
 
-Route::get('/log-out', function () {
+Route::get('/checar-salida', function () {
     return view('Auth.logOut');
 })->name('logOutChecador');
 
