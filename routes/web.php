@@ -31,7 +31,7 @@ Route::get('/proyectos', function () {
 
 Route::get('/proyectos/detalles/', function () {
     return view('proyects.show');
-})->name('userProyect');
+})->name('showProyect');
 
 Route::get('/proyectos/usuario/', function () {
     return view('proyects.usuarios');
@@ -46,10 +46,18 @@ Route::get('/usuarios', function () {
     return view('users.index');
 })->name('users');
 
-
 Route::get('/usuarios/detalles', function () {
     return view('users.show');
-})->name('detallesUsuario');
+})->name('showUsuario');
+
+// reportes
+Route::get('/reportes', function () {
+    return view('reports.index');
+})->name('report');
+
+Route::get('/reportes/detalles', function () {
+    return view('reports.show');
+})->name('showReport');
 
 //modulos
 Route::get('/Modulos', function () {
@@ -58,12 +66,12 @@ Route::get('/Modulos', function () {
 
 Route::get('/Modulos/detalles', function () {
     return view('modules.show');
-})->name('detallesModulos');
+})->name('showModulos');
 
 //chacador 
 
 Route::get('/checador', function () {
-    return view('checador.index');
+    return view('check.index');
 })->name('authChecador');
 
 Route::get('/log-out', function () {
