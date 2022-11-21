@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href=" {{route('modulos')}}" class="waves-effect">
+                    <a href=" {{route('report')}}" class="waves-effect">
                         <i class="bx bx-file"></i>
                         <span key="t-file-manager">Reportes</span>
                     </a>
