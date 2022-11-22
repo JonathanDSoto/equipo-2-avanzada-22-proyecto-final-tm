@@ -53,7 +53,7 @@
                                 </div> 
                                 <div class="col-xl-12">
                                     <div class="p-3">
-                                        <h5 class="font-size-14 mb-3">Default</h5>
+                                        <h5 class="font-size-14 mb-3">Porcentaje de avance</h5>
                                         <input type="text" id="range_01">
                                     </div>
                                 </div>

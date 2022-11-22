@@ -23,12 +23,12 @@
                     <tbody>
                     <tr>
                         <td> 
-                            <a href=" {{route('showModulos')}}" class="text-body fw-bold ">
+                            <a href=" {{route('showModules')}}" class="text-body fw-bold ">
                                 <span class="text-primary">#240</span>
                             </a>
                         </td>
                         <td>
-                            <a href=" {{route('showModulos')}}" class="text-body fw-bold ">
+                            <a href=" {{route('showModules')}}" class="text-body fw-bold ">
                                 <span >Proyectito</span>
                             </a>
                         </td>
