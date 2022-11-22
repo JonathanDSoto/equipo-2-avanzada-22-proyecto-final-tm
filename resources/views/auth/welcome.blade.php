@@ -46,7 +46,9 @@
                                         </div>
                                         
                                         <div class="mt-3 d-grid">
-                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Iniciar sesion</button>
+                                            <a href="{{route('proyect')}}">
+                                                <button class="btn btn-primary waves-effect waves-light"  type="button">Iniciar sesion</button>
+                                            </a>
                                         </div>
                                     </form>
                                 </div>
@@ -56,7 +58,6 @@
                         <div class="mt-5 text-center">
                             
                             <div>
-                                <p>¿No tienes una cuenta? <a href="{{route('create')}}" class="fw-medium text-primary"> Registrate ahora! </a> </p>
                                 <p>© 2022 programacion avanzada en internet</p>
                             </div>
                         </div>

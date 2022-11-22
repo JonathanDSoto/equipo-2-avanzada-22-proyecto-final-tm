@@ -21,7 +21,7 @@
                         <th>Cantidad de usuarios</th>
                         <th>Estado</th>
                         <th>Fecha de inicio</th> 
-                        <th>Fecha finalozacion</th>                       
+                        <th>Fecha finalizacion</th>                       
                         <th>accion</th>
                     </tr>
                     </thead>
