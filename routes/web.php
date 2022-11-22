@@ -27,15 +27,15 @@ Route::get('/crear-cuenta', function(){
 
 Route::get('/proyectos', function () {
     return view('proyects.index');
-})->name('proyectos');
+})->name('proyect');
 
 Route::get('/proyectos/detalles/', function () {
     return view('proyects.show');
 })->name('showProyect');
 
-Route::get('/proyectos/modulo/{id}', function () {
-    return view('proyects.modulos');
-})->name('modulo.proyect');
+// Route::get('/proyectos/modulo/{id}', function () {
+//     return view('proyects.modulos');
+// })->name('moduloroyect');
 
 // usuarios
 Route::get('/usuarios', function () {
@@ -44,7 +44,7 @@ Route::get('/usuarios', function () {
 
 Route::get('/usuarios/detalles', function () {
     return view('users.show');
-})->name('showUsuario');
+})->name('showUser');
 
 // reportes
 Route::get('/reportes', function () {
@@ -58,24 +58,24 @@ Route::get('/reportes/detalles', function () {
 //modulos
 Route::get('/Modulos', function () {
     return view('modules.index');
-})->name('modulos');
+})->name('modules');
 
 Route::get('/Modulos/detalles', function () {
     return view('modules.show');
-})->name('showModulos');
+})->name('showModules');
 
 //chacador 
 
 Route::get('/checador', function () {
     return view('check.index');
-})->name('authChecador');
+})->name('authCheck');
 
 Route::get('/checar-salida', function () {
     return view('Auth.logOut');
-})->name('logOutChecador');
+})->name('logOutCheck');
 
 // calendario
 
 Route::get('/calendario', function () {
     return view('calendar.index');
-})->name('calendario');
+})->name('calendar');

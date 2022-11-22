@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+            <!-- Sweet Alert-->
+            <link href="{{asset('libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 @section('contenido')
 
 <div class="row">
@@ -28,7 +29,7 @@
                     <tbody>
                     <tr>
                         <td> 
-                            <a href=" " class="text-body fw-bold ">
+                            <a href=" {{route('showReport')}}" class="text-body fw-bold ">
                                 <span class="text-primary">Proyectito</span>
                             </a>
                         </td>
@@ -41,12 +42,24 @@
                         <td>2020</td>
                         <td>Pendiente</td>
                         <td>
-                            <button type="button" class="btn btn-success waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
-                                <i class="bx bxs-pencil label-icon"></i>Editar
-                            </button>
-                            <button type="button" class="btn btn-danger waves-effect btn-label waves-light">
-                                <i class="bx bx-trash label-icon "></i> eliminar
-                            </button>
+                            <div class="row">
+                                <div class="col-4 ">
+                                    <a href=" {{route('showProyect')}}"  type="button" class="btn btn-warning waves-effect waves-light ">
+                                        <i class="bx bxs-info-circle label-icon"></i> 
+                                    </a>
+                                </div>
+                                <div class="col-4">
+                                    <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+                                        <i class="bx bxs-pencil label-icon"></i>
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button onclick="remove()" type="button" class="btn btn-danger waves-effect waves-light" >
+                                        <i class="bx bx-trash label-icon "></i> 
+                                    </button>
+                                </div>
+                            </div>
+                            
                         </td>
                     </tr>
 
@@ -149,18 +162,49 @@
 @endsection
 
 @section('scripts')
-          <!-- Required datatable js -->
-          <script src="{{asset('libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-          <script src="{{asset('libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-          <!-- Buttons examples -->
-          <script src="{{asset('libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-          <script src="{{asset('libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
-          <script src="{{asset('libs/jszip/jszip.min.js')}}"></script>
-          <script src="{{asset('libs/pdfmake/build/pdfmake.min.js')}}"></script>
-          <script src="{{asset('libs/pdfmake/build/vfs_fonts.js')}}"></script>
-          <script src="{{asset('libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-          <script src="{{asset('libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-          <script src="{{asset('libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+        <script type="text/javascript">
+            function remove(id) {
+            swal({
+                title: "Estas seguro?",
+                text: "No podras recuperar el proyecto",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Poof! EL proyecto se elimino con exito!", {
+                icon: "success",
+                });
+            } else {
+                swal("El proyecto esta a salvo!");
+            }
+            });  
+        }
+        </script>
+
+        <!-- Required datatable js -->
+        <script src="{{asset('libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+        <!-- Buttons examples -->
+        <script src="{{asset('libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('libs/jszip/jszip.min.js')}}"></script>
+        <script src="{{asset('libs/pdfmake/build/pdfmake.min.js')}}"></script>
+        <script src="{{asset('libs/pdfmake/build/vfs_fonts.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+        
+
+        <!-- Sweet Alerts js -->
+        <script src="{{asset('libs/sweetalert2/sweetalert2.min.j')}}s"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+        <!-- Sweet alert init js-->
+        <script src="{{asset('js/pages/sweet-alerts.init.js')}}"></script>
+
           
           <!-- Responsive examples -->
           <script src="{{asset('libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>

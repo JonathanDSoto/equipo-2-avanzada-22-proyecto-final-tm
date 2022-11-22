@@ -44,7 +44,7 @@
                                 10%
                             </td>
                             <td>
-                                <button type="button" class="btn btn-light btn-sm">View</button>
+                                <a type="button" href=" {{route('showUser')}}"  class="btn btn-light btn-sm">Detalles</a>
                             </td>
                         </tr>                        
                     </tbody>

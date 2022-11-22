@@ -44,11 +44,8 @@
                                             </div>
                                             <div class="col-6">
                                                 <h5 class="font-size-15">$1245</h5>
-                                                <p class="text-muted mb-0">Revenue</p>
+                                                <p class="text-muted mb-0">Salario</p>
                                             </div>
-                                        </div>
-                                        <div class="mt-4">
-                                            <a href=" " class="btn btn-primary waves-effect waves-light btn-sm">Ver perfil <i class="mdi mdi-arrow-right ms-1"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +92,7 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
-                                            <p class="text-muted fw-medium mb-2">Completed Projects</p>
+                                            <p class="text-muted fw-medium mb-2">Proyectos completados</p>
                                             <h4 class="mb-0">125</h4>
                                         </div>
 
@@ -115,7 +112,7 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
-                                            <p class="text-muted fw-medium mb-2">Pending Projects</p>
+                                            <p class="text-muted fw-medium mb-2">Proyectos pendientes</p>
                                             <h4 class="mb-0">12</h4>
                                         </div>
 
@@ -135,7 +132,7 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
-                                            <p class="text-muted fw-medium mb-2">Total Revenue</p>
+                                            <p class="text-muted fw-medium mb-2">Total ganado</p>
                                             <h4 class="mb-0">$36,524</h4>
                                         </div>
 
@@ -177,9 +174,9 @@
                                             <td>01%</td>
                                             <td>30/02/2020</td>
                                             <td>
-                                                <button type="button" class="btn btn-primary waves-effect waves-light">
+                                                <a href=" {{route('showProyect')}}" type="button" class="btn btn-primary waves-effect waves-light">
                                                     <i class="mdi mdi-folder-information font-size-16 align-middle me-2"></i> Detalles
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
 
@@ -191,9 +188,9 @@
                                             <td>50%</td>
                                             <td>20/10/2010</td>
                                             <td>
-                                                <button type="button" class="btn btn-primary waves-effect waves-light">
+                                                <a href=" {{route('showProyect')}}" type="button" class="btn btn-primary waves-effect waves-light">
                                                     <i class="mdi mdi-folder-information font-size-16 align-middle me-2"></i> Detalles
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>                                        
                                     </tbody>

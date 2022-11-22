@@ -2,19 +2,20 @@
 
 @section('contenido')
 
-<div class="row">
-    <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Reporte del proyecto</h4>
-        </div>
-    </div>
-</div>
+
 <!-- end page title -->
 
-<div class="row">
-    <div class="col-lg-12">
+<div class="row">   
+    
         <div class="card">
+            
             <div class="card-body">
+                <div class="col-lg-12">
+                    <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Reporte del proyecto</h4>
+                    </div>
+                </div>
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-4">
                         <img src="{{asset('images/companies/img-1.png')}}" alt="" class="avatar-sm">
@@ -27,7 +28,7 @@
                 </div>
                 
                 <div class="row">
-                    <h5 class="font-size-15 mt-4">Project Details :</h5>
+                    <h5 class="font-size-15 mt-4">detalles del proyecto :</h5>
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <button type="button" class="btn btn-soft-secondary waves-effect waves-light">Exportar PDF</button>
                     </div>
@@ -54,14 +55,14 @@
                 <div class="row task-dates">
                     <div class="col-sm-4 col-6">
                         <div class="mt-4">
-                            <h5 class="font-size-14"><i class="bx bx-calendar me-1 text-primary"></i> Start Date</h5>
+                            <h5 class="font-size-14"><i class="bx bx-calendar me-1 text-primary"></i> fecha de inicio</h5>
                             <p class="text-muted mb-0">08 Sept, 2019</p>
                         </div>
                     </div>
 
                     <div class="col-sm-4 col-6">
                         <div class="mt-4">
-                            <h5 class="font-size-14"><i class="bx bx-calendar-check me-1 text-primary"></i> Due Date</h5>
+                            <h5 class="font-size-14"><i class="bx bx-calendar-check me-1 text-primary"></i> fecha de finalizacion</h5>
                             <p class="text-muted mb-0">12 Oct, 2019</p>
                         </div>
                     </div>

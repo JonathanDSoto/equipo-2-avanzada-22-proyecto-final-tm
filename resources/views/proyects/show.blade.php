@@ -72,11 +72,11 @@
                         <tbody>
                             <tr>
                                 <td style="width: 50px;">
-                                    <a href=" " class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
+                                    <a href=" {{route('showUser')}}" class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
                                     
                                 </td>
                                 <td>
-                                    <h5 class="font-size-14 m-0"><a href=" " class=" text-primary">Daniel Canales</a></h5>
+                                    <h5 class="font-size-14 m-0"><a href=" {{route('showUser')}}" class=" text-primary">Daniel Canales</a></h5>
                                 </td>
                                 <td>
                                     <div>
@@ -87,11 +87,11 @@
                             </tr>
                             <tr>
                                 <td style="width: 50px;">
-                                    <a href=" " class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
+                                    <a href=" {{route('showUser')}}" class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
                                     
                                 </td>
                                 <td>
-                                    <h5 class="font-size-14 m-0"><a href=" " class=" text-primary">Daniel Canales</a></h5>
+                                    <h5 class="font-size-14 m-0"><a href=" {{route('showUser')}}" class=" text-primary">Daniel Canales</a></h5>
                                 </td>
                                 <td>
                                     <div>
@@ -102,11 +102,11 @@
                             </tr>
                             <tr>
                                 <td style="width: 50px;">
-                                    <a href=" " class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
+                                    <a href=" {{route('showUser')}}" class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
                                     
                                 </td>
                                 <td>
-                                    <h5 class="font-size-14 m-0"><a href=" " class=" text-primary">Daniel Canales</a></h5>
+                                    <h5 class="font-size-14 m-0"><a href=" {{route('showUser')}}" class=" text-primary">Daniel Canales</a></h5>
                                 </td>
                                 <td>
                                     <div>
@@ -123,7 +123,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Modulos</h4>
-                <a type="button" href=" "  class="btn btn-soft-info waves-effect waves-light">Mas informacion</a>
+                <a type="button" href=" {{route('modules')}}"  class="btn btn-soft-info waves-effect waves-light">Mas informacion</a>
 
                 <div class="table-responsive">
                     <table class="table align-middle table-nowrap">
@@ -138,26 +138,10 @@
                         <tbody>
                             <tr>
                                 <td style="width: 50px;">
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class="text-dark ">#1</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class="text-dark ">#1</a></h5>
                                 </td>
                                 <td>
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class=" text-primary">Modulo 1</a></h5>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-soft-info text-primary font-size-11">Alta</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class="text-dark ">#1</a></h5>
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class=" text-primary">Modulo 1</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class=" text-primary">Modulo 1</a></h5>
                                 </td>
                                 <td>
                                     <div>
@@ -170,10 +154,10 @@
                             </tr>
                             <tr>
                                 <td style="width: 50px;">
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class="text-dark ">#1</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class="text-dark ">#1</a></h5>
                                 </td>
                                 <td>
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" " class=" text-primary">Modulo 1</a></h5>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class=" text-primary">Modulo 1</a></h5>
                                 </td>
                                 <td>
                                     <div>
@@ -184,6 +168,22 @@
                                     <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="width: 50px;">
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class="text-dark ">#1</a></h5>
+                                </td>
+                                <td>
+                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class=" text-primary">Modulo 1</a></h5>
+                                </td>
+                                <td>
+                                    <div>
+                                        <span class="badge badge-soft-info text-primary font-size-11">Alta</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
+                                </td>
+                            </tr> 
                            
                         </tbody>
                     </table>

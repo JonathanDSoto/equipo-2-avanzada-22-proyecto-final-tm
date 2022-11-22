@@ -24,13 +24,13 @@
                     </a>
                 </li>                
                 <li>
-                    <a href=" {{ route('proyectos') }} " class="waves-effect">
+                    <a href=" {{ route('proyect') }} " class="waves-effect">
                         <i class="bx bx-briefcase-alt-2"></i>
                         <span key="t-authentication">Proyectos</span>
                     </a>
                 </li>
                 <li>
-                    <a href=" {{ route('authChecador') }} " class="waves-effect">
+                    <a href=" {{ route('authCheck') }} " class="waves-effect">
                         <i class="bx bx-task"></i>
                         <span key="t-file-manager">checador</span>
                     </a>
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('calendario')}}" class="waves-effect">
+                    <a href="{{route('calendar')}}" class="waves-effect">
                         <i class="bx bx-calendar"></i>
                         <span key="t-file-manager">Calendarios</span>
                     </a>

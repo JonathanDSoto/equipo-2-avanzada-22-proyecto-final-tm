@@ -30,7 +30,7 @@
                                 </div>
     
                                 <div class="text-end">
-                                    <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Ingresar</button>
+                                    <a href=" {{route('showUser')}}" class="btn btn-primary w-md waves-effect waves-light" type="submit">Ingresar</a>
                                 </div>
 
                             </form>
