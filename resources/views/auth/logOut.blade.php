@@ -58,7 +58,10 @@
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Enviar</button>
+                                    <a href="{{route('login')}}">
+                                        <button class="btn btn-primary w-md waves-effect waves-light" type="button">Enviar</button>
+
+                                    </a>
                                 </div>
 
                             </form>

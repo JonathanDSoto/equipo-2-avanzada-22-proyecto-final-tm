@@ -32,7 +32,7 @@
                 <li>
                     <a href=" {{ route('authCheck') }} " class="waves-effect">
                         <i class="bx bx-task"></i>
-                        <span key="t-file-manager">checador</span>
+                        <span key="t-file-manager">Checador</span>
                     </a>
                 </li>
                 <li>

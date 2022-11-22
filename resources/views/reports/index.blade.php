@@ -25,17 +25,17 @@
                         <p class="fw-light">Miembros</p>
                         <div class="avatar-group">
                             <div class="avatar-group-item">
-                                <a href="  " class="d-inline-block">
+                                <a href="{{route('showUser')}}" class="d-inline-block">
                                     <img src="{{asset('images/users/avatar-4.jpg')}}" alt="" class="rounded-circle avatar-xs">
                                 </a>
                             </div>
                             <div class="avatar-group-item">
-                                <a href=" " class="d-inline-block">
+                                <a href="{{route('showUser')}}" class="d-inline-block">
                                     <img src="{{asset('images/users/avatar-5.jpg')}}" alt="" class="rounded-circle avatar-xs">
                                 </a>
                             </div>
                             <div class="avatar-group-item">
-                                <a href=" " class="d-inline-block">
+                                <a href="{{route('showUser')}}" class="d-inline-block">
                                     <div class="avatar-xs">
                                         <span class="avatar-title rounded-circle bg-success text-white font-size-16">
                                             A
@@ -44,7 +44,7 @@
                                 </a>
                             </div>
                             <div class="avatar-group-item">
-                                <a href=" " class="d-inline-block">
+                                <a href="{{route('showUser')}}" class="d-inline-block">
                                     <img src="{{asset('images/users/avatar-2.jpg')}}" alt="" class="rounded-circle avatar-xs">
                                 </a>
                             </div>
@@ -55,7 +55,7 @@
             <div class="px-4 py-3 border-top">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item me-3">
-                        <span class="badge bg-success">Completed</span>
+                        <span class="badge bg-success">Completo</span>
                     </li>
                     <li class="list-inline-item me-3">
                         <i class= "bx bx-calendar me-1"></i> 15 Oct, 19 
