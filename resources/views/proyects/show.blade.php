@@ -33,7 +33,19 @@
 
                 <p class="text-muted">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc,</p>
 
-                
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Progreso del proyecto</h4>
+
+                        <div class="">
+                            <div class="progress progress-xl">
+                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row task-dates">
                     <div class="col-sm-4 col-6">
                         <div class="mt-4">
@@ -120,87 +132,206 @@
                 </div>
             </div>
         </div>
+    </div>
+    <!-- end col -->
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Modulos</h4>
-                <a type="button" href=" {{route('modules')}}"  class="btn btn-soft-info waves-effect waves-light">Mas informacion</a>
-
-                <div class="table-responsive">
-                    <table class="table align-middle table-nowrap">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Prioridad</th>    
-                                <th>Avance</th>                       
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="width: 50px;">
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class="text-dark ">#1</a></h5>
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class=" text-primary">Modulo 1</a></h5>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-soft-info text-primary font-size-11">Alta</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class="text-dark ">#1</a></h5>
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class=" text-primary">Modulo 1</a></h5>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-soft-info text-primary font-size-11">Alta</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class="text-dark ">#1</a></h5>
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0 text-primary"><a href=" {{route('showModules')}}" class=" text-primary">Modulo 1</a></h5>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-soft-info text-primary font-size-11">Alta</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0 text-muted"> 100%</h5>
-                                </td>
-                            </tr> 
-                           
-                        </tbody>
-                    </table>
-                </div>
+    
+                <h4 class="card-title">Modulos del proyecto</h4>
+                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
+                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Prioridad</th>
+                        <th>Proyecto</th>
+                        <th>NO.usuarios</th>                     
+                        <th>accion</th>
+                    </tr>
+                    </thead>
+    
+                    <tbody>
+                    <tr>
+                        <td> 
+                            <a href=" {{route('showModules')}}" class="text-body fw-bold ">
+                                <span class="text-primary">#240</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href=" {{route('showModules')}}" class="text-body fw-bold ">
+                                <span >Proyectito</span>
+                            </a>
+                        </td>
+                        <td>Alta</td>                        
+                        <td>BUGisoft</td>
+                        <td>4</td> 
+                        <td style="width: 200px">   
+                            <div class="row" >
+                                <div class="col-6 ">
+                                    <button type="button" class="btn btn-success waves-effect waves-light " data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+                                        <i class="bx bxs-pencil label-icon"></i>
+                                    </button>
+                                </div>
+                                <div class="col-6 ">
+                                    <button onclick="remove()" type="button" class="btn btn-danger waves-effect  waves-light">
+                                        <i class="bx bx-trash label-icon "></i> 
+                                    </button>
+                                </div>
+                            </div>                               
+                        </td>
+                    </tr>
+    
+                    </tbody>
+                </table>
+    
             </div>
         </div>
     </div>
-    <!-- end col -->
+    
 </div>
 <!-- end row -->
 
 
-</div>
+{{-- modal --}}
+<div>
+    
+
+    <!-- sample modal content -->
+    <div id="modalUsuarios" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Modulo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <form>
+                        
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802">
+                        </div>                        
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Descripcion</label>
+                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802">
+                        </div>
+                                                    
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Lider del proyecto</label>
+                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
+                        </div>                     
+                        <div class="row">
+                            <div class="col-md-6">                                
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">compania</label>
+                                    <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">                                  
+                                    <div class="mb-4">
+                                        <label for="formrow-firstname-input" class="form-label">Numero de usuarios</label>
+                                        <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
+                                    </div>                                 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">                                
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Fecha inicio</label>
+                                    <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">                                  
+                                    <div class="mb-4">
+                                        <label for="formrow-firstname-input" class="form-label">Fecha fin</label>
+                                        <input class="form-control" type="date" value="2020-07-18" id="example-date-input">
+                                    </div>                                 
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Estado</label>
+                            <div class="col-md-10">
+                                <select class="form-select">
+                                    <option>Select</option>
+                                    <option>Pendiente</option>
+                                    <option>Finalizado</option>
+                                    <option>cancelado</option>
+
+                                </select>
+                            </div>                        
+                        </div> 
+                         
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        </div>
+                    </form>
+
+                </div>
+                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div> 
+{{-- end modal --}}
 <!-- end row -->
     
 @endsection
 
 @section('scripts')
- 
+        <script type="text/javascript">
+            function remove(id) {
+            swal({
+                title: "Estas seguro?",
+                text: "No podras recuperar el proyecto",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Poof! EL proyecto se elimino con exito!", {
+                icon: "success",
+                });
+            } else {
+                swal("El proyecto esta a salvo!");
+            }
+            });  
+        }
+        </script>
+
+        <!-- Required datatable js -->
+        <script src="{{asset('libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+        <!-- Buttons examples -->
+        <script src="{{asset('libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('libs/jszip/jszip.min.js')}}"></script>
+        <script src="{{asset('libs/pdfmake/build/pdfmake.min.js')}}"></script>
+        <script src="{{asset('libs/pdfmake/build/vfs_fonts.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+        
+
+        <!-- Sweet Alerts js -->
+        <script src="{{asset('libs/sweetalert2/sweetalert2.min.j')}}s"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+        <!-- Sweet alert init js-->
+        <script src="{{asset('js/pages/sweet-alerts.init.js')}}"></script>
+
+          
+          <!-- Responsive examples -->
+          <script src="{{asset('libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+          <script src="{{asset('libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+  
+          <!-- Datatable init js -->
+          <script src="{{asset('js/pages/datatables.init.js')}}"></script>    
 @endsection

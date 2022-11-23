@@ -132,14 +132,14 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
-                                            <p class="text-muted fw-medium mb-2">Total ganado</p>
-                                            <h4 class="mb-0">$36,524</h4>
+                                            <p class="text-muted fw-medium mb-2">Total de horas trabajadas</p>
+                                            <h4 class="mb-0">240 hrs</h4>
                                         </div>
 
                                         <div class="flex-shrink-0 align-self-center">
                                             <div class="avatar-sm mini-stat-icon rounded-circle bg-primary">
                                                 <span class="avatar-title">
-                                                    <i class="bx bx-package font-size-24"></i>
+                                                    <i class="bx bx-time font-size-24"></i>
                                                 </span>
                                             </div>
                                         </div>

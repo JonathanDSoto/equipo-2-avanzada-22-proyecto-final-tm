@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('head')
-    <!-- ION Slider -->
-    <link href="{{asset('libs/ion-rangeslider/css/ion.rangeSlider.min.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('contenido')
@@ -80,10 +78,6 @@
 
 @section('scripts')
 
-        <!-- Ion Range Slider-->
-        <script src="{{asset('libs/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script>
 
-        <!-- Range slider init js-->
-        <script src="{{asset('js/pages/range-sliders.init.js')}}"></script>
  
 @endsection

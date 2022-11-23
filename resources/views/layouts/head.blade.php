@@ -5,6 +5,8 @@
 <meta content="Themesbrand" name="author" />
 <!-- App favicon -->
 <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+ <!-- ION Slider -->
+ <link href="{{asset('libs/ion-rangeslider/css/ion.rangeSlider.min.css')}}" rel="stylesheet" type="text/css"/>
 
 @yield('head')
 

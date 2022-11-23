@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Auth
-Route::get('/', function(){
+Route::get('/login', function(){
     return view('auth.welcome');
 })->name('login');
 
@@ -22,6 +22,18 @@ Route::get('/crear-cuenta', function(){
     return view('auth.create');
 })->name('create'); 
 
+// checador de empleados
+Route::get('/', function(){
+    return view('checkEmployees.index');
+})->name('check.employees'); 
+
+Route::get('/check-in', function(){
+    return view('checkEmployees.check_in');
+})->name('check_in.employees'); 
+
+Route::get('/check-out', function(){
+    return view('checkEmployees.check_out');
+})->name('check_out.employees'); 
 
 // proyectos
 

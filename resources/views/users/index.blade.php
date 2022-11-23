@@ -27,7 +27,7 @@
                     <tbody>
                     <tr>
                         <td>
-                            <a href=" {{route('showReport')}}" class="text-body fw-bold ">
+                            <a href=" {{route('showUser')}}" class="text-body fw-bold ">
                                 <span class="text-primary">Proyectito</span>
                             </a>
                         </td>
@@ -71,7 +71,7 @@
 
     <!-- sample modal content -->
     <div id="modalUsuarios" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">Crear nuevo usuario</h5>
