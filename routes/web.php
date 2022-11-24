@@ -1,4 +1,4 @@
-<?php
+        <?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Auth
-Route::get('/login', function(){
+/* Route::get('/login', function(){
     return view('auth.welcome');
-})->name('login');
+})->name('login'); */
 
 Route::get('/crear-cuenta', function(){
     return view('auth.create');
