@@ -37,24 +37,17 @@
                         <td>2011/04/25</td>
                         <td>das</td>
                         <td>$320,800</td>
-                        <td style="width: 200px" >          
-                             <div class="row" >
-                                <div class="col-4 ">
-                                    <a href=" {{route('showUser')}}"  type="button" class="btn btn-warning waves-effect waves-light ">
-                                        <i class="bx bxs-info-circle label-icon"></i> 
-                                    </a>
+                        <td>          
+                            <div class="dropdown">
+                                <a href="#" class="dropdown-toggle card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" style="">
+                                    <a class="dropdown-item" href="#"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</a>
+                                    <a class="dropdown-item" onclick="remove()"><i class="bx bx-trash label-icon "></i>Eliminar </a>
                                 </div>
-                                 <div class="col-4 ">
-                                    <button type="button" class="btn btn-success waves-effect waves-light " data-bs-toggle="modal" data-bs-target="#modalUsuarios">
-                                        <i class="bx bxs-pencil label-icon"></i>
-                                    </button>
-                                </div>
-                               <div class="col-4">
-                                    <button onclick="remove()" type="button" class="btn btn-danger waves-effect waves-light" >
-                                        <i class="bx bx-trash label-icon "></i> 
-                                    </button>
-                                </div>
-                            </div>   
+                            </div>  
                         </td>
                     </tr>
                     </tbody>

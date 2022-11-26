@@ -167,8 +167,8 @@
                         <td>Alta</td>                        
                         <td>BUGisoft</td>
                         <td>4</td> 
-                        <td style="width: 200px">   
-                            <div class="row" >
+                        <td>   
+                            {{-- <div class="row" >
                                 <div class="col-6 ">
                                     <button type="button" class="btn btn-success waves-effect waves-light " data-bs-toggle="modal" data-bs-target="#modalUsuarios">
                                         <i class="bx bxs-pencil label-icon"></i>
@@ -179,7 +179,16 @@
                                         <i class="bx bx-trash label-icon "></i> 
                                     </button>
                                 </div>
-                            </div>                               
+                            </div>                                --}}
+                            <div class="dropdown">
+                                <a href="#" class="dropdown-toggle card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" style="">
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</a>
+                                    <a class="dropdown-item" onclick="remove()"><i class="bx bx-trash label-icon "></i>Eliminar </a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
     
