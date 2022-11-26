@@ -1,5 +1,6 @@
         <?php
 
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,13 +78,21 @@ Route::get('/reportes/detalles', function () {
 })->name('showReport');
 
 //modulos
-Route::get('/Modulos', function () {
+/* Route::get('/modulos', function () {
     return view('modules.index');
-})->name('modules');
+})->name('modules'); */
+Route::get('modulos', [ModuleController::class, 'index'])->name('modules');
 
-Route::get('/Modulos/detalles', function () {
+Route::get('moduloos/{id}', [ModuleController::class, 'show'])->name('showModules');
+
+Route::put('modulos/{id}', [ModuleController::class, 'update'])->name('updateModule');
+
+Route::post('modulos', [ModuleController::class, 'store'])->name('storeModule');
+
+Route::delete('modulos', [ModuleController::class, 'destroy'])->name('destroyModule');
+/* Route::get('/modulos/detalles', function () {
     return view('modules.show');
-})->name('showModules');
+})->name('showModules'); */
 
 //chacador 
 
