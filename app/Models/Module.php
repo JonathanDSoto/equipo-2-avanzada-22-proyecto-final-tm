@@ -11,4 +11,8 @@ class Module extends Model
     public function project(){
         return $this->belongsTo(Project::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class)->withPivot('user_id');
+    }
 }

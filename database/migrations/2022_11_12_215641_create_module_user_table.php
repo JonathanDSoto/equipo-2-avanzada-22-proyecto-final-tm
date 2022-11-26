@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('role');
-            $table->integer('percentage_advance');
+            $table->string('role')->nullable();
+            $table->integer('percentage_advance')->default(0);
             
 
             $table->foreign('user_id')

@@ -1,5 +1,6 @@
         <?php
 
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,14 +38,22 @@ Route::get('/check-out', function(){
 
 // proyectos
 
-Route::get('/proyectos', function () {
-    return view('proyects.index');
-})->name('proyect');
+/* Route::get('/proyectos', function () {
+    return view('proyects.index');//<=
+})->name('proyect'); */
 
-Route::get('/proyectos/detalles/', function () {
+Route::get('/proyectos', [ProjectController::class, 'index'])->name('proyect');
+
+/* Route::get('/proyectos/detalles/', function () {
     return view('proyects.show');
-})->name('showProyect');
+})->name('showProyect'); */
+Route::get('/proyectos/{id}', [ProjectController::class, 'show'])->name('showProyect');
 
+Route::put('proyectos/{id}', [ProjectController::class, 'update'])->name('updateProyect');
+
+Route::delete('proyectos/{id}', [ProjectController::class, 'destroy'])->name('destroyProyect');
+ 
+Route::post('proyectos', [ProjectController::class, 'store'])->name('storeProject');
 // Route::get('/proyectos/modulo/{id}', function () {
 //     return view('proyects.modulos');
 // })->name('moduloroyect');
