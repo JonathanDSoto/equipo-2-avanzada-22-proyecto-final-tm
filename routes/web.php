@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ProjectController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 // Auth
 /* Route::get('/login', function(){
@@ -43,18 +45,20 @@ Route::get('/check-out', function(){
     return view('proyects.index');//<=
 })->name('proyect'); */
 
-Route::get('/proyectos', [ProjectController::class, 'index'])->name('proyect');
+Route::get('/proyectos/{id}', [ProjectController::class, 'show'])->middleware('auth')->name('showProyect');
+
+Route::get('/proyectos', [ProjectController::class, 'index'])->middleware('auth')->name('proyect');
 
 /* Route::get('/proyectos/detalles/', function () {
     return view('proyects.show');
 })->name('showProyect'); */
-Route::get('/proyectos/{id}', [ProjectController::class, 'show'])->name('showProyect');
 
-Route::put('proyectos/{id}', [ProjectController::class, 'update'])->name('updateProyect');
+Route::put('/proyectos/{id}', [ProjectController::class, 'update'])->middleware('auth')->name('updateProyect');
 
-Route::delete('proyectos/{id}', [ProjectController::class, 'destroy'])->name('destroyProyect');
+Route::delete('/proyectos/{id}', [ProjectController::class, 'destroy'])->middleware('auth')->name('destroyProyect');
  
-Route::post('proyectos', [ProjectController::class, 'store'])->name('storeProject');
+Route::post('/proyectos', [ProjectController::class, 'store'])->middleware('auth')->name('storeProject');
+
 // Route::get('/proyectos/modulo/{id}', function () {
 //     return view('proyects.modulos');
 // })->name('moduloroyect');
@@ -81,15 +85,15 @@ Route::get('/reportes/detalles', function () {
 /* Route::get('/modulos', function () {
     return view('modules.index');
 })->name('modules'); */
-Route::get('modulos', [ModuleController::class, 'index'])->name('modules');
+Route::get('modulos', [ModuleController::class, 'index'])->middleware('auth')->name('modules');
 
-Route::get('moduloos/{id}', [ModuleController::class, 'show'])->name('showModules');
+Route::get('modulos/{id}', [ModuleController::class, 'show'])->middleware('auth')->name('showModules');
 
-Route::put('modulos/{id}', [ModuleController::class, 'update'])->name('updateModule');
+Route::put('modulos/{id}', [ModuleController::class, 'update'])->middleware('auth')->name('updateModule');
 
-Route::post('modulos', [ModuleController::class, 'store'])->name('storeModule');
+Route::post('modulos', [ModuleController::class, 'store'])->middleware('auth')->name('storeModule');
 
-Route::delete('modulos', [ModuleController::class, 'destroy'])->name('destroyModule');
+Route::delete('modulos', [ModuleController::class, 'destroy'])->middleware('auth')->name('destroyModule');
 /* Route::get('/modulos/detalles', function () {
     return view('modules.show');
 })->name('showModules'); */
