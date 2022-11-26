@@ -89,6 +89,10 @@ return [
     |
     */
 
+    'redirects' => [
+        'logout' => 'login'
+    ],
+    
     'middleware' => ['web'],
 
     /*
