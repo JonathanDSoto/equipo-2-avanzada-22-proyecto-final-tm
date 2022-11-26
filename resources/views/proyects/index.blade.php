@@ -91,7 +91,7 @@
                         <tbody>
                         <tr>
                             <td> 
-                                <a href=" {{route('showProyect')}}" class="text-body fw-bold ">
+                                <a href="" class="text-body fw-bold ">
                                     <span class="text-primary">Proyectito</span>
                                 </a>
                             </td>
@@ -106,7 +106,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-4 ">
-                                        <a href=" {{route('showProyect')}}"  type="button" class="btn btn-warning waves-effect waves-light ">
+                                        <a href=""  type="button" class="btn btn-warning waves-effect waves-light ">
                                             <i class="bx bxs-info-circle label-icon"></i> 
                                         </a>
                                     </div>

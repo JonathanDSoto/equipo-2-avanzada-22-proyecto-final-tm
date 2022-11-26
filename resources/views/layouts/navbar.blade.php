@@ -60,7 +60,10 @@
                         <!-- item-->
                         <a class="dropdown-item" href="{{route('showUser')}}"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Perfil</span></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="{{route('logOutCheck')}}"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Cerrar sesion</span></a>
+                        <form method="POST" action="{{route('logout')}}">
+                            @csrf
+                            <button class="dropdown-item text-danger" type="submit"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Cerrar sesion</span></button>
+                        </form>
                     </div>
                 </div>
 

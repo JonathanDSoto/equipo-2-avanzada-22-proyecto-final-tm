@@ -30,25 +30,25 @@
                             <div class="card-body pt-0"> 
                                 
                                 <div class="p-2">
-                                    <form class="form-horizontal" action=" ">
-        
+                                    <form class="form-horizontal" method="POST" action="{{route('login')}}">
+                                        @csrf
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Usuario</label>
-                                            <input type="text" class="form-control" id="username" placeholder="usuario">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="email" placeholder="Email" name="email">
                                         </div>
                 
                                         <div class="mb-3">
                                             <label class="form-label">Contraseña</label>
                                             <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" placeholder="*********" aria-label="Password" aria-describedby="password-addon">
+                                                <input type="password" class="form-control" placeholder="*********" aria-label="Password" aria-describedby="password-addon" name="password">
                                                 <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                         </div>
                                         
                                         <div class="mt-3 d-grid">
-                                            <a href="{{route('proyect')}}">
-                                                <button class="btn btn-primary waves-effect waves-light"  type="button">Iniciar sesion</button>
-                                            </a>
+                                            <div>
+                                                <button class="btn btn-primary waves-effect waves-light"  type="submit">Iniciar sesion</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
