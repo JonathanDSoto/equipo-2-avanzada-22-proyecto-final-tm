@@ -89,33 +89,35 @@
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td> 
-                                <a href="" class="text-body fw-bold ">
-                                    <span class="text-primary">Proyectito</span>
-                                </a>
-                            </td>
-                            <td>no es un proyecto es "EL proyecto"</td>
-                            <td>BUGisoft</td>
-                            <td>Brundo "god" Alejandro</td>
-                            <td>$1000000000</td>
-                            <td>69</td>
-                            <td>activo</td>
-                            <td>2020</td>
-                            <td>Pendiente</td>
-                            <td>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mdi mdi-dots-horizontal font-size-18"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" style="">
-                                        <a class="dropdown-item" href="#"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
-                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</a>
-                                        <a class="dropdown-item" onclick="remove()"><i class="bx bx-trash label-icon "></i>Eliminar </a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            @foreach ($projects as $proyect)
+                                <tr>
+                                    <td> 
+                                        <a href="{{route('showProyect', $proyect->id)}}" class="text-body fw-bold ">
+                                            <span class="text-primary">{{$proyect->name}}</span>
+                                        </a>
+                                    </td>
+                                    <td>{{$proyect->description}}</td>
+                                    <td>{{$proyect->company}}</td>
+                                    <td>{{$proyect->leader}}</td>
+                                    <td>${{$proyect->budget}}</td>
+                                    <td>{{$proyect->user_amount}}</td>
+                                    <td>{{$proyect->status}}</td>
+                                    <td>{{$proyect->start_date}}</td>
+                                    <td>{{$proyect->end_date}}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end" style="">
+                                                <a class="dropdown-item" href="#"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</a>
+                                                <a class="dropdown-item" onclick="remove()"><i class="bx bx-trash label-icon "></i>Eliminar </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
