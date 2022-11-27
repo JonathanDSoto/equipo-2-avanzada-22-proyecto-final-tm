@@ -10,7 +10,7 @@
                     <div class="d-flex">
                         <div class="flex-grow-1">
                             <p class="text-muted fw-medium mb-2">Proyectos completos</p>
-                            <h4 class="mb-0">125</h4>
+                            <h4 id="projectsComplete" class="mb-0">0</h4>
                         </div>
 
                         <div class="flex-shrink-0 align-self-center">
@@ -30,7 +30,7 @@
                     <div class="d-flex">
                         <div class="flex-grow-1">
                             <p class="text-muted fw-medium mb-2">Proyectos pendientes</p>
-                            <h4 class="mb-0">12</h4>
+                            <h4 id="projectsPending" class="mb-0">0</h4>
                         </div>
 
                         <div class="flex-shrink-0 align-self-center">
@@ -250,8 +250,9 @@
                         swal("El proyecto esta a salvo!");
                     }
                 });  
-            });
+            })
             function editProject(val){
+
                 let boton = document.getElementById(val);
                 let project = JSON.parse(boton.getAttribute("data-project"));
                 console.log(project);
@@ -271,6 +272,7 @@
                 formulario.setAttribute('action', "{{route('updateProyect', '')}}"+"/"+project.id);
                 //Cambiar titulo del modal
                 document.getElementById("titulo").innerHTML = "Editar Proyecto";
+
             }
             function createProject(){
 
@@ -289,6 +291,26 @@
                 formulario.setAttribute('action', "{{route('storeProject')}}");
                 //Cambiar titulo del modal
                 document.getElementById("titulo").innerHTML = "Crear Proyecto";
+
+            }
+            function loadInfo(){
+
+                <?php 
+                    $allProjects=0;
+                    $pendingsProjects=0; 
+                ?>
+                @foreach ($projects as $project)
+                    @if ($project->status=="Terminado")
+                        <?php $allProjects+=1; ?>
+                    @elseif($project->status=="Pendiente")
+                        <?php $pendingsProjects+=1; ?>    
+                    @endif
+                @endforeach
+                //Cambiar total de proyectos terminados
+                document.getElementById("projectsComplete").innerHTML = "{{$allProjects}}";
+                //Cambiar total de proyectos pendientes
+                document.getElementById("projectsPending").innerHTML = "{{$pendingsProjects}}";
+                
             }
         </script>
 

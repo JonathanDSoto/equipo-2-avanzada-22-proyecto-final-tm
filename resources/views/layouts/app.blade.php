@@ -8,7 +8,7 @@
 
     </head>
 
-    <body data-sidebar="dark" data-layout-mode="light">
+    <body data-sidebar="dark" data-layout-mode="light" onload="loadInfo()">
 
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
