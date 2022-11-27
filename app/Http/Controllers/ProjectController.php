@@ -103,7 +103,7 @@ class ProjectController extends Controller
         $request ['end_date'] = Carbon::now()->addYear(); */
         $project->fill($request->all());
         $project->push();
-        return redirect()->back('info', 'Registro editado correctamente');    
+        return redirect()->back()->with('info', 'Registro editado correctamente');    
     }
 
     /**
