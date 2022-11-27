@@ -50,7 +50,7 @@
                     <div class="d-flex">
                         <div class="flex-grow-1">
                             <p class="text-muted fw-medium mb-2">Total de proyectos</p>
-                            <h4 class="mb-0">200</h4>
+                            <h4 class="mb-0">{{$projects->count()}}</h4>
                         </div>
 
                         <div class="flex-shrink-0 align-self-center">
@@ -112,7 +112,11 @@
                                             <div class="dropdown-menu dropdown-menu-end" style="">
                                                 <a class="dropdown-item" href="#"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</a>
-                                                <a class="dropdown-item" onclick="remove()"><i class="bx bx-trash label-icon "></i>Eliminar </a>
+                                                <form class="eliminar" action="{{route('destroyProyect', $proyect->id)}}" method="POST">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="dropdown-item"><i class="bx bx-trash label-icon "></i>Eliminar </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </td>
@@ -139,56 +143,62 @@
                     </div>
                     <div class="modal-body">
                         
-                        <form>
-                            
+                        <form action="{{ route('storeProject') }} " method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802">
+                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802" name="name">
                             </div>                        
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802">
+                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802" name="description">
                             </div>
                                                         
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Lider del proyecto</label>
-                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
+                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC" name="leader">
                             </div>                     
                             <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="mb-3">
                                         <label for="formrow-firstname-input" class="form-label">compania</label>
-                                        <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos">
+                                        <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos" name="company">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">                                  
                                         <div class="mb-4">
                                             <label for="formrow-firstname-input" class="form-label">Numero de usuarios</label>
-                                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
+                                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC" name="user_amount">
                                         </div>                                 
                                 </div>
+
+                                <div class="col-md-6">                                  
+                                    <div class="mb-4">
+                                        <label for="formrow-firstname-input" class="form-label">Presupuesto</label>
+                                        <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 50000" name="budget">
+                                    </div>                                 
+                            </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="mb-3">
                                         <label for="formrow-firstname-input" class="form-label">Fecha inicio</label>
-                                        <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+                                        <input class="form-control" type="date" value="2019-08-19" id="example-date-input" name="start_date">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">                                  
                                         <div class="mb-4">
                                             <label for="formrow-firstname-input" class="form-label">Fecha fin</label>
-                                            <input class="form-control" type="date" value="2020-07-18" id="example-date-input">
+                                            <input class="form-control" type="date" value="2020-07-18" id="example-date-input" name="end_date">
                                         </div>                                 
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Estado</label>
                                 <div class="col-md-10">
-                                    <select class="form-select">
-                                        <option>Select</option>
+                                    <select class="form-select" name="status">
                                         <option>Pendiente</option>
                                         <option>Finalizado</option>
                                         <option>cancelado</option>
@@ -217,24 +227,25 @@
 
 @section('scripts')
         <script type="text/javascript">
-            function remove(id) {
-            swal({
-                title: "Estas seguro?",
-                text: "No podras recuperar el proyecto",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-                swal("Poof! EL proyecto se elimino con exito!", {
-                icon: "success",
-                });
-            } else {
-                swal("El proyecto esta a salvo!");
-            }
-            });  
-        }
+            $('.eliminar').submit(function(e){
+                e.preventDefault();
+                swal({
+                    title: "Estas seguro?",
+                    text: "No podras recuperar el proyecto",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! EL proyecto se elimino con exito!", {
+                            icon: "success",
+                        });
+                        this.submit();
+                    } else {
+                        swal("El proyecto esta a salvo!");
+                    }
+                });  
+            });
         </script>
 
         <!-- Required datatable js -->
