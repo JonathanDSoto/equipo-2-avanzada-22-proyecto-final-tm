@@ -71,7 +71,7 @@
                 <div class="card-body">
 
                     <h4 class="card-title">Proyectos</h4>
-                    <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo proyecto</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light btn-label" onclick="createProject()" data-bs-toggle="modal" data-bs-target="#modalProject"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo proyecto</button>
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                         <tr>
@@ -89,30 +89,31 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($projects as $proyect)
+
+                            @foreach ($projects as $project)
                                 <tr>
                                     <td> 
-                                        <a href="{{route('showProyect', $proyect->id)}}" class="text-body fw-bold ">
-                                            <span class="text-primary">{{$proyect->name}}</span>
+                                        <a href="{{route('showProyect', $project->id)}}" class="text-body fw-bold ">
+                                            <span class="text-primary">{{$project->name}}</span>
                                         </a>
                                     </td>
-                                    <td>{{$proyect->description}}</td>
-                                    <td>{{$proyect->company}}</td>
-                                    <td>{{$proyect->leader}}</td>
-                                    <td>${{$proyect->budget}}</td>
-                                    <td>{{$proyect->user_amount}}</td>
-                                    <td>{{$proyect->status}}</td>
-                                    <td>{{$proyect->start_date}}</td>
-                                    <td>{{$proyect->end_date}}</td>
+                                    <td>{{$project->description}}</td>
+                                    <td>{{$project->company}}</td>
+                                    <td>{{$project->leader}}</td>
+                                    <td>${{$project->budget}}</td>
+                                    <td>{{$project->user_amount}}</td>
+                                    <td>{{$project->status}}</td>
+                                    <td>{{$project->start_date}}</td>
+                                    <td>{{$project->end_date}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" class="dropdown-toggle card-drop" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="mdi mdi-dots-horizontal font-size-18"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end" style="">
-                                                <a class="dropdown-item" href="#"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</a>
-                                                <form class="eliminar" action="{{route('destroyProyect', $proyect->id)}}" method="POST">
+                                                <a class="dropdown-item" href="{{route('showProyect', $project->id)}}"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
+                                                <button class="dropdown-item" id="{{ $project->id }}" data-project='{{ json_encode($project) }}' onclick="editProject({{ $project->id }})" data-bs-toggle="modal" data-bs-target="#modalProject"><i class="bx bxs-pencil label-icon"></i>Editar</button>   
+                                                <form class="eliminar" action="{{route('destroyProyect', $project->id)}}" method="POST">
                                                     @method('delete')
                                                     @csrf
                                                     <button class="dropdown-item"><i class="bx bx-trash label-icon "></i>Eliminar </button>
@@ -121,6 +122,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                
                             @endforeach
 
                         </tbody>
@@ -134,49 +136,49 @@
     {{-- modal --}}
     <div>
         <!-- sample modal content -->
-        <div id="modalUsuarios" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="modalProject" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Proyecto</h5>
+                        <h5 id="titulo" class="modal-title" id="myModalLabel">Crear Proyecto</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        
-                        <form action="{{ route('storeProject') }} " method="POST">
+                        <form id="formulario" action=" " method="POST">
+                            @method('put')
                             @csrf
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802" name="name">
+                                <input type="text" class="form-control" id="name" placeholder="Ej: 230802" name="name">
                             </div>                        
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802" name="description">
+                                <input type="text" class="form-control" id="description" placeholder="Ej: 230802" name="description">
                             </div>
                                                         
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Lider del proyecto</label>
-                                <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC" name="leader">
+                                <input type="text" class="form-control" id="leader" placeholder="Ej: juanPC" name="leader">
                             </div>                     
                             <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="mb-3">
                                         <label for="formrow-firstname-input" class="form-label">compania</label>
-                                        <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos" name="company">
+                                        <input type="text" class="form-control" id="company" placeholder="Ej: juan perez santos" name="company">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">                                  
                                         <div class="mb-4">
                                             <label for="formrow-firstname-input" class="form-label">Numero de usuarios</label>
-                                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC" name="user_amount">
+                                            <input type="text" class="form-control" id="user_amount" placeholder="Ej: juanPC" name="user_amount">
                                         </div>                                 
                                 </div>
 
                                 <div class="col-md-6">                                  
                                     <div class="mb-4">
                                         <label for="formrow-firstname-input" class="form-label">Presupuesto</label>
-                                        <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 50000" name="budget">
+                                        <input type="text" class="form-control" id="budget" placeholder="Ej: 50000" name="budget">
                                     </div>                                 
                             </div>
                             </div>
@@ -184,24 +186,26 @@
                                 <div class="col-md-6">                                
                                     <div class="mb-3">
                                         <label for="formrow-firstname-input" class="form-label">Fecha inicio</label>
-                                        <input class="form-control" type="date" value="2019-08-19" id="example-date-input" name="start_date">
+                                        <input class="form-control" type="date" id="start_date" name="start_date">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">                                  
                                         <div class="mb-4">
                                             <label for="formrow-firstname-input" class="form-label">Fecha fin</label>
-                                            <input class="form-control" type="date" value="2020-07-18" id="example-date-input" name="end_date">
+                                            <input class="form-control" type="date" id="end_date" name="end_date">
                                         </div>                                 
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Estado</label>
                                 <div class="col-md-10">
-                                    <select class="form-select" name="status">
-                                        <option>Pendiente</option>
-                                        <option>Finalizado</option>
-                                        <option>cancelado</option>
+                                    <select class="form-select" id="projectStatus" name="status">
+                                        
+                                        <option value="Aprobado">Aprobado</option>
+                                        <option value="Pendiente">Pendiente</option>
+                                        <option value="Finalizado">Finalizado</option>
+                                        <option value="Cancelado">Cancelado</option>
 
                                     </select>
                                 </div>                        
@@ -210,6 +214,8 @@
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                             </div>
+
+                            <input type="hidden" id="id" name="id">
                         </form>
 
                     </div>
@@ -219,8 +225,7 @@
         </div>
         <!-- /.modal -->
     </div> 
-{{-- end modal --}}
-
+    {{-- end modal --}}
     
     
 @endsection
@@ -246,6 +251,45 @@
                     }
                 });  
             });
+            function editProject(val){
+                let boton = document.getElementById(val);
+                let project = JSON.parse(boton.getAttribute("data-project"));
+                console.log(project);
+
+                document.getElementById("id").value = project.id;
+                document.getElementById("name").value = project.name;
+                document.getElementById("description").value = project.description;
+                document.getElementById("company").value = project.company;
+                document.getElementById("leader").value = project.leader;
+                document.getElementById("user_amount").value = project.user_amount;
+                document.getElementById("budget").value = project.budget;
+                document.getElementById("projectStatus").value = project.status;
+                document.getElementById("start_date").value = project.start_date;
+                document.getElementById("end_date").value = project.end_date;
+                console.log(project.id);
+                //Cambiar url del form
+                formulario.setAttribute('action', "{{route('updateProyect', '')}}"+"/"+project.id);
+                //Cambiar titulo del modal
+                document.getElementById("titulo").innerHTML = "Editar Proyecto";
+            }
+            function createProject(){
+
+                document.getElementById("id").value = "";
+                document.getElementById("name").value = "";
+                document.getElementById("description").value = "";
+                document.getElementById("company").value = "";
+                document.getElementById("leader").value = "";
+                document.getElementById("user_amount").value = "";
+                document.getElementById("budget").value = "";
+                document.getElementById("projectStatus").value = "";
+                document.getElementById("start_date").value = "";
+                document.getElementById("end_date").value = "";
+
+                //Cambiar url del form
+                formulario.setAttribute('action', "{{route('storeProject')}}");
+                //Cambiar titulo del modal
+                document.getElementById("titulo").innerHTML = "Crear Proyecto";
+            }
         </script>
 
         <!-- Required datatable js -->
