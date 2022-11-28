@@ -64,7 +64,7 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Miembros del equipo</h4>
+                <h4 class="card-title mb-4">Miembros del Proyecto</h4>
 
                 <div class="table-responsive">
                     <table class="table align-middle table-nowrap">
@@ -77,51 +77,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="width: 50px;">
-                                    <a href=" {{route('showUser')}}" class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
-                                    
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0"><a href=" {{route('showUser')}}" class=" text-primary">Daniel Canales</a></h5>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-soft-info text-primary font-size-11">Frontend</span>
-                                        <span class="badge badge-soft-info text-primary font-size-11">UI</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">
-                                    <a href=" {{route('showUser')}}" class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
-                                    
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0"><a href=" {{route('showUser')}}" class=" text-primary">Daniel Canales</a></h5>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-soft-info text-primary font-size-11">Frontend</span>
-                                        <span class="badge badge-soft-info text-primary font-size-11">UI</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">
-                                    <a href=" {{route('showUser')}}" class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
-                                    
-                                </td>
-                                <td>
-                                    <h5 class="font-size-14 m-0"><a href=" {{route('showUser')}}" class=" text-primary">Daniel Canales</a></h5>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-soft-info text-primary font-size-11">Frontend</span>
-                                        <span class="badge badge-soft-info text-primary font-size-11">UI</span>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach($project[0]->modules as $module)
+                                @foreach($module->users as $user)
+                                    <tr>
+                                        <td style="width: 50px;">
+                                            <a href=" {{route('showUser')}}" class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
+                                        </td>
+                                        <td>
+                                            <h5 class="font-size-14 m-0"><a href=" {{route('showUser')}}" class=" text-primary">{{$user->name}}</a></h5>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <span class="badge badge-soft-info text-primary font-size-11">Frontend</span>
+                                                <span class="badge badge-soft-info text-primary font-size-11">UI</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
