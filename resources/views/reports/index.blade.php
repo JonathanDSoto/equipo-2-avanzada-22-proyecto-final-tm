@@ -91,6 +91,43 @@
             </div>
         </div>
     </div>  
+    <div class="col-xl-4 col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Example</h4>
+                <form class="repeater" enctype="multipart/form-data">
+                    <div data-repeater-list="group-a">
+                        <div data-repeater-item class="row">
+                            <div  class="col-4">
+                                <label for="name">Nombre</label>
+                                <input type="text" id="name" name="untyped-input" class="form-control" placeholder="Nombre de usuario"/>
+                            </div>
+
+                            <div class="col-4">
+                                <label >ROL</label>
+                                <select id="formrow-inputState" class="form-select">
+                                    <option selected="">Elige...</option>
+                                    <option>QA</option>
+                                    <option>Maquetador</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-4 ">
+                                <div class="d-grid">
+                                    <label >Accion</label>
+                                    <input data-repeater-delete type="button" class="btn btn-primary" value="Delete"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <br>
+                    <input data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0" value="Añadir usuario"/>
+                </form>
+            </div>
+        </div>
+    </div> 
 </div>
 <!-- end row -->
 
@@ -125,5 +162,6 @@
 @endsection
 
 @section('scripts')
- 
+    <script src="{{asset('libs/jquery.repeater/jquery.repeater.min.js')}}"></script>
+    <script src="{{asset('js/pages/form-repeater.int.js')}}"></script>
 @endsection
