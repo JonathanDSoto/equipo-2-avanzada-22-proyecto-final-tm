@@ -4,6 +4,23 @@
 @section('contenido')
 
     <div class="row">
+        <div class="row">
+            <div class="col-md-5">
+                @if (session('info'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="mdi mdi-check-all me-2"></i>
+                            Acción realizada con exito.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @else
+                    {{-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="mdi mdi-block-helper me-2"></i>
+                        error! no se pudo realizar la accion.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div> --}}
+                @endif
+            </div>
+        </div>
         <div class="col-md-4">
             <div class="card mini-stats-wid">
                 <div class="card-body">
@@ -145,7 +162,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="formulario" action=" " method="POST">
-                            @method('put')
+                            <input type="hidden" id="method" name="_method">
                             @csrf
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nombre</label>
@@ -272,6 +289,8 @@
                 formulario.setAttribute('action', "{{route('updateProyect', '')}}"+"/"+project.id);
                 //Cambiar titulo del modal
                 document.getElementById("titulo").innerHTML = "Editar Proyecto";
+                //Cambiar method del formulario
+                document.getElementById("method").value = "PUT";
 
             }
             function createProject(){
@@ -291,6 +310,8 @@
                 formulario.setAttribute('action', "{{route('storeProject')}}");
                 //Cambiar titulo del modal
                 document.getElementById("titulo").innerHTML = "Crear Proyecto";
+                //Cambiar method del formulario
+                document.getElementById("method").value = "POST";
 
             }
             function loadInfo(){

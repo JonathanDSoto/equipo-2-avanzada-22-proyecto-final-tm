@@ -13,8 +13,8 @@
                     </div>
 
                     <div class="flex-grow-1 overflow-hidden">
-                        <h5 class="text-truncate font-size-15">Facebook 2</h5>
-                        <p class="text-muted">by: META</p>
+                        <h5 class="text-truncate font-size-15">{{$project[0]->name}}</h5>
+                        <p class="text-muted">by: {{$project[0]->company}}</p>
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
                         <h5 class="text-truncate font-size-15">Estado</h5>
@@ -22,22 +22,17 @@
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
                         <h5 class="text-truncate font-size-15">Presupuesto</h5>
-                        <p class="text-muted">$1000000</p>
+                        <p class="text-muted">${{$project[0]->budget}}</p>
                     </div>
                 </div>
                 <h5 class="font-size-15 mt-4">Lider del proyecto:</h5>
-                <p class="text-muted">Mark zukaritas</p>
-
-
+                <p class="text-muted">{{$project[0]->leader}}</p>
                 <h5 class="font-size-15 mt-4">Descripcion del proyecto:</h5>
-
-                <p class="text-muted">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc,</p>
+                <p class="text-muted">{{$project[0]->description}}</p>
 
                 <div class="card">
                     <div class="card-body">
-
                         <h4 class="card-title">Progreso del proyecto</h4>
-
                         <div class="">
                             <div class="progress progress-xl">
                                 <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
@@ -49,15 +44,15 @@
                 <div class="row task-dates">
                     <div class="col-sm-4 col-6">
                         <div class="mt-4">
-                            <h5 class="font-size-14"><i class="bx bx-calendar me-1 text-primary"></i> Fecha de inicio</h5>
-                            <p class="text-muted mb-0">08 Sept, 2019</p>
+                            <h5 class="font-size-14"><i class="bx bx-calendar me-1 text-primary"></i>Fecha de inicio</h5>
+                            <p class="text-muted mb-0">{{$project[0]->start_date}}</p>
                         </div>
                     </div>
 
                     <div class="col-sm-4 col-6">
                         <div class="mt-4">
-                            <h5 class="font-size-14"><i class="bx bx-calendar-check me-1 text-primary"></i> Fecha de Finalizacion</h5>
-                            <p class="text-muted mb-0">12 Oct, 2019</p>
+                            <h5 class="font-size-14"><i class="bx bx-calendar-check me-1 text-primary"></i>Fecha de Finalizacion</h5>
+                            <p class="text-muted mb-0">{{$project[0]->end_date}}</p>
                         </div>
                     </div>
                 </div>
