@@ -68,9 +68,29 @@
             </div>
         </div>
     </div>
-
-
-
+    <div class="col-xl-4 col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">estados </h4>
+                <span class="badge badge-soft-success">Finalizado</span>
+                <span class="badge badge-soft-warning">Pendiente</span>
+                <span class="badge badge-soft-danger">Cancelado</span>
+                <span class="badge badge-soft-info">Aprobado</span>
+                <h4 class="card-title">alertas</h4>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="mdi mdi-check-all me-2"></i>
+                        accion realizada con exito.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="mdi mdi-block-helper me-2"></i>
+                    error! no se pudo realizar la accion.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+               
+            </div>
+        </div>
+    </div>  
 </div>
 <!-- end row -->
 
