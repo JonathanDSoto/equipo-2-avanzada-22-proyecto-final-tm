@@ -5,6 +5,23 @@
 @section('contenido')
 
 <div class="row">
+    <div class="row">
+        <div class="col-md-5">
+            @if (session('info'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="mdi mdi-check-all me-2"></i>
+                        Acción realizada con exito.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @else
+                {{-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="mdi mdi-block-helper me-2"></i>
+                    error! no se pudo realizar la accion.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div> --}}
+            @endif
+        </div>
+    </div>
     <div class="col-12">
         <div class="card">
             <div class="card-body">

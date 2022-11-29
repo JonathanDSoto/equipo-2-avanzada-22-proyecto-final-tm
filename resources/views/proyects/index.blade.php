@@ -321,9 +321,10 @@
                     $pendingsProjects=0; 
                 ?>
                 @foreach ($projects as $project)
-                    @if ($project->status=="Terminado")
+                    @if ($project->status=="Finalizado")
                         <?php $allProjects+=1; ?>
-                    @elseif($project->status=="Pendiente")
+                    @endif
+                    @if($project->status=="Pendiente")
                         <?php $pendingsProjects+=1; ?>    
                     @endif
                 @endforeach
