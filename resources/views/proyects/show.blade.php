@@ -107,7 +107,7 @@
             <div class="card-body">
     
                 <h4 class="card-title">Modulos del proyecto</h4>
-                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
@@ -189,78 +189,47 @@
 {{-- modal --}}
 <div>
     
-
     <!-- sample modal content -->
-    <div id="modalUsuarios" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div id="modalModules" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Modulo</h5>
+                    <h5 id="titulo" class="modal-title" id="myModalLabel">Crear Modulo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     
-                    <form>
+                    <form id="formulario" action=" " method="POST">
+                        <input type="hidden" id="method" name="_method">
+                        @csrf
                         
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802">
-                        </div>                        
-                        <div class="mb-3">
-                            <label for="formrow-firstname-input" class="form-label">Descripcion</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802">
-                        </div>
-                                                    
-                        <div class="mb-3">
-                            <label for="formrow-firstname-input" class="form-label">Lider del proyecto</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
-                        </div>                     
-                        <div class="row">
-                            <div class="col-md-6">                                
-                                <div class="mb-3">
-                                    <label for="formrow-firstname-input" class="form-label">compania</label>
-                                    <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos">
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">                                  
-                                    <div class="mb-4">
-                                        <label for="formrow-firstname-input" class="form-label">Numero de usuarios</label>
-                                        <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
-                                    </div>                                 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">                                
-                                <div class="mb-3">
-                                    <label for="formrow-firstname-input" class="form-label">Fecha inicio</label>
-                                    <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">                                  
-                                    <div class="mb-4">
-                                        <label for="formrow-firstname-input" class="form-label">Fecha fin</label>
-                                        <input class="form-control" type="date" value="2020-07-18" id="example-date-input">
-                                    </div>                                 
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formrow-firstname-input" class="form-label">Estado</label>
-                            <div class="col-md-10">
-                                <select class="form-select">
-                                    <option>Select</option>
-                                    <option>Pendiente</option>
-                                    <option>Finalizado</option>
-                                    <option>cancelado</option>
+                            <input type="text" class="form-control" id="name" placeholder="Nombre del modulo" name="name">
+                        </div>      
 
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Prioridad</label>
+                            <div class="col-md-10">
+                                <select id="priority" class="form-select" name="priority">
+                                    <option value="10">Alta</option>
+                                    <option value="7">Media</option>
+                                    <option value="3">Baja</option>
                                 </select>
-                            </div>                        
-                        </div> 
+                            </div>
+                        </div>  
+
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Id del proyecto</label>
+                            <input type="text" class="form-control" id="project_id" name="project_id" value={{$project[0]->id}}>
+                        </div>                                                  
+                        
                          
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                         </div>
+
+                        <input type="hidden" id="id" name="id">
                     </form>
 
                 </div>
@@ -294,6 +263,22 @@
                 swal("El proyecto esta a salvo!");
             }
             });  
+        }
+
+        function createModule(){
+
+            document.getElementById("id").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("priority").value = "";
+            document.getElementById("project_id").value = "";
+
+            //Cambiar url del form
+            formulario.setAttribute('action', "{{route('storeModule')}}");
+            //Cambiar titulo del modal
+            document.getElementById("titulo").innerHTML = "Crear Modulo";
+            //Cambiar method del formulario
+            document.getElementById("method").value = "POST";
+
         }
         </script>
 
