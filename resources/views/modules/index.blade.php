@@ -106,13 +106,13 @@
                         
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nombre del modulo" name="name">
+                            <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" required>
                         </div>      
 
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
-                                <select id="priority" class="form-select" name="priority">
+                                <select id="priority" class="form-select" name="priority" required>
                                     <option value="10">Alta</option>
                                     <option value="7">Media</option>
                                     <option value="3">Baja</option>
@@ -121,8 +121,14 @@
                         </div>  
 
                         <div class="mb-3">
-                            <label for="formrow-firstname-input" class="form-label">Id del proyecto</label>
-                            <input type="text" class="form-control" id="project_id" placeholder="Nombre del encargado" name="project_id">
+                            <label for="formrow-firstname-input" class="form-label">Proyecto</label>
+
+                            <select id="project_id" class="form-select" name="project_id" required>   
+                                @foreach($modules as $module)
+                                    <option value="{{$module->project->id}}">{{$module->project->name}}</option>
+                                @endforeach
+                            </select>
+
                         </div>                                                  
                         
                          
@@ -178,7 +184,7 @@
             //Cambiar url del form
             formulario.setAttribute('action', "{{route('storeModule')}}");
             //Cambiar titulo del modal
-            document.getElementById("titulo").innerHTML = "Crear Proyecto";
+            document.getElementById("titulo").innerHTML = "Crear Modulo";
             //Cambiar method del formulario
             document.getElementById("method").value = "POST";
 

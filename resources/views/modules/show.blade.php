@@ -46,9 +46,13 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                    @foreach($module[0]->users as $user)
                         <tr>
                             <th scope="row">{{$module[0]->id}}</th>
                             <td>{{$module[0]->name}}</td>
+                            <th scope="row">{{$user->id}}</th>
+                            <td>{{$user->name}}</td>
                             <td>
                                 <p  class="badge badge-soft-primary font-size-11 m-1">QA</p>
                             </td>
@@ -56,9 +60,11 @@
                                 10%
                             </td>
                             <td>
-                                <a type="button" href=" {{route('showUser')}}"  class="btn btn-light btn-sm">Detalles</a>
-                            </td>
-                        </tr>                        
+                                <a type="button" href=" {{route('showUser')}}" class="btn btn-light btn-sm">Detalles</a>
+                            </td>                       
+                        </tr>  
+                    @endforeach      
+
                     </tbody>
                 </table>
                 
@@ -79,14 +85,30 @@
                     <div class="col-sm-4 col-6">
                         <div class="mt-4">
                             <h5 class="font-size-14"><i class="bx bx-calendar me-1 text-primary"></i> Fecha de inicio</h5>
-                            <p class="text-muted mb-0">08 Sept, 2019</p>
+                            <p class="text-muted mb-0">
+
+                            @if($module[0]->project->start_date != null)
+                                {{$module[0]->project->start_date}}
+                            @else
+                                TBE
+                            @endif
+
+                            </p>
                         </div>
                     </div>
 
                     <div class="col-sm-4 col-6">
                         <div class="mt-4">
                             <h5 class="font-size-14"><i class="bx bx-calendar-check me-1 text-primary"></i> Fecha de finalizacion</h5>
-                            <p class="text-muted mb-0">TBE</p>
+                            <p class="text-muted mb-0">
+
+                            @if($module[0]->project->end_date != null)
+                                {{$module[0]->project->end_date}}
+                            @else
+                                TBE
+                            @endif
+
+                            </p>
                         </div>
                     </div>
                 </div>

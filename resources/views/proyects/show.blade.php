@@ -169,7 +169,13 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
                                     <button class="dropdown-item" id="{{ $module->id }}" data-module='{{ json_encode($module) }}' onclick="editModule({{ $module->id }})" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-pencil label-icon"></i>Editar</button>  
-                                    <a class="dropdown-item" onclick="remove()"><i class="bx bx-trash label-icon "></i>Eliminar </a>
+                                    
+                                    <form class="eliminar" action="{{route('destroyModule', $module->id)}}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="dropdown-item"><i class="bx bx-trash label-icon "></i>Eliminar </button>
+                                    </form>
+
                                 </div>
                             </div>
                         </td>
@@ -242,24 +248,25 @@
 
 @section('scripts')
         <script type="text/javascript">
-            function remove(id) {
-            swal({
-                title: "Estas seguro?",
-                text: "No podras recuperar el proyecto",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
+            $('.eliminar').submit(function(e){
+                e.preventDefault();
+                swal({
+                    title: "Estas seguro?",
+                    text: "No podras recuperar el modulo",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! EL modulo se elimino con exito!", {
+                            icon: "success",
+                        });
+                        this.submit();
+                    } else {
+                        swal("El modulo esta a salvo!");
+                    }
+                });  
             })
-            .then((willDelete) => {
-            if (willDelete) {
-                swal("Poof! EL proyecto se elimino con exito!", {
-                icon: "success",
-                });
-            } else {
-                swal("El proyecto esta a salvo!");
-            }
-            });  
-        }
 
         function createModule(){
 
