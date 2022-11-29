@@ -59,7 +59,7 @@
                                 <td style="width: 200px">   
                                     <div class="row" >
                                         <div class="col-6 ">
-                                            <button type="button" class="btn btn-success waves-effect waves-light " data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+                                            <button type="button" class="btn btn-success waves-effect waves-light " id="{{ $module->id }}" data-module='{{ json_encode($module) }}' onclick="editModule({{ $module->id }})" data-bs-toggle="modal" data-bs-target="#modalModules">
                                                 <i class="bx bxs-pencil label-icon"></i>
                                             </button>
                                         </div>
@@ -166,7 +166,7 @@
         document.getElementById("id").value = "";
         document.getElementById("name").value = "";
         document.getElementById("priority").value = "";
-        document.getElementById("user").value = "";
+        document.getElementById("project_id").value = "";
 
         //Cambiar url del form
         formulario.setAttribute('action', "{{route('storeModule')}}");
@@ -174,6 +174,36 @@
         document.getElementById("titulo").innerHTML = "Crear Proyecto";
         //Cambiar method del formulario
         document.getElementById("method").value = "POST";
+
+    }
+
+    function editModule(val){
+
+        let boton = document.getElementById(val);
+        let module = JSON.parse(boton.getAttribute("data-module"));
+
+        document.getElementById("id").value = module.id;
+        document.getElementById("name").value = module.name;
+
+        var valModule = module.priority;
+        switch (true) {
+            case (valModule < 4):
+                valModule = 3; break;
+            case (valModule < 8):
+                valModule = 7; break;
+            default:
+                valModule = 10; break;
+        }
+        document.getElementById("priority").value = valModule;
+
+        document.getElementById("project_id").value = module.project_id;
+
+        //Cambiar url del form
+        formulario.setAttribute('action', "{{route('updateModule', '')}}"+"/"+module.id);
+        //Cambiar titulo del modal
+        document.getElementById("titulo").innerHTML = "Editar Modulo";
+        //Cambiar method del formulario
+        document.getElementById("method").value = "PUT";
 
     }
 
