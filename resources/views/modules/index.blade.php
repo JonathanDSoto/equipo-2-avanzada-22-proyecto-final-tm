@@ -1,4 +1,6 @@
 @extends('layouts.app')
+<!-- Sweet Alert-->
+<link href="{{asset('libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 
 @section('contenido')
 
@@ -8,7 +10,7 @@
             <div class="card-body">
 
                 <h4 class="card-title">Modulos del proyecto</h4>
-                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" onclick="createModule()" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
@@ -21,19 +23,20 @@
                     </thead>
 
                     <tbody>
-                    @php ($i = 0)
                         @foreach ($modules as $module)
                             <tr>
                                 <td> 
-                                    @php ($i++) {{$i}}
+                                    <a href="{{route('showModules', $module->id)}}" class="text-body fw-bold ">
+                                        <span class="text-primary">{{$module->id}}</span>
+                                    </a>
                                 </td>
                                 <td>
                                     <a href=" " class="text-body fw-bold ">
                                         <span >{{$module->name}}</span>
                                     </a>
                                 </td>
-                                <td>
 
+                                <td>
                                 <!-- SWITCH PARA ASIGNAR PRIORIDAD -->
                                     @switch($module->priority)
                                         @case($module->priority < 4)
@@ -45,7 +48,6 @@
                                         @default
                                             <span>Alta</span>
                                     @endswitch
-
                                 </td>
 
                                 <td>
@@ -82,44 +84,47 @@
 {{-- modal --}}
 <div>
     
-
     <!-- sample modal content -->
-    <div id="modalUsuarios" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="modalModules" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Modulo</h5>
+                    <h5 id="titulo" class="modal-title" id="myModalLabel">Crear Modulo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     
-                    <form>
+                    <form id="formulario" action=" " method="POST">
+                        <input type="hidden" id="method" name="_method">
+                        @csrf
                         
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Nombre del modulo">
-                        </div>                        
+                            <input type="text" class="form-control" id="name" placeholder="Nombre del modulo" name="name">
+                        </div>      
+
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
-                                <select class="form-select">
-                                    <option>Select</option>
-                                    <option>Alta</option>
-                                    <option>Media</option>
-                                    <option>Baja</option>
-
+                                <select id="priority" class="form-select" name="priority">
+                                    <option value="10">Alta</option>
+                                    <option value="7">Media</option>
+                                    <option value="3">Baja</option>
                                 </select>
                             </div>
                         </div>  
+
                         <div class="mb-3">
-                            <label for="formrow-firstname-input" class="form-label">Encargado del modulo</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Nombre del encargado">
+                            <label for="formrow-firstname-input" class="form-label">Id del proyecto</label>
+                            <input type="text" class="form-control" id="project_id" placeholder="Nombre del encargado" name="project_id">
                         </div>                                                  
                         
                          
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                         </div>
+
+                        <input type="hidden" id="id" name="id">
                     </form>
 
                 </div>
@@ -155,6 +160,23 @@
         }
         });  
     }
+
+    function createModule(){
+
+        document.getElementById("id").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("priority").value = "";
+        document.getElementById("user").value = "";
+
+        //Cambiar url del form
+        formulario.setAttribute('action', "{{route('storeModule')}}");
+        //Cambiar titulo del modal
+        document.getElementById("titulo").innerHTML = "Crear Proyecto";
+        //Cambiar method del formulario
+        document.getElementById("method").value = "POST";
+
+    }
+
     </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!-- Required datatable js -->
