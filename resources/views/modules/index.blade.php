@@ -26,13 +26,13 @@
                         @foreach ($modules as $module)
                             <tr>
                                 <td> 
-                                    <a href="{{route('showModules', $module->id)}}" class="text-body fw-bold ">
-                                        <span class="text-primary">{{$module->id}}</span>
+                                    <a class="text-body fw-bold ">
+                                        <span>{{$module->id}}</span>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href=" " class="text-body fw-bold ">
-                                        <span >{{$module->name}}</span>
+                                    <a href="{{route('showModules', $module->id)}}" class="text-body fw-bold ">
+                                        <span class="text-primary">{{$module->name}}</span>
                                     </a>
                                 </td>
 

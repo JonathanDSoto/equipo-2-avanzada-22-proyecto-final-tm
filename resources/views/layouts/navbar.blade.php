@@ -6,7 +6,12 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box">
-
+                    <a href="" class="logo-light mt-4">
+                        <span >
+                            <img src="https://play-lh.googleusercontent.com/bgFXLigJP65KdRcSlkYh4tFsYhG5g8cSSeCzQLEhoU2UBlnH_wKsThXcvPffaGsQ5E4" alt="" height="40">
+                            <h5>CHECADOR</h5>
+                        </span>
+                    </a>
                 </div>
 
                 <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
