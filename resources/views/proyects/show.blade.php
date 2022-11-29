@@ -121,20 +121,35 @@
                     </thead>
     
                     <tbody>
+                    @foreach ($project[0]->modules as $module)
                     <tr>
                         <td> 
-                            <a href=" " class="text-body fw-bold ">
-                                <span class="text-primary">#240</span>
+                            <a href="{{route('showModules', $module->id)}}" class="text-body fw-bold ">
+                                <span class="text-primary">{{$module->id}}</span>
                             </a>
                         </td>
                         <td>
                             <a href=" " class="text-body fw-bold ">
-                                <span >Proyectito</span>
+                                <span >{{$module->name}}</span>
                             </a>
                         </td>
-                        <td>Alta</td>                        
-                        <td>BUGisoft</td>
-                        <td>4</td> 
+
+                        <td>
+                            <!-- SWITCH PARA ASIGNAR PRIORIDAD -->
+                                @switch($module->priority)
+                                    @case($module->priority < 4)
+                                        <span>Baja</span>
+                                        @break
+                                    @case($module->priority < 8)
+                                        <span>Media</span>
+                                        @break
+                                    @default
+                                        <span>Alta</span>
+                                @endswitch
+                        </td>    
+
+                        <td>{{$project[0]->name}}</td>
+                        <td>{{$project[0]->user_amount}}</td> 
                         <td>   
                             {{-- <div class="row" >
                                 <div class="col-6 ">
@@ -159,7 +174,7 @@
                             </div>
                         </td>
                     </tr>
-    
+                    @endforeach
                     </tbody>
                 </table>
     
