@@ -58,18 +58,17 @@
 
                                 <td style="width: 200px">   
                                     <div class="row" >
-                                        <div class="col-6 ">
+                                        <div class="col-4">
                                             <button type="button" class="btn btn-success waves-effect waves-light " id="{{ $module->id }}" data-module='{{ json_encode($module) }}' onclick="editModule({{ $module->id }})" data-bs-toggle="modal" data-bs-target="#modalModules">
                                                 <i class="bx bxs-pencil label-icon"></i>
                                             </button>
                                         </div>
-                                        <div class="col-6 ">
-                                        <form class="eliminar" action="{{route('destroyModule', $module->id)}}" method="POST">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger waves-effect waves-light"><i class="bx bx-trash label-icon "></i>Eliminar </button>
-                                        </form>
-
+                                        <div class="col">
+                                            <form class="eliminar" action="{{route('destroyModule', $module->id)}}" method="POST">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger waves-effect waves-light"><i class="bx bx-trash label-icon "></i></button>
+                                            </form>
                                         </div>
                                     </div>                               
                                 </td>
