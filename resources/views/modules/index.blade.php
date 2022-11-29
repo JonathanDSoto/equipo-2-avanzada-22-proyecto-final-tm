@@ -21,34 +21,55 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td> 
-                            <a href=" " class="text-body fw-bold ">
-                                <span class="text-primary">#240</span>
-                            </a>
-                        </td>
-                        <td>
-                            <a href=" " class="text-body fw-bold ">
-                                <span >Proyectito</span>
-                            </a>
-                        </td>
-                        <td>Alta</td>                        
-                        <td>BUGisoft</td>
-                        <td style="width: 200px">   
-                            <div class="row" >
-                                <div class="col-6 ">
-                                    <button type="button" class="btn btn-success waves-effect waves-light " data-bs-toggle="modal" data-bs-target="#modalUsuarios">
-                                        <i class="bx bxs-pencil label-icon"></i>
-                                    </button>
-                                </div>
-                                <div class="col-6 ">
-                                    <button onclick="remove()" type="button" class="btn btn-danger waves-effect  waves-light">
-                                        <i class="bx bx-trash label-icon "></i> 
-                                    </button>
-                                </div>
-                            </div>                               
-                        </td>
-                    </tr>
+                    @php ($i = 0)
+                        @foreach ($modules as $module)
+                            <tr>
+                                <td> 
+                                    @php ($i++) {{$i}}
+                                </td>
+                                <td>
+                                    <a href=" " class="text-body fw-bold ">
+                                        <span >{{$module->name}}</span>
+                                    </a>
+                                </td>
+                                <td>
+
+                                <!-- SWITCH PARA ASIGNAR PRIORIDAD -->
+                                    @switch($module->priority)
+                                        @case($module->priority < 4)
+                                            <span>Baja</span>
+                                            @break
+                                        @case($module->priority < 8)
+                                            <span>Media</span>
+                                            @break
+                                        @default
+                                            <span>Alta</span>
+                                    @endswitch
+
+                                </td>
+
+                                <td>
+                                    <a href="{{route('showProyect', $module->project_id)}}" class="text-body fw-bold ">
+                                        <span class="text-primary">{{$module->project->name}}</span>
+                                    </a>
+                                </td>
+
+                                <td style="width: 200px">   
+                                    <div class="row" >
+                                        <div class="col-6 ">
+                                            <button type="button" class="btn btn-success waves-effect waves-light " data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+                                                <i class="bx bxs-pencil label-icon"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-6 ">
+                                            <button onclick="remove()" type="button" class="btn btn-danger waves-effect  waves-light">
+                                                <i class="bx bx-trash label-icon "></i> 
+                                            </button>
+                                        </div>
+                                    </div>                               
+                                </td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
