@@ -107,7 +107,7 @@
             <div class="card-body">
     
                 <h4 class="card-title">Modulos del proyecto</h4>
-                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" onclick="createModule()" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
@@ -168,7 +168,7 @@
                                     <i class="mdi mdi-dots-horizontal font-size-18"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
-                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</a>
+                                    <button class="dropdown-item" id="{{ $module->id }}" data-module='{{ json_encode($module) }}' onclick="editModule({{ $module->id }})" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-pencil label-icon"></i>Editar</button>  
                                     <a class="dropdown-item" onclick="remove()"><i class="bx bx-trash label-icon "></i>Eliminar </a>
                                 </div>
                             </div>
@@ -219,11 +219,7 @@
                             </div>
                         </div>  
 
-                        <div class="mb-3">
-                            <label for="formrow-firstname-input" class="form-label">Id del proyecto</label>
-                            <input type="text" class="form-control" id="project_id" name="project_id" value={{$project[0]->id}}>
-                        </div>                                                  
-                        
+                        <input type="hidden" id="project_id" name="project_id" value={{$project[0]->id}}>                                             
                          
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
@@ -270,7 +266,6 @@
             document.getElementById("id").value = "";
             document.getElementById("name").value = "";
             document.getElementById("priority").value = "";
-            document.getElementById("project_id").value = "";
 
             //Cambiar url del form
             formulario.setAttribute('action', "{{route('storeModule')}}");
@@ -278,6 +273,34 @@
             document.getElementById("titulo").innerHTML = "Crear Modulo";
             //Cambiar method del formulario
             document.getElementById("method").value = "POST";
+
+        }
+
+        function editModule(val){
+
+            let boton = document.getElementById(val);
+            let module = JSON.parse(boton.getAttribute("data-module"));
+
+            document.getElementById("id").value = module.id;
+            document.getElementById("name").value = module.name;
+
+            var valModule = module.priority;
+            switch (true) {
+                case (valModule < 4):
+                    valModule = 3; break;
+                case (valModule < 8):
+                    valModule = 7; break;
+                default:
+                    valModule = 10; break;
+            }
+            document.getElementById("priority").value = valModule;
+
+            //Cambiar url del form
+            formulario.setAttribute('action', "{{route('updateModule', '')}}"+"/"+module.id);
+            //Cambiar titulo del modal
+            document.getElementById("titulo").innerHTML = "Editar Modulo";
+            //Cambiar method del formulario
+            document.getElementById("method").value = "PUT";
 
         }
         </script>
