@@ -11,11 +11,23 @@
                         <img src="{{asset('images/companies/img-1.png')}}" alt="" class="avatar-sm">
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
-                        <h5 class="text-truncate font-size-15">Modulo:<p class="text-muted">Perfiles</p></h5>
+                        <h5 class="text-truncate font-size-15">Modulo:<p class="text-muted">{{$module[0]->name}}</p></h5>
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
                         <h5 class="text-truncate font-size-15">Prioridad:</h5>
-                        <span class="badge badge-soft-info">Baja</span>
+
+                        <!-- SWITCH PARA ASIGNAR PRIORIDAD -->
+                        @switch($module[0]->priority)
+                            @case($module[0]->priority < 4)
+                                <span class="badge badge-soft-info">Baja</span>
+                                @break
+                            @case($module[0]->priority < 8)
+                                <span class="badge badge-soft-info">Media</span>
+                                @break
+                            @default
+                                <span class="badge badge-soft-info">Alta</span>
+                        @endswitch
+                        
                     </div>
                 </div>
                 
@@ -35,8 +47,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
+                            <th scope="row">{{$module[0]->id}}</th>
+                            <td>{{$module[0]->name}}</td>
                             <td>
                                 <p  class="badge badge-soft-primary font-size-11 m-1">QA</p>
                             </td>
