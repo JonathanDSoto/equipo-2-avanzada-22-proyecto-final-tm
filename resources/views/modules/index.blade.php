@@ -64,9 +64,15 @@
                                             </button>
                                         </div>
                                         <div class="col-6 ">
-                                            <button onclick="remove()" type="button" class="btn btn-danger waves-effect  waves-light">
+                                        
+                                        <form class="eliminar" action="{{route('destroyModule', $module->id)}}" method="POST">
+                                            @csrf    
+                                            @method('delete')
+                                            <button type="button" class="btn btn-danger waves-effect  waves-light">
                                                 <i class="bx bx-trash label-icon "></i> 
                                             </button>
+                                        </form>
+
                                         </div>
                                     </div>                               
                                 </td>
@@ -142,70 +148,71 @@
 
 @section('scripts')
     <script type="text/javascript">
-        function remove(id) {
-        swal({
-            title: "Estas seguro?",
-            text: "No podras recuperar el modulo",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-        if (willDelete) {
-            swal("Poof! EL modulo se elimino con exito!", {
-            icon: "success",
-            });
-        } else {
-            swal("El modulo esta a salvo!");
+        $('.eliminar').submit(function(e){
+                e.preventDefault();
+                swal({
+                    title: "Estas seguro?",
+                    text: "No podras recuperar el modulo",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! EL modulo se elimino con exito!", {
+                            icon: "success",
+                        });
+                        this.submit();
+                    } else {
+                        swal("El modulo esta a salvo!");
+                    }
+                });  
+            })
+
+        function createModule(){
+
+            document.getElementById("id").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("priority").value = "";
+            document.getElementById("project_id").value = "";
+
+            //Cambiar url del form
+            formulario.setAttribute('action', "{{route('storeModule')}}");
+            //Cambiar titulo del modal
+            document.getElementById("titulo").innerHTML = "Crear Proyecto";
+            //Cambiar method del formulario
+            document.getElementById("method").value = "POST";
+
         }
-        });  
-    }
 
-    function createModule(){
+        function editModule(val){
 
-        document.getElementById("id").value = "";
-        document.getElementById("name").value = "";
-        document.getElementById("priority").value = "";
-        document.getElementById("project_id").value = "";
+            let boton = document.getElementById(val);
+            let module = JSON.parse(boton.getAttribute("data-module"));
 
-        //Cambiar url del form
-        formulario.setAttribute('action', "{{route('storeModule')}}");
-        //Cambiar titulo del modal
-        document.getElementById("titulo").innerHTML = "Crear Proyecto";
-        //Cambiar method del formulario
-        document.getElementById("method").value = "POST";
+            document.getElementById("id").value = module.id;
+            document.getElementById("name").value = module.name;
 
-    }
+            var valModule = module.priority;
+            switch (true) {
+                case (valModule < 4):
+                    valModule = 3; break;
+                case (valModule < 8):
+                    valModule = 7; break;
+                default:
+                    valModule = 10; break;
+            }
+            document.getElementById("priority").value = valModule;
 
-    function editModule(val){
+            document.getElementById("project_id").value = module.project_id;
 
-        let boton = document.getElementById(val);
-        let module = JSON.parse(boton.getAttribute("data-module"));
+            //Cambiar url del form
+            formulario.setAttribute('action', "{{route('updateModule', '')}}"+"/"+module.id);
+            //Cambiar titulo del modal
+            document.getElementById("titulo").innerHTML = "Editar Modulo";
+            //Cambiar method del formulario
+            document.getElementById("method").value = "PUT";
 
-        document.getElementById("id").value = module.id;
-        document.getElementById("name").value = module.name;
-
-        var valModule = module.priority;
-        switch (true) {
-            case (valModule < 4):
-                valModule = 3; break;
-            case (valModule < 8):
-                valModule = 7; break;
-            default:
-                valModule = 10; break;
         }
-        document.getElementById("priority").value = valModule;
-
-        document.getElementById("project_id").value = module.project_id;
-
-        //Cambiar url del form
-        formulario.setAttribute('action', "{{route('updateModule', '')}}"+"/"+module.id);
-        //Cambiar titulo del modal
-        document.getElementById("titulo").innerHTML = "Editar Modulo";
-        //Cambiar method del formulario
-        document.getElementById("method").value = "PUT";
-
-    }
 
     </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
