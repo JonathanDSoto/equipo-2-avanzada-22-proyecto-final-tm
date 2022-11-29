@@ -64,13 +64,10 @@
                                             </button>
                                         </div>
                                         <div class="col-6 ">
-                                        
                                         <form class="eliminar" action="{{route('destroyModule', $module->id)}}" method="POST">
-                                            @csrf    
                                             @method('delete')
-                                            <button type="button" class="btn btn-danger waves-effect  waves-light">
-                                                <i class="bx bx-trash label-icon "></i> 
-                                            </button>
+                                            @csrf
+                                            <button class="btn btn-danger waves-effect waves-light"><i class="bx bx-trash label-icon "></i>Eliminar </button>
                                         </form>
 
                                         </div>
