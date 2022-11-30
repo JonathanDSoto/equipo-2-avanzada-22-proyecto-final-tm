@@ -13,6 +13,6 @@ class Module extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class)->withPivot('user_id');
+        return $this->belongsToMany(User::class)->withPivot('user_id','percentage_advance');
     }
 }

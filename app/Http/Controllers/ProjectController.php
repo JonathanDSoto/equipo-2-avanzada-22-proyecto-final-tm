@@ -91,16 +91,7 @@ class ProjectController extends Controller
     {
 
         $project = Project::find($request->id);
-/*         $request['name'] = 'name';
-        $request['description'] = 'de ad';
-        $request['leader'] = 'leader ';
-        $request['company'] = 'asd'; 
-        $request ['user_amount'] = '1';
-        $request ['budget'] = '90000';
-        $request ['status'] = 'cancelled';
-
-        $request['start_date'] = Carbon::now();
-        $request ['end_date'] = Carbon::now()->addYear(); */
+ 
         $project->fill($request->all());
         $project->push();
         return redirect()->back()->with('info', 'Registro editado correctamente');    

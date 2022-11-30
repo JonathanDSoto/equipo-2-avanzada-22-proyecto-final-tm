@@ -14,7 +14,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-      //  $modules = Module::with('project', 'users')->get();
+ 
         $modules = Module::with('project:id,name')->get();
         return view('modules.index', compact('modules'));
     }
@@ -38,9 +38,7 @@ class ModuleController extends Controller
     public function store(Request $request)
     {
 
-/*         $request['name'] = 'qweqe';
-        $request['priority'] = '0';
-        $request['project_id'] = '2'; */
+ 
         $module = new Module;
         $module->name = $request->name;
         $module->priority = $request->priority;
@@ -87,10 +85,7 @@ class ModuleController extends Controller
     public function update(Request $request)
     {
         $module = Module::where('id', $request->id)->first();
-
-/*         $request->name = 'oreo';
-        $request->priority = '0';
- */
+ 
         $module->name = $request->name;
         $module->priority = $request->priority;
         $module->project_id = $request->project_id;

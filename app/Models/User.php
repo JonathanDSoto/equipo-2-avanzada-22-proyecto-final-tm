@@ -17,10 +17,19 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+ 
     protected $fillable = [
         'name',
         'email',
         'password',
+        'address', 
+        'NSS', 
+        'email',
+        'password',
+        'verify_code',
+        'position',
+        'salary',
+        'hired'
     ];
 
     /**
@@ -41,4 +50,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function modules(){
+        return $this->belongsToMany(Module::class)->withPivot('module_id', 'percentage_advance');
+    }
 }

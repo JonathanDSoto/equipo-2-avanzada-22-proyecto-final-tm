@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -64,14 +65,23 @@ Route::post('/proyectos', [ProjectController::class, 'store'])->middleware('auth
 // })->name('moduloroyect');
 
 // usuarios
-Route::get('/usuarios', function () {
+/* Route::get('/usuarios', function () {
     return view('users.index');
 })->name('users');
+ */
+Route::get('/usuarios', [UserController::class, 'index'])->name('users'); // middleware !!!
 
-Route::get('/usuarios/detalles', function () {
+Route::get('/usuarios/{id}', [UserController::class, 'show'])->name('showUser');
+
+Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('deleteUser'); 
+
+Route::post('usuarios', [UserController::class, 'store'])->name('storeUser');
+
+Route::put('usuarios/{id}',[UserController::class, 'update'])->name('updateUser'); 
+/* Route::get('/usuarios/detalles', function () {
     return view('users.show');
 })->name('showUser');
-
+ */
 // reportes
 Route::get('/reportes', function () {
     return view('reports.index');
