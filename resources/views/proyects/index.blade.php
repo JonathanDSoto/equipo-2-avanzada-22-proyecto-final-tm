@@ -91,18 +91,14 @@
                     <button type="button" class="btn btn-primary waves-effect waves-light btn-label" onclick="createProject()" data-bs-toggle="modal" data-bs-target="#modalProject"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo proyecto</button>
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
-                            <th>Compania</th>
-                            <th>Jefe</th>
-                            <th>Presupuesto</th>
-                            <th>Cantidad de usuarios</th>
-                            <th>Estado</th>
-                            <th>Fecha de inicio</th> 
-                            <th>Fecha finalizacion</th>                       
-                            <th>accion</th>
-                        </tr>
+                            <tr>
+                                <th class="col-3">Nombre</th>
+                                <th>Compañia</th>
+                                <th>Presupuesto</th>
+                                <th>Estado</th>
+                                <th>Fecha finalizacion</th>                       
+                                <th>accion</th>
+                            </tr>
                         </thead>
 
                         <tbody>
@@ -114,13 +110,9 @@
                                             <span class="text-primary">{{$project->name}}</span>
                                         </a>
                                     </td>
-                                    <td>{{$project->description}}</td>
                                     <td>{{$project->company}}</td>
-                                    <td>{{$project->leader}}</td>
                                     <td>${{$project->budget}}</td>
-                                    <td>{{$project->user_amount}}</td>
                                     <td>{{$project->status}}</td>
-                                    <td>{{$project->start_date}}</td>
                                     <td>{{$project->end_date}}</td>
                                     <td>
                                         <div class="dropdown">
@@ -219,10 +211,10 @@
                                 <div class="col-md-10">
                                     <select class="form-select" id="projectStatus" name="status">
                                         
-                                        <option value="Aprobado">Aprobado</option>
                                         <option value="Pendiente">Pendiente</option>
-                                        <option value="Finalizado">Finalizado</option>
+                                        <option value="Aprobado">Aprobado</option>
                                         <option value="Cancelado">Cancelado</option>
+                                        <option value="Finalizado">Finalizado</option>
 
                                     </select>
                                 </div>                        

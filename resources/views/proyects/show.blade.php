@@ -4,26 +4,40 @@
 
 <div class="row">
     <div class="row">
-        <div class="col-md-5">
-            @if (session('info'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="mdi mdi-check-all me-2"></i>
-                        Acción realizada con exito.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @else
-                {{-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="mdi mdi-block-helper me-2"></i>
-                    error! no se pudo realizar la accion.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div> --}}
-            @endif
+            <div class="col-md-5">
+                @if (session('info'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="mdi mdi-check-all me-2"></i>
+                            Acción realizada con exito.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @else
+                    {{-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="mdi mdi-block-helper me-2"></i>
+                        error! no se pudo realizar la accion.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div> --}}
+                @endif
+            </div>
         </div>
-    </div>
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Detalles del proyecto</h4>
+                <div class="text-end">
+                    <div class="row btn-group" >
+                        <div class="col">
+                            <button type="button" class="btn btn-success waves-effect waves-light " id="{{ $project[0]->id }}" data-project='{{ json_encode($project[0]) }}' onclick="editProject({{ $project[0]->id }})" data-bs-toggle="modal" data-bs-target="#modalProject">
+                                <i class="bx bxs-pencil label-icon"></i>
+                            </button>
+                        </div>
+                        <form class="deleteProject col" action="{{route('destroyProyect', $project[0]->id)}}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button class="btn btn-danger waves-effect waves-light"><i class="bx bx-trash label-icon "></i></button>
+                        </form>
+                    </div>
+                </div>
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-4">
                         <img src="{{asset('images/companies/img-1.png')}}" alt="" class="avatar-sm">
@@ -259,12 +273,124 @@
     <!-- /.modal -->
 </div> 
 {{-- end modal --}}
-<!-- end row -->
-    
+
+{{-- modal --}}
+<div>
+    <!-- sample modal content -->
+    <div id="modalProject" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="titulo" class="modal-title" id="myModalLabel">Editar Proyecto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formulario2" action=" " method="POST">
+                        @method('PUT')
+                        @csrf
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name2" placeholder="Ej: 230802" name="name">
+                        </div>                        
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Descripcion</label>
+                            <input type="text" class="form-control" id="description" placeholder="Ej: 230802" name="description">
+                        </div>
+                                                    
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Lider del proyecto</label>
+                            <input type="text" class="form-control" id="leader" placeholder="Ej: juanPC" name="leader">
+                        </div>                     
+                        <div class="row">
+                            <div class="col-md-6">                                
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">compania</label>
+                                    <input type="text" class="form-control" id="company" placeholder="Ej: juan perez santos" name="company">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">                                  
+                                    <div class="mb-4">
+                                        <label for="formrow-firstname-input" class="form-label">Numero de usuarios</label>
+                                        <input type="text" class="form-control" id="user_amount" placeholder="Ej: juanPC" name="user_amount">
+                                    </div>                                 
+                            </div>
+
+                            <div class="col-md-6">                                  
+                                <div class="mb-4">
+                                    <label for="formrow-firstname-input" class="form-label">Presupuesto</label>
+                                    <input type="text" class="form-control" id="budget" placeholder="Ej: 50000" name="budget">
+                                </div>                                 
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">                                
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Fecha inicio</label>
+                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">                                  
+                                    <div class="mb-4">
+                                        <label for="formrow-firstname-input" class="form-label">Fecha fin</label>
+                                        <input class="form-control" type="date" id="end_date" name="end_date">
+                                    </div>                                 
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Estado</label>
+                            <div class="col-md-10">
+                                <select class="form-select" id="projectStatus" name="status">
+                                    
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Aprobado">Aprobado</option>
+                                    <option value="Cancelado">Cancelado</option>
+                                    <option value="Finalizado">Finalizado</option>
+
+                                </select>
+                            </div>                        
+                        </div> 
+                        
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        </div>
+
+                        <input type="hidden" id="id2" name="id">
+                    </form>
+
+                </div>
+                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div> 
+{{-- end modal --}}
+
 @endsection
 
 @section('scripts')
         <script type="text/javascript">
+            $('.deleteProject').submit(function(ev){
+                ev.preventDefault();
+                swal({
+                    title: "Estas seguro?",
+                    text: "No podras recuperar el proyecto",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! EL proyecto se elimino con exito!", {
+                            icon: "success",
+                        });
+                        this.submit();
+                    } else {
+                        swal("El proyecto esta a salvo!");
+                    }
+                });  
+            })
             $('.eliminar').submit(function(e){
                 e.preventDefault();
                 swal({
@@ -325,6 +451,28 @@
             document.getElementById("titulo").innerHTML = "Editar Modulo";
             //Cambiar method del formulario
             document.getElementById("method").value = "PUT";
+
+        }
+
+        function editProject(val){
+
+            let boton = document.getElementById(val);
+            let project = JSON.parse(boton.getAttribute("data-project"));
+            console.log(project);
+
+            document.getElementById("id2").value = project.id;
+            document.getElementById("name2").value = project.name;
+            document.getElementById("description").value = project.description;
+            document.getElementById("company").value = project.company;
+            document.getElementById("leader").value = project.leader;
+            document.getElementById("user_amount").value = project.user_amount;
+            document.getElementById("budget").value = project.budget;
+            document.getElementById("projectStatus").value = project.status;
+            document.getElementById("start_date").value = project.start_date;
+            document.getElementById("end_date").value = project.end_date;
+            console.log(project.name);
+            //Cambiar url del form
+            formulario2.setAttribute('action', "{{route('updateProyect', '')}}"+"/"+project.id);
 
         }
         </script>
