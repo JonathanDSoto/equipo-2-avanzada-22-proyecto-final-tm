@@ -25,7 +25,9 @@ class UserController extends Controller
         if($user){
             $user->delete();
         }
-        return redirect()->back()->with('info', 'Registro borrado correctamente');
+        return redirect()->action([UserController::class, 'index'])->with('info', 'Registro eliminado correctamente');;
+
+      //  return redirect()->back()->with('info', 'Registro borrado correctamente');
     }
  
     public function store(Request $request){

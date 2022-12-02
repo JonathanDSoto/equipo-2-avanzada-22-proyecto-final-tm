@@ -105,6 +105,8 @@ class ModuleController extends Controller
         if($module)
             $module->delete();
 
-        return redirect()->back()->with('info', 'Registro eliminado correctamente');
+     //   return redirect()->back()->with('info', 'Registro eliminado correctamente');
+     return redirect()->action([ModuleController::class, 'index'])->with('info', 'Registro eliminado correctamente');
+
     }
 }

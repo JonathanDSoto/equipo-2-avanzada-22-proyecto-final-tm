@@ -89,7 +89,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request)
     {
-
+    
         $project = Project::find($request->id);
  
         $project->fill($request->all());
@@ -110,6 +110,7 @@ class ProjectController extends Controller
         if($project)
             $project->delete();
 
-        return redirect()->back()->with('info', 'Registro eliminado correctamente');
+       // return redirect()->back()->with('info', 'Registro eliminado correctamente');
+       return redirect()->action([ProjectController::class, 'index'])->with('info', 'Registro eliminado correctamente');;
     }
 }
