@@ -46,6 +46,18 @@
                         @endswitch
                         
                     </div>
+                    <div class="row btn-group" >
+                        <div class="col">
+                            <button type="button" class="btn btn-success waves-effect waves-light " id="{{ $module[0]->id }}" data-Module='{{ json_encode($module[0]) }}' onclick="editModule({{ $module[0]->id }})" data-bs-toggle="modal" data-bs-target="#modalModules">
+                                <i class="bx bxs-pencil label-icon"></i>
+                            </button>
+                        </div>
+                        <form class="deleteModule col" action="{{ route('destroyModule', $module[0]->id)}}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button class="btn btn-danger waves-effect waves-light"><i class="bx bx-trash label-icon "></i></button>
+                        </form>
+                    </div>
                 </div>
                 
 
@@ -139,11 +151,113 @@
 </div>
 <!-- end row -->
 
-
-<!-- end row -->
+{{-- modal --}}
+<div>
     
+    <!-- sample modal content -->
+    <div id="modalModules" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="titulo" class="modal-title" id="myModalLabel">Crear Modulo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <form id="formulario" action=" " method="POST">
+                        <input type="hidden" id="method" name="_method">
+                        @csrf
+                        
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nameM" placeholder="Nombre del modulo" name="name">
+                        </div>      
+
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Prioridad</label>
+                            <div class="col-md-10">
+                                <select id="priority" class="form-select" name="priority">
+                                    <option value="10">Alta</option>
+                                    <option value="7">Media</option>
+                                    <option value="3">Baja</option>
+                                </select>
+                            </div>
+                        </div>  
+
+                        <input type="hidden" id="project_id" name="project_id" value={{$module[0]->project->id}}>                                             
+                         
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        </div>
+
+                        <input type="hidden" id="idM" name="id">
+                    </form>
+
+                </div>
+                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div> 
+{{-- end modal --}}
+
 @endsection
 
 @section('scripts')
- 
+    <script type="text/javascript">
+        $('.deleteModule').submit(function(e){
+            e.preventDefault();
+            swal({
+                title: "Estas seguro?",
+                text: "No podras recuperar el modulo",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! EL modulo se elimino con exito!", {
+                        icon: "success",
+                    });
+                    this.submit();
+                } else {
+                    swal("El modulo esta a salvo!");
+                }
+            });  
+        })
+        function editModule(val){
+
+            let boton = document.getElementById(val);
+            let module = JSON.parse(boton.getAttribute("data-module"));
+
+            document.getElementById("idM").value = module.id;
+            document.getElementById("nameM").value = module.name;
+
+            var valModule = module.priority;
+            switch (true) {
+                case (valModule < 4):
+                    valModule = 3; break;
+                case (valModule < 8):
+                    valModule = 7; break;
+                default:
+                    valModule = 10; break;
+            }
+            document.getElementById("priority").value = valModule;
+
+            //Cambiar url del form
+            formulario.setAttribute('action', "{{route('updateModule', '')}}"+"/"+module.id);
+            //Cambiar titulo del modal
+            document.getElementById("titulo").innerHTML = "Editar Modulo";
+            //Cambiar method del formulario
+            document.getElementById("method").value = "PUT";
+
+        }
+    </script>
+    <!-- Sweet Alerts js -->
+    <script src="{{asset('libs/sweetalert2/sweetalert2.min.j')}}s"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    <!-- Sweet alert init js-->
+    <script src="{{asset('js/pages/sweet-alerts.init.js')}}"></script>
 @endsection
