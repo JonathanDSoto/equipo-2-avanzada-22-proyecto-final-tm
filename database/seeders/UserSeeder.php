@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Module;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -32,7 +33,7 @@ class UserSeeder extends Seeder
             $table->date('hired'); */
         
             
-        User::create([
+       $user =  User::create([
             'name' => 'Joel Verdugo',
             'username' => '@joel17',
             'phone' => '6121903234',
@@ -45,8 +46,12 @@ class UserSeeder extends Seeder
             'salary' => '4000',
             'hired' => Carbon::now()->subYears(4)
         ]);
+        
+//     $user->modules()->attach(random_int(0, Module::count()-1));
+$user->modules()->attach([1]);
 
-        User::create([
+
+        $user = User::create([
             'name' => 'Daniel Zamago',
             'username' => '@daniel32317',
             'phone' => '612123223',
@@ -59,8 +64,10 @@ class UserSeeder extends Seeder
             'salary' => '4000',
             'hired' => Carbon::now()->subYears(4)
         ]);
+        $user->modules()->attach([1,3]);
 
-        User::create([
+
+        $user = User::create([
             'name' => 'David Buenrostro',
             'username' => '@davidl32317',
             'phone' => '612120226',
@@ -74,6 +81,6 @@ class UserSeeder extends Seeder
             'hired' => Carbon::now()->subYears(4)
         ]);
 
-
+        $user->modules()->attach([1,2,3]);
     }
 }

@@ -27,7 +27,7 @@
                     <tbody>
                     <tr>
                         <td>
-                            <a href=" {{route('showUser')}}" class="text-body fw-bold ">
+                            <a href=" {{route('showUser', 1)}}" class="text-body fw-bold ">
                                 <span class="text-primary">Proyectito</span>
                             </a>
                         </td>

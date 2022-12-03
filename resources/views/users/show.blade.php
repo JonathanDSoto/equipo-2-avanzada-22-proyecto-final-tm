@@ -174,7 +174,7 @@
                                             <td>01%</td>
                                             <td>30/02/2020</td>
                                             <td>
-                                                <a href=" {{route('showProyect')}}" type="button" class="btn btn-primary waves-effect waves-light">
+                                                <a href=" {{route('showProyect',1)}}" type="button" class="btn btn-primary waves-effect waves-light">
                                                     <i class="mdi mdi-folder-information font-size-16 align-middle me-2"></i> Detalles
                                                 </a>
                                             </td>
@@ -188,7 +188,7 @@
                                             <td>50%</td>
                                             <td>20/10/2010</td>
                                             <td>
-                                                <a href=" {{route('showProyect')}}" type="button" class="btn btn-primary waves-effect waves-light">
+                                                <a href=" {{route('showProyect', 1)}}" type="button" class="btn btn-primary waves-effect waves-light">
                                                     <i class="mdi mdi-folder-information font-size-16 align-middle me-2"></i> Detalles
                                                 </a>
                                             </td>
