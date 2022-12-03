@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
@@ -65,8 +66,9 @@ class ProjectController extends Controller
         $project = Project::where('id', $id)
         ->with('modules.users')
         ->get();
+        $users = User::all();
         #return $project;
-        return view('proyects.show', compact('project'));
+        return view('proyects.show', compact('project', 'users'));
     }
 
     /**
