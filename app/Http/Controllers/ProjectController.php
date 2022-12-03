@@ -40,6 +40,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:projects,name', 
+            'description' => 'required',
+            'company' => 'required',
+            'leader' => 'required',
+            'user_amount' => 'required|numeric',
+            'budget' => 'required|numeric',
+            'status' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+ 
         $project = new Project();
         $project->name = $request->name;
         $project->description = $request->description;
@@ -91,6 +103,17 @@ class ProjectController extends Controller
      */
     public function update(Request $request)
     {
+         $request->validate([
+            'name' => 'required|unique:projects,name,'.$request->id, 
+            'description' => 'required',
+            'company' => 'required',
+            'leader' => 'required',
+            'user_amount' => 'required|numeric',
+            'budget' => 'required|numeric',
+            'status' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]); 
     
         $project = Project::find($request->id);
  

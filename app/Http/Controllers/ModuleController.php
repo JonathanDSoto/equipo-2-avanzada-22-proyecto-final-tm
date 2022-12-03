@@ -40,8 +40,12 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-
- 
+        //'name' => 'required|regex:/^[a-zA-Z]+$/u
+        $request->validate([
+            'name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'priority' => 'required|numeric',
+            'project_id' => 'required|exists:projects,id'
+        ]);
         $module = new Module;
         $module->name = $request->name;
         $module->priority = $request->priority;
@@ -87,6 +91,11 @@ class ModuleController extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'priority' => 'required|numeric',
+            'project_id' => 'required|exists:projects,id'
+        ]);
         $module = Module::where('id', $request->id)->first();
  
         $module->name = $request->name;

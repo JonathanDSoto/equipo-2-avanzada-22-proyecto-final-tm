@@ -22,8 +22,8 @@ class AssistanceSeeder extends Seeder
      */
     public function run()
     {
-        $assistance = Assistance::create([
+/*         $assistance = Assistance::create([
             'user_id'
-        ])
+        ]) */
     }
 }
