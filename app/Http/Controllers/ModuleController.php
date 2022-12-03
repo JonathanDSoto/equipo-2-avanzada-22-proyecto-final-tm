@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\module;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -14,9 +16,10 @@ class ModuleController extends Controller
      */
     public function index()
     {
- 
+        $users = User::all();
+        $projects = Project::all(); 
         $modules = Module::with('project:id,name')->get();
-        return view('modules.index', compact('modules'));
+        return view('modules.index', compact('modules', 'projects', 'users'));
     }
 
     /**
