@@ -119,26 +119,42 @@
                         
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" required>
+                            <input type="text" class="form-control" id="name" placeholder="Nombre" name="name">
                         </div>      
 
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
-                                <select id="priority" class="form-select" name="priority" required>
-                                    <option value="10">Alta</option>
+                                <select id="priority" class="form-select" name="priority">
+                                    <option value="10">Baja</option>
                                     <option value="7">Media</option>
-                                    <option value="3">Baja</option>
+                                    <option value="3">Alta</option>
                                 </select>
                             </div>
                         </div>  
 
                         <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Encargado</label>
+                            <div class="col-md-10">
+                                <select id="user_id" class="form-select" name="user_id">
+                                    @foreach ($users as $user)
+                                        <option value="$user->id">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>  
+
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Rol</label>
+                            <input type="text" class="form-control" id="role" placeholder="Nombre del modulo" name="role">
+                        </div>  
+
+                        <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Proyecto</label>
 
-                            <select id="project_id" class="form-select" name="project_id" required>   
-                                @foreach($modules as $module)
-                                    <option value="{{$module->project->id}}">{{$module->project->name}}</option>
+                            <select id="project_id" class="form-select" name="project_id">   
+                                @foreach($projects as $project)
+                                    <option value="{{$project->id}}">{{$project->name}}</option>
                                 @endforeach
                             </select>
 
