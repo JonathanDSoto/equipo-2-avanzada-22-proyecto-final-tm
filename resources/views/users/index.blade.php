@@ -4,19 +4,30 @@
 @section('contenido')
 
 <div class="row">
+     @if (session('info'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="mdi mdi-check-all me-2"></i>
+                Acción realizada con exito.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @else
+    @endif
+
+
+  
     <div class="col-12">
         <div class="card">
             <div class="card-body">
 
                 <h4 class="card-title">Usuarios</h4>
-                <button type="button" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-user-plus label-icon"></i>Crear usuario</button>
+                <button type="button" onclick="createUser()" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-user-plus label-icon"></i>Crear usuario</button>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Usuario</th>
                         <th>telefono</th>
-                        <th>Direccion</th>
+                   {{--      <th>Direccion</th> --}}
                         <th>NSS</th>
                         <th>Posision</th>
                         <th>Salario</th>                        
@@ -25,31 +36,41 @@
                     </thead>
 
                     <tbody>
+                @foreach ($users as $user)
+                    
+               
                     <tr>
                         <td>
-                            <a href=" {{route('showUser', 1)}}" class="text-body fw-bold ">
-                                <span class="text-primary">Proyectito</span>
+                            <a href=" {{route('showUser', $user->id)}}" class="text-body fw-bold "> 
+                                <span class="text-primary">{{$user->name}}</span>
                             </a>
                         </td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>das</td>
-                        <td>$320,800</td>
-                        <td>          
-                            <div class="dropdown">
-                                <a href="#" class="dropdown-toggle card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-horizontal font-size-18"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" style="">
-                                    <a class="dropdown-item" href="#"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
-                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</a>
-                                    <a class="dropdown-item" onclick="remove()"><i class="bx bx-trash label-icon "></i>Eliminar </a>
-                                </div>
-                            </div>  
-                        </td>
+                     
+                        <td>{{$user->username}}</td>
+                        <td>{{$user->phone}}</td>
+                        <td>{{$user->NSS}}</td>
+                        <td>{{$user->position}}</td>
+                        <td>${{$user->salary}}</td>
+                            <td>          
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" style="">
+                                        <a class="dropdown-item" href="{{route('showUser', $user->id)}}"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
+                                        <button class="dropdown-item" id="{{ $user->id }}" data-user='{{ json_encode($user) }}' onclick="editUser({{ $user->id }})" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</button>   
+
+                                        
+                                        <form action="{{route('deleteUser', $user->id)}}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="dropdown-item"><i class="bx bx-trash label-icon "></i>Eliminar </button>
+                                        </form>
+                                    </div>
+                                </div>  
+                            </td> 
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
 
@@ -67,24 +88,26 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Crear nuevo usuario</h5>
+                    <h5 class="modal-title" id="titulo">Crear nuevo usuario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     
-                    <form>
+                    <form id="formulario" method="POST" action=" ">
+                        <input type="hidden" id="method" name="_method">
+                        @csrf
                         <div class="row">
 
                             <div class="col-md-6">                                
                                 <div class="mb-3">
                                     <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos">
+                                    <input type="text" name="name" id="name" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos">
                                 </div>
                             </div>
                             <div class="col-md-6">                                
                                 <div class="mb-3">
                                     <label for="formrow-firstname-input" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
+                                    <input type="text"  name="username" id="username" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
                                 </div>                                
                             </div>
                         </div>
@@ -94,47 +117,46 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="formrow-email-input" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="formrow-email-input" placeholder="Ej: ejemplo@gmail.com">
+                                    <input type="email" name="email" id="email" class="form-control" id="formrow-email-input" placeholder="Ej: ejemplo@gmail.com">
                                 </div>
                             </div>
-                            
+    
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="formrow-password-input" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="formrow-password-input" placeholder="************">
+                                    <input type="password" name="password" disabled='true' id="password" class="form-control" id="formrow-password-input" placeholder="************">
                                 </div>
-                                
-                            </div>
+                            </div>  
                         </div>    
                        
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label for="formrow-inputZip" class="form-label">Telefono</label>
-                                <input class="form-control" type="tel" value="" placeholder="ej: 6121072052" id="phone">
+                                <input class="form-control" type="tel" value="" id="phone" name="phone" placeholder="ej: 6121072052" id="phone">
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Direccion</label>
                             <div>
-                                <textarea required="" class="form-control" rows="3"></textarea>
+                                <textarea id="address" name="address" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">NSS</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 90806083439">
+                            <input type="text" class="form-control" id="NSS" name="NSS" id="formrow-firstname-input" placeholder="Ej: 90806083439">
                         </div>       
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Posicion</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 90806083439">
+                            <input type="text" class="form-control" name="position" id="position" id="formrow-firstname-input" placeholder="Ej: 90806083439">
                         </div>  
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Salario</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 8900">
+                            <input type="text" class="form-control"  id="salary" name='salary' id="formrow-firstname-input" placeholder="Ej: 8900">
                         </div> 
-                        <div class="mb-3">
+                          <div class="mb-3" >
                             <label for="formrow-firstname-input" class="form-label">Token</label>
-                            <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Ej: 230802">
-                        </div> 
+                            <input type="text" class="form-control" disabled='true' id="verify_code" name='verify_code' placeholder="Ej: 230802">
+                        </div>   
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                         </div>
@@ -154,7 +176,8 @@
 
 @section('scripts')
         <script type="text/javascript">
-            function remove(id) {
+           $('.eliminar').submit(function(e){
+          
             swal({
                 title: "Estas seguro?",
                 text: "No podras recuperar el usuario",
@@ -167,10 +190,57 @@
                 swal("Poof! EL usuario se elimino con exito!", {
                 icon: "success",
                 });
+                this.submit();
             } else {
                 swal("El usuario esta a salvo!");
             }
             });  
+        })
+
+        function editUser(val){
+            let boton = document.getElementById(val);
+            let user = JSON.parse(boton.getAttribute('data-user'));
+
+            document.getElementById("name").value = user.name;
+            document.getElementById("username").value = user.username;
+            document.getElementById("phone").value = user.phone;
+            document.getElementById("email").value = user.email;
+        //    document.getElementById("password").value = user.password;
+            document.getElementById("NSS").value = user.NSS;
+            document.getElementById("address").value = user.address;
+            document.getElementById("salary").value = user.salary;
+            document.getElementById("position").value = user.position;
+        //    document.getElementById("verify_code").value = user.verify_code;
+        
+            formulario = document.getElementById('formulario');
+            formulario.setAttribute('action', "{{route('updateUser', '')}}"+"/"+user.id);
+            document.getElementById("titulo").innerHTML = "Editar Usuario";
+            document.getElementById("method").value = "PUT";
+
+        }
+
+        function createUser(){
+            document.getElementById("name").value = "";
+                document.getElementById("username").value = "";
+                document.getElementById("phone").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("password").value = "";
+                document.getElementById("NSS").value = "";
+                document.getElementById("address").value = "";
+                document.getElementById("salary").value = "";
+                document.getElementById("position").value = "";
+                document.getElementById("verify_code").value = "";
+     
+
+                document.getElementById('verify_code').disabled = false;
+                document.getElementById('password').disabled = false;
+                //Cambiar url del form
+                formulario.setAttribute('action', "{{route('storeUser')}}");
+                //Cambiar titulo del modal
+                document.getElementById("titulo").innerHTML = "Crear Usuario";
+                //Cambiar method del formulario
+                document.getElementById("method").value = "POST";
+
         }
         </script>
         <!-- Required datatable js -->

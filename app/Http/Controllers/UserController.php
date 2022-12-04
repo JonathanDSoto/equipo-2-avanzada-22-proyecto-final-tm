@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -22,27 +24,30 @@ class UserController extends Controller
     public function destroy($id){
         $user = User::where('id', $id)->firstOrFail();
 
-        if($user){
-            $user->delete();
+        if( Auth()->user()->id != $user->id && $user){
+           $user->delete();
+            return redirect()->action([UserController::class, 'index'])->with('info', 'Registro eliminado correctamente');;
         }
-        return redirect()->action([UserController::class, 'index'])->with('info', 'Registro eliminado correctamente');;
 
+        return redirect()->action([UserController::class, 'index']);
       //  return redirect()->back()->with('info', 'Registro borrado correctamente');
     }
  
     public function store(Request $request){
+
+    //    dd($request);
         $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:users,username',
+            'username' => 'required|unique:users',
             'phone' => 'required|numeric|min:10',
             'address' => 'required',
-            'NSS' => 'required|unique:users,NSS',
-            'email' => 'required|email|unique:users,email',
+            'NSS' => 'required|numeric|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
             'verify_code' => 'required|digits:4',
             'position' => 'required',
             'salary' => 'required|numeric',
-            'hired' => 'required|date'
+            // 'hired' => 'required|date'
         ]);
 
         $user = User::create([
@@ -56,7 +61,7 @@ class UserController extends Controller
             'verify_code' => Hash::make($request->verufy_code),
             'position' => $request->position,
             'salary' => $request->salary,
-            'hired' => $request->hired
+            'hired' => Carbon::now()
         ]);
 
         return redirect()->back()->with('info', 'Usuario creado correctamente');
@@ -70,28 +75,37 @@ class UserController extends Controller
             'address' => 'required',
             'NSS' => "required|unique:users,NSS,".$request->id,
             'email' => "required|email|unique:users,email,".$request->id,
-            'password' => 'required',
-            'verify_code' => 'required|digits:4',
+         //   'password' => 'required',
+          //  'verify_code' => 'required|digits:4',
             'position' => 'required',
             'salary' => 'required|numeric',
-            'hired' => 'required|date'
+       //     'hired' => 'required|date'
         ]);
  
 
+/*         if(isset($request->password)){
+            $request['password'] =  Hash::make($request->password);
+        }
+        if(isset($request['verify_code'])) {
+            $request['verify_code'] = Hash::make($request->verify_code);
+        } */
         $user = User::where('id', $request->id)
         ->update([
             'name' => $request->name,
-            'email' => $request->username,
+            'username' => $request->username,
             'phone' =>  $request->phone,
-            'address' => $request->address, 
-            'NSS' => $request->NSS,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'verify_code' => Hash::make($request->verify_code),
+            'address' => $request->address, 
+            'email' => $request->email,
+            'NSS' => $request->NSS,
+           // 'password' => Hash::make($request->password),
+           // 'verify_code' => Hash::make($request->verify_code),
             'position' => $request->position,
             'salary' => $request->salary,
-            'hired' => $request->hired
+            // 'hired' => $request->hired
         ]);
+
+    
 
         return redirect()->back()->with('info', 'Usuario editado correctamente');
     }
