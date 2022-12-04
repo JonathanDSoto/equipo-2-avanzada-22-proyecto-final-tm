@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('assistance', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
-            $table->timestamps();
+        Schema::table('assistances', function (Blueprint $table) {
+            $table->dateTime('out_time')->nullable();
         });
     }
 
@@ -32,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assistance');
+        Schema::table('assistances', function (Blueprint $table) {
+            $table->dropColumn('out_time');
+        });
     }
 };

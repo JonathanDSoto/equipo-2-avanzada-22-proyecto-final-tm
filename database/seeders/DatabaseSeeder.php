@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
                 ProjectSeeder::class,
                 ModuleSeeder::class,
                 UserSeeder::class,
+                AssistanceSeeder::class,
             ]
             );
         // \App\Models\User::factory()->create([

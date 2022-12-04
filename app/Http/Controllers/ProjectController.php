@@ -78,6 +78,12 @@ class ProjectController extends Controller
         $project = Project::where('id', $id)
         ->with('modules.users')
         ->get();
+
+        $p = $project->first();
+
+       $project->users = ($p->modules[0]->users->unique('id')); // usuarios no repiten aunque temgan varios modulos 
+        
+        $project->percentage_advance = ProjectController::percentage_advance($id);
         $users = User::all();
         #return $project;
         return view('proyects.show', compact('project', 'users'));
@@ -102,7 +108,7 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
+    {   
          $request->validate([
             'name' => 'required|unique:projects,name,'.$request->id, 
             'description' => 'required',
@@ -137,5 +143,17 @@ class ProjectController extends Controller
 
        // return redirect()->back()->with('info', 'Registro eliminado correctamente');
        return redirect()->action([ProjectController::class, 'index'])->with('info', 'Registro eliminado correctamente');;
+    }
+
+    public static function percentage_advance($id){
+        $p = Project::where('id', $id)
+        ->with('modules.users')->first();
+
+        $perc = 0;
+        foreach($p->modules as $module){// recorremos los modulos del proyecto
+              $perc += ($module->users[0]->pivot->percentage_advance) ?? 0; // todos los usuarios del modulo marcaraan el mismo avance
+          //    print_r('modulo     '.$module->id. "        avance :  ".$module->users[0]->pivot->percentage_advance.' ');
+        }
+        return $perc/$p->modules->count();
     }
 }

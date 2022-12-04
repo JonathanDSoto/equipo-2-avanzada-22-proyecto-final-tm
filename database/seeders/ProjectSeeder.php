@@ -32,7 +32,7 @@ class ProjectSeeder extends Seeder
             'leader' => "Jose Hernandez",
             'user_amount' => random_int(1,10),
             'budget' => random_int(0,5000000),
-            'status' => 'en revision',
+            'status' => 'Finalizado',
             'start_date' => Carbon::now(),
             'end_date' => Carbon::now()->addMonths(3)
 

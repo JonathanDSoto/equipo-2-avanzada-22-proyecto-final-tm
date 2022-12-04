@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Assistance;
+use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,8 +19,32 @@ class UserController extends Controller
 
     public function show($id){
         $user = User::where('id', $id)
-        ->with('modules.project:id,name')
+        ->with('modules')
         ->firstOrFail();
+       
+        $project_ids = User::find($id)->modules()->get()->unique('project_id');
+        
+        $user->project_amount =  $project_ids->count();
+
+        $user->projects = Project::whereIn('id', $project_ids->pluck('id'))
+        ->with('modules.users:id,position')->get();
+
+        $sum = 0;
+        $a = Assistance::where('user_id', $id)->get()->each(
+            function($item, $key) use(&$sum){
+                $sum += Carbon::make($item->created_at)->diffInHours(Carbon::make($item->out_time));
+            }
+        );
+
+        
+
+        foreach($user->projects as $project){
+            $project->percentage_advance = ProjectController::percentage_advance($project->id);
+        }
+
+    //    return ProjectController::percentage_advance(1);
+        $user->total_hours_worked = $sum;  
+        $user->finnished_projects = $user->projects->where('status', 'Finalizado')->count();
         return view('users.show', compact('user'));
     }
 
