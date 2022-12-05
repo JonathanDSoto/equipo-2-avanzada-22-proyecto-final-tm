@@ -61,7 +61,11 @@
                 </div>
                 
 
-                <h5 class="font-size-15 mt-4">Usuarios del modulo :</h5>
+                <h5 class="font-size-15 mt-4">Usuarios del modulo :
+                    @foreach($module[0]->users as $user)
+                        <span>* {{$user->name}}  </span>
+                    @endforeach      
+                </h5>
 
                 <table class="table align-middle mb-0">
         
@@ -76,23 +80,23 @@
                     </thead>
                     <tbody>
 
-                    @foreach($module[0]->users as $user)
-                        <tr>
-                            <th scope="row">{{$module[0]->id}}</th>
-                            <td>{{$module[0]->name}}</td>
-                            <th scope="row">{{$user->id}}</th>
-                            <td>{{$user->name}}</td>
-                            <td>
-                                <p  class="badge badge-soft-primary font-size-11 m-1">QA</p>
-                            </td>
-                            <td>
-                                10%
-                            </td>
-                            <td>
-                                <a type="button" href=" {{route('showUser')}}" class="btn btn-light btn-sm">Detalles</a>
-                            </td>                       
-                        </tr>  
-                    @endforeach      
+                        @foreach($module[0]->users as $user)
+                            <tr>
+                                <th scope="row">{{$module[0]->id}}</th>
+                                <td>{{$module[0]->name}}</td>
+                                <th scope="row">{{$user->id}}</th>
+                                <td>{{$user->name}}</td>
+                                <td>
+                                    <p  class="badge badge-soft-primary font-size-11 m-1">QA</p>
+                                </td>
+                                <td>
+                                    10%
+                                </td>
+                                <td>
+                                    <a type="button" href=" {{route('showUser', $user->id)}}" class="btn btn-light btn-sm">Detalles</a>
+                                </td>                       
+                            </tr>  
+                        @endforeach      
 
                     </tbody>
                 </table>
@@ -159,13 +163,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="titulo" class="modal-title" id="myModalLabel">Crear Modulo</h5>
+                    <h5 id="titulo" class="modal-title" id="myModalLabel">Editar Modulo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     
-                    <form id="formulario" action=" " method="POST">
-                        <input type="hidden" id="method" name="_method">
+                    <form id="formulario" action="{{route('updateModule', $module[0]->id)}}" method="POST">
+                        @method('PUT')
                         @csrf
                         
                         <div class="mb-3">
@@ -228,7 +232,7 @@
         function editModule(val){
 
             let boton = document.getElementById(val);
-            let module = JSON.parse(boton.getAttribute("data-module"));
+            let module = JSON.parse(boton.getAttribute("data-Module"));
 
             document.getElementById("idM").value = module.id;
             document.getElementById("nameM").value = module.name;
@@ -243,13 +247,7 @@
                     valModule = 10; break;
             }
             document.getElementById("priority").value = valModule;
-
-            //Cambiar url del form
-            formulario.setAttribute('action', "{{route('updateModule', '')}}"+"/"+module.id);
-            //Cambiar titulo del modal
-            document.getElementById("titulo").innerHTML = "Editar Modulo";
-            //Cambiar method del formulario
-            document.getElementById("method").value = "PUT";
+            console.log(module.id);
 
         }
     </script>
