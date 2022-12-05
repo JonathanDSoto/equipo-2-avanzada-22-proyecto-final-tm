@@ -25,17 +25,17 @@
                         <p class="fw-light">Miembros</p>
                         <div class="avatar-group">
                             <div class="avatar-group-item">
-                                <a href="{{route('showUser')}}" class="d-inline-block">
+                                <a href="{{route('showUser',1)}}" class="d-inline-block">
                                     <img src="{{asset('images/users/avatar-4.jpg')}}" alt="" class="rounded-circle avatar-xs">
                                 </a>
                             </div>
                             <div class="avatar-group-item">
-                                <a href="{{route('showUser')}}" class="d-inline-block">
+                                <a href="{{route('showUser',1)}}" class="d-inline-block">
                                     <img src="{{asset('images/users/avatar-5.jpg')}}" alt="" class="rounded-circle avatar-xs">
                                 </a>
                             </div>
                             <div class="avatar-group-item">
-                                <a href="{{route('showUser')}}" class="d-inline-block">
+                                <a href="{{route('showUser',1)}}" class="d-inline-block">
                                     <div class="avatar-xs">
                                         <span class="avatar-title rounded-circle bg-success text-white font-size-16">
                                             A
@@ -44,7 +44,7 @@
                                 </a>
                             </div>
                             <div class="avatar-group-item">
-                                <a href="{{route('showUser')}}" class="d-inline-block">
+                                <a href="{{route('showUser',1)}}" class="d-inline-block">
                                     <img src="{{asset('images/users/avatar-2.jpg')}}" alt="" class="rounded-circle avatar-xs">
                                 </a>
                             </div>

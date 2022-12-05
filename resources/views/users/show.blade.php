@@ -11,11 +11,24 @@
                 </div>
             </div>
             <!-- end page title -->
-
             <div class="row">
                 <div class="col-xl-4">
                     <div class="card overflow-hidden">
                         <div class="bg-primary bg-soft">
+                            <div class="ms-2 text-end ">
+                                <div class="row btn-group mt-2" >
+                                    <div class="col-5">
+                                        <button type="button" class="btn btn-success waves-effect waves-light " id="{{ $user->id }}" data-project='{{ json_encode($user) }}' onclick="editProject({{  $user->id }})" data-bs-toggle="modal" data-bs-target="#modalProject">
+                                            <i class="bx bxs-pencil label-icon"></i>
+                                        </button>
+                                    </div>
+                                    <form class="deleteProject col-1" action="{{route('destroyProyect',  $user->id)}}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger waves-effect waves-light"><i class="bx bx-trash label-icon "></i></button>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-7">
                                 </div>
@@ -30,20 +43,20 @@
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <img src="{{asset('images/users/avatar-1.jpg')}}" alt="" class="img-thumbnail rounded-circle">
                                     </div>
-                                    <h5 class="font-size-15 text-truncate">Daniel Zamago</h5>
-                                    <p class="text-muted mb-0 text-truncate">Backend</p>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modelEditFoto">Editar foto <i class="bx bx-pencil "></i></button>
+                                    <h5 class="mt-2 font-size-15 text-truncate">{{$user->username}}</h5>
+                                    <p class="text-muted mb-0 text-truncate">{{$user->position}}</p>
                                 </div>
 
                                 <div class="col-sm-8">
                                     <div class="pt-4">
-                                       
                                         <div class="row">
                                             <div class="col-6">
-                                                <h5 class="font-size-15">2</h5>
+                                                <h5 class="font-size-15">{{$user->projects->count()}}</h5>
                                                 <p class="text-muted mb-0">Proyectos</p>
                                             </div>
                                             <div class="col-6">
-                                                <h5 class="font-size-15">$1245</h5>
+                                                <h5 class="font-size-15">{{$user->salary}}</h5>
                                                 <p class="text-muted mb-0">Salario</p>
                                             </div>
                                         </div>
@@ -56,24 +69,30 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Infomacion de contacto</h4>
+                            <h4 class="card-title mb-4">Infomación de contacto</h4>
 
-                            <p class="text-muted mb-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.                            </p>
                             <div class="table-responsive">
                                 <table class="table table-nowrap mb-0">
                                     <tbody>
                                         <tr>
                                             <th scope="row">Nombre :</th>
-                                            <td>Cynthia Price</td>
+                                            <td>{{$user->name}}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Telefono :</th>
-                                            <td>(123) 123 1234</td>
+                                            <td>{{$user->phone}}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">E-mail :</th>
-                                            <td>cynthiaskote@gmail.com</td>
+                                            <th scope="row">Correo :</th>
+                                            <td>{{$user->email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">NSS :</th>
+                                            <td>{{$user->NSS}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Direccion :</th>
+                                            <td>{{$user->address}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -93,7 +112,7 @@
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
                                             <p class="text-muted fw-medium mb-2">Proyectos completados</p>
-                                            <h4 class="mb-0">125</h4>
+                                            <h4 id="allProjects" class="mb-0">0</h4>
                                         </div>
 
                                         <div class="flex-shrink-0 align-self-center">
@@ -113,7 +132,7 @@
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
                                             <p class="text-muted fw-medium mb-2">Proyectos pendientes</p>
-                                            <h4 class="mb-0">12</h4>
+                                            <h4 id="pendignProjects" class="mb-0">0</h4>
                                         </div>
 
                                         <div class="flex-shrink-0 align-self-center">
@@ -133,7 +152,7 @@
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
                                             <p class="text-muted fw-medium mb-2">Total de horas trabajadas</p>
-                                            <h4 class="mb-0">240 hrs</h4>
+                                            <h4 id="totalHours" class="mb-0">0 hrs</h4>
                                         </div>
 
                                         <div class="flex-shrink-0 align-self-center">
@@ -158,41 +177,27 @@
                                         <tr>
                                             <th scope="col">id</th>
                                             <th scope="col">Proyecto</th>
-                                            <th scope="col">Modulo</th>
-                                            <th scope="col">Rol</th>
-                                            <th scope="col">Porcentaje de avance</th>
+                                            <th scope="col">Compañia</th>
+                                            <th scope="col">Estado</th>
                                             <th scope="col">Fecha de inicio</th>
                                             <th scope="col">Accion</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Facebook 2</td>
-                                            <td>Perfiles</td>
-                                            <td>QA</td>
-                                            <td>01%</td>
-                                            <td>30/02/2020</td>
-                                            <td>
-                                                <a href=" {{route('showProyect',1)}}" type="button" class="btn btn-primary waves-effect waves-light">
-                                                    <i class="mdi mdi-folder-information font-size-16 align-middle me-2"></i> Detalles
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>proyecton</td>
-                                            <td>Perfiles</td>
-                                            <td>QA</td>
-                                            <td>50%</td>
-                                            <td>20/10/2010</td>
-                                            <td>
-                                                <a href=" {{route('showProyect', 1)}}" type="button" class="btn btn-primary waves-effect waves-light">
-                                                    <i class="mdi mdi-folder-information font-size-16 align-middle me-2"></i> Detalles
-                                                </a>
-                                            </td>
-                                        </tr>                                        
+                                        @foreach ($user->projects as $project)
+                                            <tr>
+                                                <th>{{$project->id}}</th>
+                                                <td>{{$project->name}}</td>
+                                                <td>{{$project->company}}</td>
+                                                <td>{{$project->status}}</td>
+                                                <td>{{$project->start_date}}</td>
+                                                <td>
+                                                    <a href=" {{route('showProyect', $project->id)}}" type="button" class="btn btn-primary waves-effect waves-light">
+                                                        <i class="mdi mdi-folder-information font-size-16 align-middle me-2"></i> Detalles
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach                                      
                                     </tbody>
                                 </table>
                             </div>
@@ -208,5 +213,30 @@
 @endsection
 
 @section('scripts')
- 
+    <script type="text/javascript">
+        function loadInfo(){
+
+            <?php 
+                $allProjects=0;
+                $pendingsProjects=0; 
+                $allhours=0;
+            ?>
+            <?php $allhours+=$user->total_hours_worked; ?>
+            @foreach ($user->projects as $project)
+                @if ($project->status=="Finalizado")
+                    <?php $allProjects+=1; ?>
+                @endif
+                @if($project->status=="Pendiente")
+                    <?php $pendingsProjects+=1; ?>
+                @endif
+            @endforeach
+            //Cambiar total de proyectos terminados
+            document.getElementById("allProjects").innerHTML = "{{$allProjects}}";
+            //Cambiar total de proyectos pendientes
+            document.getElementById("pendignProjects").innerHTML = "{{$pendingsProjects}}";
+             //Cambiar total de horas
+            document.getElementById("totalHours").innerHTML = "{{$allhours}} hrs";
+            console.log('sexo');
+        }
+    </script>
 @endsection

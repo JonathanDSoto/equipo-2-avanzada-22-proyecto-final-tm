@@ -61,7 +61,11 @@
                 </div>
                 
 
-                <h5 class="font-size-15 mt-4">Usuarios del modulo :</h5>
+                <h5 class="font-size-15 mt-4">Usuarios del modulo :
+                    @foreach($module[0]->users as $user)
+                        <span>* {{$user->name}}  </span>
+                    @endforeach      
+                </h5>
 
                 <table class="table align-middle mb-0">
         
@@ -76,23 +80,25 @@
                     </thead>
                     <tbody>
 
-                    @foreach($module[0]->users as $user)
-                        <tr>
-                            <th scope="row">{{$module[0]->id}}</th>
-                            <td>{{$module[0]->name}}</td>
-                            <th scope="row">{{$user->id}}</th>
-                            <td>{{$user->name}}</td>
-                            <td>
-                                <p  class="badge badge-soft-primary font-size-11 m-1">QA</p>
-                            </td>
-                            <td>
-                                10%
-                            </td>
-                            <td>
-                                <a type="button" href=" {{route('showUser')}}" class="btn btn-light btn-sm">Detalles</a>
-                            </td>                       
-                        </tr>  
-                    @endforeach      
+                    @if($module[0]->users->count() != 0)
+                        @foreach($module[0]->users as $user)
+                            <tr>
+                                <th scope="row">{{$user->id}}</th>
+                                <td>{{$user->name}}</td>
+                                <td>
+                                    <p  class="badge badge-soft-primary font-size-11 m-1">{{$user->module_user->role}}</p>
+                                </td>
+                                <td>{{$user->module_user->percentage_advance}}</td>
+                                <td>
+                                    <a type="button" href=" {{route('showUser', $user->id)}}" class="btn btn-light btn-sm">Detalles</a>
+                                </td>                       
+                            </tr>  
+                        @endforeach  
+                    @else
+                            <tr>
+                                <th scope="row"> Nada que mostrar por aquí </th>                     
+                            </tr>  
+                    @endif
 
                     </tbody>
                 </table>
@@ -102,11 +108,21 @@
 
                         <h4 class="card-title">Progreso del modulo</h4>
 
-                        <div class="">
-                            <div class="progress progress-xl">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                            </div>
-                        </div>
+                        @if($module[0]->users->count() != 0)
+                            @foreach($module[0]->users as $user)
+                                <div class="">
+                                    <div class="progress progress-xl">
+                                        <div class="progress-bar" role="progressbar" style="width: {{$user->module_user->percentage_advance->avg()}}%;" aria-valuenow="{{$user->percentage_advance->avg()}}" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                                <div class="">
+                                    <div class="progress progress-xl">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    </div>
+                                </div>
+                        @endif
                     </div>
                 </div>
                 
@@ -159,13 +175,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="titulo" class="modal-title" id="myModalLabel">Crear Modulo</h5>
+                    <h5 id="titulo" class="modal-title" id="myModalLabel">Editar Modulo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     
-                    <form id="formulario" action=" " method="POST">
-                        <input type="hidden" id="method" name="_method">
+                    <form id="formulario" action="{{route('updateModule', $module[0]->id)}}" method="POST">
+                        @method('PUT')
                         @csrf
                         
                         <div class="mb-3">
@@ -177,9 +193,9 @@
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
                                 <select id="priority" class="form-select" name="priority">
-                                    <option value="10">Alta</option>
+                                    <option value="10">Baja</option>
                                     <option value="7">Media</option>
-                                    <option value="3">Baja</option>
+                                    <option value="3">Alta</option>
                                 </select>
                             </div>
                         </div>  
@@ -228,7 +244,7 @@
         function editModule(val){
 
             let boton = document.getElementById(val);
-            let module = JSON.parse(boton.getAttribute("data-module"));
+            let module = JSON.parse(boton.getAttribute("data-Module"));
 
             document.getElementById("idM").value = module.id;
             document.getElementById("nameM").value = module.name;
@@ -243,13 +259,7 @@
                     valModule = 10; break;
             }
             document.getElementById("priority").value = valModule;
-
-            //Cambiar url del form
-            formulario.setAttribute('action', "{{route('updateModule', '')}}"+"/"+module.id);
-            //Cambiar titulo del modal
-            document.getElementById("titulo").innerHTML = "Editar Modulo";
-            //Cambiar method del formulario
-            document.getElementById("method").value = "PUT";
+            console.log(module.id);
 
         }
     </script>

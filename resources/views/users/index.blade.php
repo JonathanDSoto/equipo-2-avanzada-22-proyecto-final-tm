@@ -4,17 +4,21 @@
 @section('contenido')
 
 <div class="row">
+    
      @if (session('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="mdi mdi-check-all me-2"></i>
                 Acción realizada con exito.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @else
+    @elseif (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="mdi mdi-block-helper me-2"></i>
+            error! no se pudo realizar la accion.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
-
-
-  
+ 
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -58,10 +62,8 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" style="">
                                         <a class="dropdown-item" href="{{route('showUser', $user->id)}}"><i class="bx bxs-info-circle label-icon">Detalles</i> </a>
-                                        <button class="dropdown-item" id="{{ $user->id }}" data-user='{{ json_encode($user) }}' onclick="editUser({{ $user->id }})" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</button>   
-
-                                        
-                                        <form action="{{route('deleteUser', $user->id)}}" method="POST">
+                                        <button class="dropdown-item" id="{{ $user->id }}" data-user='{{ json_encode($user) }}' onclick="editUser({{ $user->id }})" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-pencil label-icon"></i>Editar</button>
+                                        <form class="eliminarU" action="{{route('deleteUser', $user->id)}}" method="POST">
                                             @method('delete')
                                             @csrf
                                             <button class="dropdown-item"><i class="bx bx-trash label-icon "></i>Eliminar </button>
@@ -93,7 +95,7 @@
                 </div>
                 <div class="modal-body">
                     
-                    <form id="formulario" method="POST" action=" ">
+                    <form id="formularioU" action=" " method="POST">
                         <input type="hidden" id="method" name="_method">
                         @csrf
                         <div class="row">
@@ -124,7 +126,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="formrow-password-input" class="form-label">Password</label>
-                                    <input type="password" name="password" disabled='true' id="password" class="form-control" id="formrow-password-input" placeholder="************">
+                                    <input type="password" name="password" id="password" class="form-control" id="formrow-password-input" placeholder="************">
                                 </div>
                             </div>  
                         </div>    
@@ -155,7 +157,7 @@
                         </div> 
                           <div class="mb-3" >
                             <label for="formrow-firstname-input" class="form-label">Token</label>
-                            <input type="text" class="form-control" disabled='true' id="verify_code" name='verify_code' placeholder="Ej: 230802">
+                            <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802">
                         </div>   
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
@@ -176,24 +178,24 @@
 
 @section('scripts')
         <script type="text/javascript">
-           $('.eliminar').submit(function(e){
-          
-            swal({
-                title: "Estas seguro?",
-                text: "No podras recuperar el usuario",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-                swal("Poof! EL usuario se elimino con exito!", {
-                icon: "success",
-                });
-                this.submit();
-            } else {
-                swal("El usuario esta a salvo!");
-            }
+           $('.eliminarU').submit(function(e){
+                e.preventDefault();
+                swal({
+                    title: "Estas seguro?",
+                    text: "No podras recuperar el usuario",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! EL usuario se elimino con exito!", {
+                        icon: "success",
+                    });
+                    this.submit();
+                } else {
+                    swal("El usuario esta a salvo!");
+                }
             });  
         })
 
@@ -205,41 +207,42 @@
             document.getElementById("username").value = user.username;
             document.getElementById("phone").value = user.phone;
             document.getElementById("email").value = user.email;
-        //    document.getElementById("password").value = user.password;
             document.getElementById("NSS").value = user.NSS;
             document.getElementById("address").value = user.address;
             document.getElementById("salary").value = user.salary;
             document.getElementById("position").value = user.position;
-        //    document.getElementById("verify_code").value = user.verify_code;
         
-            formulario = document.getElementById('formulario');
-            formulario.setAttribute('action', "{{route('updateUser', '')}}"+"/"+user.id);
+            formularioU = document.getElementById('formularioU');
+            formularioU.setAttribute('action', "{{route('updateUser', '')}}"+"/"+user.id);
             document.getElementById("titulo").innerHTML = "Editar Usuario";
             document.getElementById("method").value = "PUT";
-
+            document.getElementById('verify_code').disabled = true;
+            document.getElementById('password').disabled = true;
+        
         }
 
         function createUser(){
-            document.getElementById("name").value = "";
-                document.getElementById("username").value = "";
-                document.getElementById("phone").value = "";
-                document.getElementById("email").value = "";
-                document.getElementById("password").value = "";
-                document.getElementById("NSS").value = "";
-                document.getElementById("address").value = "";
-                document.getElementById("salary").value = "";
-                document.getElementById("position").value = "";
-                document.getElementById("verify_code").value = "";
-     
 
-                document.getElementById('verify_code').disabled = false;
-                document.getElementById('password').disabled = false;
-                //Cambiar url del form
-                formulario.setAttribute('action', "{{route('storeUser')}}");
-                //Cambiar titulo del modal
-                document.getElementById("titulo").innerHTML = "Crear Usuario";
-                //Cambiar method del formulario
-                document.getElementById("method").value = "POST";
+            document.getElementById("name").value = "";
+            document.getElementById("username").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("NSS").value = "";
+            document.getElementById("address").value = "";
+            document.getElementById("salary").value = "";
+            document.getElementById("position").value = "";
+            document.getElementById("verify_code").value = "";
+    
+            //Cambiar url del form
+            formularioU.setAttribute('action', "{{route('storeUser')}}");
+            //Cambiar titulo del modal
+            document.getElementById("titulo").innerHTML = "Crear Usuario";
+            //Cambiar method del formulario
+            document.getElementById("method").value = "POST";
+
+            document.getElementById('verify_code').disabled = false;
+            document.getElementById('password').disabled = false;
 
         }
         </script>
