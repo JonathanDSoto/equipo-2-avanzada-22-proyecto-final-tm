@@ -68,7 +68,10 @@ class ModuleController extends Controller
         ->with('users')
         ->with('project:id,name')
         ->get();
-        return view('modules.show', compact('module'));
+
+
+        $users = User::all();
+        return view('modules.show', compact('module', 'users'));
     }
 
     /**
@@ -97,7 +100,6 @@ class ModuleController extends Controller
             'project_id' => 'required|exists:projects,id'
         ]);
         $module = Module::where('id', $request->id)->first();
- 
         $module->name = $request->name;
         $module->priority = $request->priority;
         $module->project_id = $request->project_id;
