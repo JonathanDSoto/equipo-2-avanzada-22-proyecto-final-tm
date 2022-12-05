@@ -123,4 +123,17 @@ class ModuleController extends Controller
      return redirect()->action([ModuleController::class, 'index'])->with('info', 'Registro eliminado correctamente');
 
     }
+
+    
+    public function assignUser(Request $request){
+        $module = Module::where('id', $request->module_id)->first();
+        $user = User::find($request->user_id);
+        
+        if($module && $user){
+            $module->users()->syncWithoutDetaching([$request->user_id]);
+        }
+
+        return redirect()->back()->with('info', 'Usuario asignado correctamente');
+
+    }
 }

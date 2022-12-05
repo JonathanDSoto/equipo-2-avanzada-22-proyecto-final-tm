@@ -3,6 +3,7 @@
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
+use App\Models\Module;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -104,6 +105,9 @@ Route::put('modulos/{id}', [ModuleController::class, 'update'])->middleware('aut
 Route::post('modulos', [ModuleController::class, 'store'])->middleware('auth')->name('storeModule');
 
 Route::delete('modulos/{id}', [ModuleController::class, 'destroy'])->middleware('auth')->name('destroyModule');
+
+Route::post('attach-user-module', [ModuleController::class, 'attach_user'])->middleware('auth')->name('attachUser');
+
 /* Route::get('/modulos/detalles', function () {
     return view('modules.show');
 })->name('showModules'); */
