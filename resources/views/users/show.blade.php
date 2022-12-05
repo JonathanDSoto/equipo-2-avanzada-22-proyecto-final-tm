@@ -15,6 +15,20 @@
                 <div class="col-xl-4">
                     <div class="card overflow-hidden">
                         <div class="bg-primary bg-soft">
+                            <div class="ms-2 text-end ">
+                                <div class="row btn-group mt-2" >
+                                    <div class="col-5">
+                                        <button type="button" class="btn btn-success waves-effect waves-light " id="{{ $user->id }}" data-project='{{ json_encode($user) }}' onclick="editProject({{  $user->id }})" data-bs-toggle="modal" data-bs-target="#modalProject">
+                                            <i class="bx bxs-pencil label-icon"></i>
+                                        </button>
+                                    </div>
+                                    <form class="deleteProject col-1" action="{{route('destroyProyect',  $user->id)}}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger waves-effect waves-light"><i class="bx bx-trash label-icon "></i></button>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-7">
                                 </div>
@@ -29,13 +43,13 @@
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <img src="{{asset('images/users/avatar-1.jpg')}}" alt="" class="img-thumbnail rounded-circle">
                                     </div>
-                                    <h5 class="font-size-15 text-truncate">{{$user->username}}</h5>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modelEditFoto">Editar foto <i class="bx bx-pencil "></i></button>
+                                    <h5 class="mt-2 font-size-15 text-truncate">{{$user->username}}</h5>
                                     <p class="text-muted mb-0 text-truncate">{{$user->position}}</p>
                                 </div>
 
                                 <div class="col-sm-8">
                                     <div class="pt-4">
-                                       
                                         <div class="row">
                                             <div class="col-6">
                                                 <h5 class="font-size-15">{{$user->projects->count()}}</h5>
