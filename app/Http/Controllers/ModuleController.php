@@ -125,7 +125,7 @@ class ModuleController extends Controller
     }
 
     
-    public function assignUser(Request $request){
+    public function attach_user(Request $request){
         $module = Module::where('id', $request->module_id)->first();
         $user = User::find($request->user_id);
         
