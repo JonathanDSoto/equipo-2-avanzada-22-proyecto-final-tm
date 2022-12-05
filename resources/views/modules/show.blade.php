@@ -80,23 +80,25 @@
                     </thead>
                     <tbody>
 
+                    @if($module[0]->users->count() != 0)
                         @foreach($module[0]->users as $user)
                             <tr>
-                                <th scope="row">{{$module[0]->id}}</th>
-                                <td>{{$module[0]->name}}</td>
                                 <th scope="row">{{$user->id}}</th>
                                 <td>{{$user->name}}</td>
                                 <td>
-                                    <p  class="badge badge-soft-primary font-size-11 m-1">QA</p>
+                                    <p  class="badge badge-soft-primary font-size-11 m-1">{{$user->module_user->role}}</p>
                                 </td>
-                                <td>
-                                    10%
-                                </td>
+                                <td>{{$user->module_user->percentage_advance}}</td>
                                 <td>
                                     <a type="button" href=" {{route('showUser', $user->id)}}" class="btn btn-light btn-sm">Detalles</a>
                                 </td>                       
                             </tr>  
-                        @endforeach      
+                        @endforeach  
+                    @else
+                            <tr>
+                                <th scope="row"> Nada que mostrar por aquí </th>                     
+                            </tr>  
+                    @endif
 
                     </tbody>
                 </table>
@@ -106,11 +108,21 @@
 
                         <h4 class="card-title">Progreso del modulo</h4>
 
-                        <div class="">
-                            <div class="progress progress-xl">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                            </div>
-                        </div>
+                        @if($module[0]->users->count() != 0)
+                            @foreach($module[0]->users as $user)
+                                <div class="">
+                                    <div class="progress progress-xl">
+                                        <div class="progress-bar" role="progressbar" style="width: {{$user->module_user->percentage_advance->avg()}}%;" aria-valuenow="{{$user->percentage_advance->avg()}}" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                                <div class="">
+                                    <div class="progress progress-xl">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    </div>
+                                </div>
+                        @endif
                     </div>
                 </div>
                 
@@ -181,9 +193,9 @@
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
                                 <select id="priority" class="form-select" name="priority">
-                                    <option value="10">Alta</option>
+                                    <option value="10">Baja</option>
                                     <option value="7">Media</option>
-                                    <option value="3">Baja</option>
+                                    <option value="3">Alta</option>
                                 </select>
                             </div>
                         </div>  
