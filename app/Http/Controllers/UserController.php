@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -52,8 +53,16 @@ class UserController extends Controller
         $user = User::where('id', $id)->firstOrFail();
 
         if( Auth()->user()->id != $user->id && $user){
-           $user->delete();
-            return redirect()->action([UserController::class, 'index'])->with('info', 'Registro eliminado correctamente');;
+
+            if($user->avatar){
+                $path = public_path("images/users/$user->avatar");
+                File::delete($path);
+            }
+            
+            $user->delete();
+            return redirect()->action([UserController::class, 'index'])->with('info', 'Registro eliminado correctamente');
+
+
         }
 
         return redirect()->action([UserController::class, 'index']);
@@ -62,7 +71,7 @@ class UserController extends Controller
  
     public function store(Request $request){
 
-    //    dd($request);
+   //     dd($request);
         $request->validate([
             'name' => 'required',
             'username' => 'required|unique:users',
@@ -74,8 +83,10 @@ class UserController extends Controller
             'verify_code' => 'required|digits:4',
             'position' => 'required',
             'salary' => 'required|numeric',
+            'avatar' => 'image'
             // 'hired' => 'required|date'
         ]);
+
 
         $user = User::create([
             'name' => $request->name,
@@ -90,6 +101,14 @@ class UserController extends Controller
             'salary' => $request->salary,
             'hired' => Carbon::now()
         ]);
+
+        
+        if($request->has('avatar')){
+            $imageName = time() . '.' . $request->avatar->extension(); 
+            $request->avatar->move(public_path('images/users'), $imageName);
+            $user->avatar = $imageName;
+            $user->save();
+        }
 
         return redirect()->back()->with('info', 'Usuario creado correctamente');
     }
@@ -106,34 +125,39 @@ class UserController extends Controller
           //  'verify_code' => 'required|digits:4',
             'position' => 'required',
             'salary' => 'required|numeric',
-       //     'hired' => 'required|date'
+       //     'hired' => 'required|date',
+            'avatar' => 'image'
         ]);
  
 
-/*         if(isset($request->password)){
-            $request['password'] =  Hash::make($request->password);
-        }
-        if(isset($request['verify_code'])) {
-            $request['verify_code'] = Hash::make($request->verify_code);
-        } */
-        $user = User::where('id', $request->id)
-        ->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'phone' =>  $request->phone,
-            'email' => $request->email,
-            'address' => $request->address, 
-            'email' => $request->email,
-            'NSS' => $request->NSS,
+ 
+        $user = User::where('id', $request->id)->first();
+
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->phone =  $request->phone;
+            $user->email = $request->email;
+            $user->address = $request->address;
+            $user->email = $request->email;
+            $user->NSS = $request->NSS;
            // 'password' => Hash::make($request->password),
            // 'verify_code' => Hash::make($request->verify_code),
-            'position' => $request->position,
-            'salary' => $request->salary,
-            // 'hired' => $request->hired
-        ]);
-
+            $user->position = $request->position;
+            $user->salary = $request->salary;
     
+          
+        if($request->has('avatar')){
 
+            if($user->avatar){
+                $path = public_path("images/users/$user->avatar");
+                File::delete($path);
+            }
+            
+            $imageName = time() . '.' . $request->avatar->extension(); 
+            $request->avatar->move(public_path('images/users'), $imageName);
+            $user->avatar = $imageName;
+        }
+        $user->save();
         return redirect()->back()->with('info', 'Usuario editado correctamente');
     }
 }

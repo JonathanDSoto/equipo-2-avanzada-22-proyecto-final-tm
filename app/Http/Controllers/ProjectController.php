@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProjectController extends Controller
 {
@@ -50,7 +51,10 @@ class ProjectController extends Controller
             'status' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
+            'image' => 'image'
         ]);
+
+
  
         $project = new Project();
         $project->name = $request->name;
@@ -62,6 +66,12 @@ class ProjectController extends Controller
         $project->status = $request->status;
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
+      
+        if($request->has('image')){
+            $imageName = time() . '.' . $request->image->extension(); 
+            $request->image->move(public_path('images/projects'), $imageName);
+            $project->image_path = $imageName;
+        }
         $project->save();
         
         return redirect()->back()->with('info', 'Registro creado correctamente');
@@ -81,8 +91,10 @@ class ProjectController extends Controller
 
         $p = $project->first();
 
-       $project->users = ($p->modules[0]->users->unique('id')); // usuarios no repiten aunque temgan varios modulos 
-        
+        if(isset($p->modules[0]))
+            $project->users = ($p->modules[0]->users->unique('id')); // usuarios no repiten aunque temgan varios modulos 
+        else
+            $project->users = [];
         $project->percentage_advance = ProjectController::percentage_advance($id);
         $users = User::all();
         #return $project;
@@ -119,12 +131,38 @@ class ProjectController extends Controller
             'status' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
+            'image' => 'image'
         ]); 
     
         $project = Project::find($request->id);
  
-        $project->fill($request->all());
-        $project->push();
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->company = $request->company;
+        $project->leader = $project->leader;
+        $project->user_amount = $project->user_amount;
+        $project->budget = $request->budget;
+        $project->status = $request->status;
+        $project->start_date = $request->start_date;
+        $project->end_date = $request->end_date;
+
+
+
+
+        if($request->has('image')){
+
+
+            if($project->image_path){
+                $path = public_path("images/projects/$project->image_path");
+                File::delete($path);
+            }
+
+
+            $imageName = time() . '.' . $request->image->extension(); 
+            $request->image->move(public_path('images/projects'), $imageName);
+            $project->image_path = $imageName;
+        }
+        $project->save(); 
         return redirect()->back()->with('info', 'Registro editado correctamente');    
     }
 
@@ -138,8 +176,15 @@ class ProjectController extends Controller
     {
         $project = Project::where('id', $id)->first();
         
-        if($project)
+        if($project){
             $project->delete();
+
+            if($project->image_path){
+                $path = public_path("images/projects/$project->image_path");
+                File::delete($path);
+            }
+            
+        }
 
        // return redirect()->back()->with('info', 'Registro eliminado correctamente');
        return redirect()->action([ProjectController::class, 'index'])->with('info', 'Registro eliminado correctamente');;
@@ -147,13 +192,16 @@ class ProjectController extends Controller
 
     public static function percentage_advance($id){
         $p = Project::where('id', $id)
-        ->with('modules.users')->first();
+        ->with('modules.users')
+        ->first();
 
         $perc = 0;
         foreach($p->modules as $module){// recorremos los modulos del proyecto
               $perc += ($module->users[0]->pivot->percentage_advance) ?? 0; // todos los usuarios del modulo marcaraan el mismo avance
           //    print_r('modulo     '.$module->id. "        avance :  ".$module->users[0]->pivot->percentage_advance.' ');
         }
-        return $perc/$p->modules->count();
+        if($p->modules->count()>0)
+            return $perc/$p->modules->count();
+        return 0;
     }
 }
