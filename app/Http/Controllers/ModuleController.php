@@ -42,7 +42,7 @@ class ModuleController extends Controller
     {
         //'name' => 'required|regex:/^[a-zA-Z]+$/u
         $request->validate([
-            'name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'name' => 'required',
             'priority' => 'required|numeric',
             'project_id' => 'required|exists:projects,id'
         ]);
@@ -64,7 +64,7 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
-        $module = Module::find($id)
+        $module = Module::where('id', $id)
         ->with('users')
         ->with('project:id,name')
         ->get();
