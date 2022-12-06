@@ -130,7 +130,15 @@ class ModuleController extends Controller
         $user = User::find($request->user_id);
         
         if($module && $user){
-            $module->users()->syncWithoutDetaching([$request->user_id]);
+            // > $module->users()->syncWithoutDetaching([1 => ['role' => 'asdasd', 'percentage_advance' => 50]])  
+            // module->users()->syncWithoutDetaching([1 => ['role' => 'asdasd']])
+            $module->users()->syncWithoutDetaching([
+                $request->user_id
+                =>[
+                    'role' => $request->role,
+                    'percentage_advance' => $request->percentage_advance    
+                ]
+            ]);
         }
 
         return redirect()->back()->with('info', 'Usuario asignado correctamente');
