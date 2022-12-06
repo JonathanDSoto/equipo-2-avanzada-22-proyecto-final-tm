@@ -53,6 +53,6 @@ class User extends Authenticatable
     ];
 
     public function modules(){
-        return $this->belongsToMany(Module::class)->withPivot('module_id', 'percentage_advance');
+        return $this->belongsToMany(Module::class)->withPivot('module_id', 'percentage_advance', 'role');
     }
 }
