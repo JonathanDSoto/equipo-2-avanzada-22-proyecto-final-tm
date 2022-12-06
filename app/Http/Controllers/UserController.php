@@ -65,7 +65,7 @@ class UserController extends Controller
 
         }
 
-        return redirect()->action([UserController::class, 'index']);
+        return redirect()->action([UserController::class, 'index'])->with('error', 'No se pudo eliminar el usuario');
       //  return redirect()->back()->with('info', 'Registro borrado correctamente');
     }
  
