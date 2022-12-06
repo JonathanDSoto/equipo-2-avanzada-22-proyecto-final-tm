@@ -53,7 +53,12 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="avatar-md profile-user-wid mb-4">
-                                        <img src="{{asset('images/users/avatar-1.jpg')}}" alt="" class="img-thumbnail rounded-circle">
+                                        @if($user->avatar!=null)
+                                            <img src="{{asset('images/users/')}}/{{$user->avatar}}" alt="" class="img-thumbnail rounded-circle">
+                                        @else
+                                            <img src="{{asset('images/users/avatar-1.jpg')}}" alt="" class="img-thumbnail rounded-circle">
+                                        @endif
+                                        
                                     </div>
                                     <h5 class="mt-2 font-size-15 text-truncate">{{$user->username}}</h5>
                                     <p class="text-muted mb-0 text-truncate">{{$user->position}}</p>
@@ -231,7 +236,7 @@
                 </div>
                 <div class="modal-body">
                     
-                    <form id="formularioU" action=" " method="POST">
+                    <form id="formularioU" action=" " method="POST" enctype='multipart/form-data'>
                         <input type="hidden" id="method" name="_method">
                         @csrf
                         <div class="row">
@@ -295,6 +300,14 @@
                             <label for="formrow-firstname-input" class="form-label">Token</label>
                             <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802">
                         </div>   
+                        <div class="col-sm-12">
+                            <div class="mt-4">
+                                <div>
+                                    <label for="formFileLg" class="form-label">Large file input example</label>
+                                    <input class="form-control form-control-lg" id="avatar" name="avatar" type="file">
+                                </div>
+                            </div>
+                        </div> 
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                         </div>

@@ -95,7 +95,7 @@
                 </div>
                 <div class="modal-body">
                     
-                    <form id="formularioU" action=" " method="POST">
+                    <form id="formularioU" action=" " method="POST" enctype='multipart/form-data'>
                         <input type="hidden" id="method" name="_method">
                         @csrf
                         <div class="row">
@@ -158,6 +158,14 @@
                           <div class="mb-3" >
                             <label for="formrow-firstname-input" class="form-label">Token</label>
                             <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802">
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="mt-4">
+                                <div>
+                                    <label for="formFileLg" class="form-label">Large file input example</label>
+                                    <input class="form-control form-control-lg" id="avatar" name="avatar" type="file">
+                                </div>
+                            </div>
                         </div>   
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
