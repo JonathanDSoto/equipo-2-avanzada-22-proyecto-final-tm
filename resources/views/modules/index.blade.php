@@ -134,22 +134,6 @@
                         </div>  
 
                         <div class="mb-3">
-                            <label for="formrow-firstname-input" class="form-label">Encargado</label>
-                            <div class="col-md-10">
-                                <select id="user_id" class="form-select" name="user_id">
-                                    @foreach ($users as $user)
-                                        <option value="$user->id">{{$user->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>  
-
-                        <div class="mb-3">
-                            <label for="formrow-firstname-input" class="form-label">Rol</label>
-                            <input type="text" class="form-control" id="role" placeholder="Nombre del modulo" name="role">
-                        </div>  
-
-                        <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Proyecto</label>
 
                             <select id="project_id" class="form-select" name="project_id">   
@@ -157,9 +141,7 @@
                                     <option value="{{$project->id}}">{{$project->name}}</option>
                                 @endforeach
                             </select>
-
                         </div>                                                  
-                        
                          
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>

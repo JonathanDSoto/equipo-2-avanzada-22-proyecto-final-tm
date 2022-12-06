@@ -40,7 +40,13 @@
                 </div>
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-4">
-                        <img src="{{asset('images/companies/img-1.png')}}" alt="" class="avatar-sm">
+
+                        @if($project[0]->image_path != null)
+                            <img src="{{asset('images/projects/')}}/{{$project[0]->image_path}}"  alt="" class="avatar-sm">
+                        @else
+                            <img src="{{asset('images/companies/img-1.png')}}" alt="" class="avatar-sm">
+                        @endif
+
                     </div>
 
                     <div class="flex-grow-1 overflow-hidden">
@@ -119,8 +125,11 @@
                                         </td>
                                         <td>
                                             <div>
-                                                <span class="badge badge-soft-info text-primary font-size-11">Frontend</span>
-                                                <span class="badge badge-soft-info text-primary font-size-11">UI</span>
+                                                @if($user->pivot->role != null)
+                                                    <p class="badge badge-soft-primary font-size-11 m-1">{{$user->pivot->role}}</p>
+                                                @else
+                                                    <p class="badge badge-soft-primary font-size-11 m-1">Sin asignar</p>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -169,13 +178,13 @@
                             <!-- SWITCH PARA ASIGNAR PRIORIDAD -->
                                 @switch($module->priority)
                                     @case($module->priority < 4)
-                                        <span>Baja</span>
+                                        <span>Alta</span>
                                         @break
                                     @case($module->priority < 8)
                                         <span>Media</span>
                                         @break
                                     @default
-                                        <span>Alta</span>
+                                        <span>Baja</span>
                                 @endswitch
                         </td>    
 

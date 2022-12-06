@@ -153,7 +153,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="formulario" action=" " method="POST">
+                        <form id="formulario" action=" " method="POST" enctype="multipart/form-data">
                             <input type="hidden" id="method" name="_method">
                             @csrf
                             <div class="mb-3">
@@ -161,25 +161,25 @@
                                 <input type="text" class="form-control" id="name" placeholder="Ej: 230802" name="name">
                             </div>                        
                             <div class="mb-3">
-                                <label for="formrow-firstname-input" class="form-label">Descripcion</label>
+                                <label for="formrow-firstname-input" class="form-label">Descripción</label>
                                 <input type="text" class="form-control" id="description" placeholder="Ej: 230802" name="description">
                             </div>
                                                         
                             <div class="mb-3">
-                                <label for="formrow-firstname-input" class="form-label">Lider del proyecto</label>
+                                <label for="formrow-firstname-input" class="form-label">Líder del proyecto</label>
                                 <input type="text" class="form-control" id="leader" placeholder="Ej: juanPC" name="leader">
                             </div>                     
                             <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">compania</label>
+                                        <label for="formrow-firstname-input" class="form-label">Compañia</label>
                                         <input type="text" class="form-control" id="company" placeholder="Ej: juan perez santos" name="company">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">                                  
                                         <div class="mb-4">
-                                            <label for="formrow-firstname-input" class="form-label">Numero de usuarios</label>
+                                            <label for="formrow-firstname-input" class="form-label">NO. de usuarios</label>
                                             <input type="text" class="form-control" id="user_amount" placeholder="Ej: juanPC" name="user_amount">
                                         </div>                                 
                                 </div>
@@ -217,7 +217,16 @@
                                         <option value="Finalizado">Finalizado</option>
 
                                     </select>
-                                </div>                        
+                                </div>  
+
+                                <div class="col-sm-12">
+                                    <div class="mt-4">
+                                        <div>
+                                            <label for="formFileLg" class="form-label">Imagen</label>
+                                            <input class="form-control form-control-lg" id="image" name="image" type="file">
+                                        </div>
+                                    </div>
+                                </div>                      
                             </div> 
                             
                             <div class="modal-footer">
