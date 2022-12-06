@@ -1,7 +1,19 @@
 @extends('layouts.app')
 
 @section('contenido')
-
+            @if (session('info'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="mdi mdi-check-all me-2"></i>
+                    Acción realizada con exito.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @elseif (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="mdi mdi-block-helper me-2"></i>
+                error! no se pudo realizar la accion.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -18,11 +30,11 @@
                             <div class="ms-2 text-end ">
                                 <div class="row btn-group mt-2" >
                                     <div class="col-5">
-                                        <button type="button" class="btn btn-success waves-effect waves-light " id="{{ $user->id }}" data-project='{{ json_encode($user) }}' onclick="editProject({{  $user->id }})" data-bs-toggle="modal" data-bs-target="#modalProject">
+                                        <button type="button" class="btn btn-success waves-effect waves-light " id="{{ $user->id }}" data-user='{{ json_encode($user) }}' onclick="editUser({{  $user->id }})" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
                                             <i class="bx bxs-pencil label-icon"></i>
                                         </button>
                                     </div>
-                                    <form class="deleteProject col-1" action="{{route('destroyProyect',  $user->id)}}" method="POST">
+                                    <form class="eliminarUs col-1" action="{{route('deleteUser',  $user->id)}}" method="POST">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger waves-effect waves-light"><i class="bx bx-trash label-icon "></i></button>
@@ -43,7 +55,6 @@
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <img src="{{asset('images/users/avatar-1.jpg')}}" alt="" class="img-thumbnail rounded-circle">
                                     </div>
-                                    <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modelEditFoto">Editar foto <i class="bx bx-pencil "></i></button>
                                     <h5 class="mt-2 font-size-15 text-truncate">{{$user->username}}</h5>
                                     <p class="text-muted mb-0 text-truncate">{{$user->position}}</p>
                                 </div>
@@ -208,12 +219,143 @@
     </div>
     <!-- End Page-content -->
 
+{{-- modal --}}
+<div>
+    <!-- sample modal content -->
+    <div id="modalUsuarios" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titulo">Crear nuevo usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <form id="formularioU" action=" " method="POST">
+                        <input type="hidden" id="method" name="_method">
+                        @csrf
+                        <div class="row">
 
+                            <div class="col-md-6">                                
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Nombre</label>
+                                    <input type="text" name="name" id="name" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos">
+                                </div>
+                            </div>
+                            <div class="col-md-6">                                
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Usuario</label>
+                                    <input type="text"  name="username" id="username" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
+                                </div>                                
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="formrow-email-input" class="form-label">Email</label>
+                                    <input type="email" name="email" id="email" class="form-control" id="formrow-email-input" placeholder="Ej: ejemplo@gmail.com">
+                                </div>
+                            </div>
+    
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="formrow-password-input" class="form-label">Password</label>
+                                    <input type="password" name="password" id="password" class="form-control" id="formrow-password-input" placeholder="************">
+                                </div>
+                            </div>  
+                        </div>    
+                       
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="formrow-inputZip" class="form-label">Telefono</label>
+                                <input class="form-control" type="tel" value="" id="phone" name="phone" placeholder="ej: 6121072052" id="phone">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Direccion</label>
+                            <div>
+                                <textarea id="address" name="address" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">NSS</label>
+                            <input type="text" class="form-control" id="NSS" name="NSS" id="formrow-firstname-input" placeholder="Ej: 90806083439">
+                        </div>       
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Posicion</label>
+                            <input type="text" class="form-control" name="position" id="position" id="formrow-firstname-input" placeholder="Ej: 90806083439">
+                        </div>  
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Salario</label>
+                            <input type="text" class="form-control"  id="salary" name='salary' id="formrow-firstname-input" placeholder="Ej: 8900">
+                        </div> 
+                          <div class="mb-3" >
+                            <label for="formrow-firstname-input" class="form-label">Token</label>
+                            <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802">
+                        </div>   
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        </div>
+                    </form>
+
+                </div>
+                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div> 
+{{-- end modal --}}
     
 @endsection
 
 @section('scripts')
     <script type="text/javascript">
+           $('.eliminarUs').submit(function(e){
+                e.preventDefault();
+                swal({
+                    title: "Estas seguro?",
+                    text: "No podras recuperar el usuario",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! EL usuario se elimino con exito!", {
+                        icon: "success",
+                    });
+                    this.submit();
+                } else {
+                    swal("El usuario esta a salvo!");
+                }
+            });  
+        })
+
+        function editUser(val){
+            let boton = document.getElementById(val);
+            let user = JSON.parse(boton.getAttribute('data-user'));
+
+            document.getElementById("name").value = user.name;
+            document.getElementById("username").value = user.username;
+            document.getElementById("phone").value = user.phone;
+            document.getElementById("email").value = user.email;
+            document.getElementById("NSS").value = user.NSS;
+            document.getElementById("address").value = user.address;
+            document.getElementById("salary").value = user.salary;
+            document.getElementById("position").value = user.position;
+        
+            formularioU = document.getElementById('formularioU');
+            formularioU.setAttribute('action', "{{route('updateUser', '')}}"+"/"+user.id);
+            document.getElementById("titulo").innerHTML = "Editar Usuario";
+            document.getElementById("method").value = "PUT";
+            document.getElementById('verify_code').disabled = true;
+            document.getElementById('password').disabled = true;
+        
+        }
+
         function loadInfo(){
 
             <?php 
@@ -239,4 +381,13 @@
             console.log('sexo');
         }
     </script>
+
+    <!-- Sweet Alerts js -->
+    <script src="{{asset('libs/sweetalert2/sweetalert2.min.j')}}s"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    <!-- Sweet alert init js-->
+    <script src="{{asset('js/pages/sweet-alerts.init.js')}}"></script>
+
 @endsection
