@@ -60,12 +60,11 @@
                     </div>
                 </div>
                 
+                <div>
+                    <button type="button" class="btn btn-primary waves-effect waves-light btn-label" onclick="addUser()" data-bs-toggle="modal" data-bs-target="#modalUser"><i class="bx bxs-folder-plus label-icon"></i>Asignar usuario</button>
+                </div>
 
-                <h5 class="font-size-15 mt-4">Usuarios del modulo :
-                    @foreach($module[0]->users as $user)
-                        <span>* {{$user->name}}  </span>
-                    @endforeach      
-                </h5>
+                <h5 class="font-size-15 mt-4">Usuarios del modulo :</h5>
 
                 <table class="table align-middle mb-0">
         
@@ -86,9 +85,15 @@
                                 <th scope="row">{{$user->id}}</th>
                                 <td>{{$user->name}}</td>
                                 <td>
-                                    <p  class="badge badge-soft-primary font-size-11 m-1">{{$user->module_user->role}}</p>
+                                    @if($user->pivot->role != null)
+                                        <p class="badge badge-soft-primary font-size-11 m-1">{{$user->pivot->role}}</p>
+                                    @else
+                                        <p class="badge badge-soft-primary font-size-11 m-1">Sin asignar</p>
+                                    @endif
                                 </td>
-                                <td>{{$user->module_user->percentage_advance}}</td>
+
+                                <td>{{$user->pivot->percentage_advance}}%</td>
+
                                 <td>
                                     <a type="button" href=" {{route('showUser', $user->id)}}" class="btn btn-light btn-sm">Detalles</a>
                                 </td>                       
@@ -112,7 +117,7 @@
                             @foreach($module[0]->users as $user)
                                 <div class="">
                                     <div class="progress progress-xl">
-                                        <div class="progress-bar" role="progressbar" style="width: {{$user->module_user->percentage_advance->avg()}}%;" aria-valuenow="{{$user->percentage_advance->avg()}}" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                        <div class="progress-bar" role="progressbar" style="width: {{$user->pivot->percentage_advance}}%;" aria-valuenow="{{$user->pivot->percentage_advance}}" aria-valuemin="0" aria-valuemax="100">{{$user->pivot->percentage_advance}}</div>
                                     </div>
                                 </div>
                             @endforeach
@@ -215,6 +220,60 @@
         </div><!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+    <!-- sample modal content -->
+    <div id="modalUser" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="titulo" class="modal-title" id="myModalLabel">Añadir usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <form id="formulario" action="{{route('attachUser')}}" method="POST">
+                        @csrf   
+
+                        <div class="mb-3">
+                            <label for="formrow-firstname-input" class="form-label">Usuario</label>
+                            <div class="col-md-10">
+                                <select id="priority" class="form-select" name="user_id">
+                                    @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>  
+                        </div> 
+
+                        <div class="mb-3">
+                            <div class="col-md-10">
+                                <select id="role" class="form-select" name="role">
+                                    <option value="Backend">Backend</option>
+                                    <option value="Frontend">Frontend</option>
+                                    <option value="Maquetador">Maquetador</option>
+                                    <option value="QA">QA</option>
+                                    <option value="Fullstack">Fullstack</option>
+                                </select>
+                            </div>
+                        </div>  
+
+                        <input type="hidden" id="module_id" name="module_id" value={{$module[0]->id}}>  
+                        <input type="hidden" id="percentage_advance" name="percentage_advance" value=0>                                        
+                         
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        </div>
+
+                        
+                    </form>
+
+                </div>
+                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
 </div> 
 {{-- end modal --}}
 
