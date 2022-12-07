@@ -70,15 +70,15 @@ Route::post('/proyectos', [ProjectController::class, 'store'])->middleware('auth
     return view('users.index');
 })->name('users');
  */
-Route::get('/usuarios', [UserController::class, 'index'])->name('users'); // middleware !!!
+Route::get('/usuarios', [UserController::class, 'index'])->middleware('auth')->name('users'); // middleware !!!
 
-Route::get('/usuarios/{id}', [UserController::class, 'show'])->name('showUser');
+Route::get('/usuarios/{id}', [UserController::class, 'show'])->middleware('auth')->name('showUser');
 
-Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('deleteUser'); 
+Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->middleware('auth')->name('deleteUser'); 
 
-Route::post('usuarios', [UserController::class, 'store'])->name('storeUser');
+Route::post('usuarios', [UserController::class, 'store'])->middleware('auth')->name('storeUser');
 
-Route::put('usuarios/{id}',[UserController::class, 'update'])->name('updateUser'); 
+Route::put('usuarios/{id}',[UserController::class, 'update'])->middleware('auth')->name('updateUser'); 
 /* Route::get('/usuarios/detalles', function () {
     return view('users.show');
 })->name('showUser');
