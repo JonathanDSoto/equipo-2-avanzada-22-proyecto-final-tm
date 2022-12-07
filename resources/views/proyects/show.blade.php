@@ -38,7 +38,6 @@
                         </form>
                     </div>
                 </div>
-                {{$project[0]}}
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-4">
 
@@ -428,6 +427,24 @@
                 });  
             })
 
+            $(document).ready(function() {
+            $('#datatable').DataTable( {
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "search": "Buscar:",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sin registros",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "Sin datos para mostrar",
+                }
+            } );
+        } );
+
         function createModule(){
 
             document.getElementById("id").value = "";
@@ -517,10 +534,10 @@
         <script src="{{asset('js/pages/sweet-alerts.init.js')}}"></script>
 
           
-          <!-- Responsive examples -->
-          <script src="{{asset('libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-          <script src="{{asset('libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
-  
-          <!-- Datatable init js -->
-          <script src="{{asset('js/pages/datatables.init.js')}}"></script>    
+        <!-- Responsive examples -->
+        <script src="{{asset('libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+        <script src="{{asset('libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+
+        <!-- Datatable init js -->
+        <script src="{{asset('js/pages/datatables.init.js')}}"></script>    
 @endsection
