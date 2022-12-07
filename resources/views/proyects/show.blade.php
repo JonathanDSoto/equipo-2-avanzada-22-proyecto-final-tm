@@ -38,6 +38,7 @@
                         </form>
                     </div>
                 </div>
+                {{$project[0]}}
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-4">
 
@@ -294,7 +295,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="formulario2" action=" " method="POST">
+                    <form id="formulario2" action=" " method="POST" enctype='multipart/form-data'>
                         @method('PUT')
                         @csrf
                         <div class="mb-3">
@@ -360,7 +361,14 @@
                                 </select>
                             </div>                        
                         </div> 
-                        
+                        <div class="col-sm-12">
+                            <div class="mt-4">
+                                <div>
+                                    <label for="formFileLg" class="form-label">Imagen</label>
+                                    <input class="form-control form-control-lg" id="image" name="image" type="file">
+                                </div>
+                            </div>
+                        </div>    
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                         </div>
