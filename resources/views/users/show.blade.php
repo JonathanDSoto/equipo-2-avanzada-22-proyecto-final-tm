@@ -284,11 +284,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">NSS</label>
-                            <input type="text" class="form-control" id="NSS" name="NSS" id="formrow-firstname-input" placeholder="Ej: 90806083439" maxlength="50" onkeypress="return solonumeros(event)" required>
+                            <input type="text" class="form-control" id="NSS" name="NSS" id="formrow-firstname-input" placeholder="Ej: 90806083439" maxlength="11" onkeypress="return solonumeros(event)" required>
                         </div>       
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Posicion</label>
-                            <input type="text" class="form-control" name="position" id="position" id="formrow-firstname-input" placeholder="Ej: 90806083439" maxlength="50" onkeypress="return solonumeros(event)" required>
+                            <input type="text" class="form-control" name="position" id="position" id="formrow-firstname-input" placeholder="Ej: Jefe" maxlength="50" onkeypress="return soloLetras(event)" required>
                         </div>  
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Salario</label>
@@ -296,7 +296,7 @@
                         </div> 
                           <div class="mb-3" >
                             <label for="formrow-firstname-input" class="form-label">Token</label>
-                            <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802" maxlength="50" onkeypress="return solonumeros(event)" required>
+                            <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802" maxlength="4" onkeypress="return solonumeros(event)" required>
                         </div>   
                         <div class="col-sm-12">
                             <div class="mt-4">
