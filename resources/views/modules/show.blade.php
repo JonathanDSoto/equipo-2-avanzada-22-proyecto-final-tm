@@ -191,13 +191,13 @@
                         
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nameM" placeholder="Nombre del modulo" name="name">
+                            <input type="text" class="form-control" id="nameM" placeholder="Nombre del modulo" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
                         </div>      
 
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
-                                <select id="priority" class="form-select" name="priority">
+                                <select id="priority" class="form-select" name="priority" required>
                                     <option value="10">Baja</option>
                                     <option value="7">Media</option>
                                     <option value="3">Alta</option>
@@ -237,7 +237,7 @@
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Usuario</label>
                             <div class="col-md-10">
-                                <select id="priority" class="form-select" name="user_id">
+                                <select id="priority" class="form-select" name="user_id" required>
                                     @foreach($users as $user)
                                         <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
@@ -247,7 +247,7 @@
 
                         <div class="mb-3">
                             <div class="col-md-10">
-                                <select id="role" class="form-select" name="role">
+                                <select id="role" class="form-select" name="role" required>
                                     <option value="Backend">Backend</option>
                                     <option value="Frontend">Frontend</option>
                                     <option value="Maquetador">Maquetador</option>
