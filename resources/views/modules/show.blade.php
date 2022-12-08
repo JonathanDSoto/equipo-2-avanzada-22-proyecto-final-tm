@@ -159,7 +159,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="titulo" class="modal-title" id="myModalLabel">Editar Modulo</h5>
+                    <h5 id="titulo" class="modal-title" id="myModalLabel">Crear Modulo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -170,27 +170,27 @@
                         
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nameM" placeholder="Nombre del modulo" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
+                            <input type="text" class="form-control" id="nameMS" placeholder="Nombre del modulo" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
                         </div>      
 
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
-                                <select id="priority" class="form-select" name="priority" required>
-                                    <option value="10">Baja</option>
-                                    <option value="7">Media</option>
+                                <select id="priorityMS" class="form-select" name="priority" required>
                                     <option value="3">Alta</option>
+                                    <option value="7">Media</option>
+                                    <option value="10">Baja</option>
                                 </select>
                             </div>
                         </div>  
 
-                        <input type="hidden" id="project_id" name="project_id" value={{$module[0]->project->id}}>                                             
+                        <input type="hidden" id="project_idM" name="project_id" value="{{$module[0]->project->id}}">                                             
                          
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                         </div>
 
-                        <input type="hidden" id="idM" name="id">
+                        <input type="hidden" id="idMS" name="id">
                     </form>
 
                 </div>
@@ -199,6 +199,8 @@
         </div><!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+</div> 
+{{-- end modal --}}
 
     <!-- sample modal content -->
     <div id="modalUser" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -284,20 +286,23 @@
             let boton = document.getElementById(val);
             let module = JSON.parse(boton.getAttribute("data-Module"));
 
-            document.getElementById("idM").value = module.id;
-            document.getElementById("nameM").value = module.name;
+            document.getElementById("idMS").value = module.id;
+            document.getElementById("nameMS").value = module.name;
 
             var valModule = module.priority;
             switch (true) {
                 case (valModule < 4):
-                    valModule = 3; break;
+                    valModule = 3; 
+                    break;
                 case (valModule < 8):
-                    valModule = 7; break;
+                    valModule = 7; 
+                    break;
                 default:
-                    valModule = 10; break;
+                    valModule = 10; 
+                    break;
             }
-            document.getElementById("priority").value = valModule;
-            console.log(module.id);
+            document.getElementById("priorityMS").value = valModule;
+            console.log(module);
 
         }
     </script>
