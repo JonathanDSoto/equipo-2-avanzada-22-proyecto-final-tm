@@ -9,7 +9,6 @@
                     <a href="" class="logo-light mt-4">
                         <span >
                             <img src="https://play-lh.googleusercontent.com/bgFXLigJP65KdRcSlkYh4tFsYhG5g8cSSeCzQLEhoU2UBlnH_wKsThXcvPffaGsQ5E4" alt="" height="40">
-                            <h5>CHECADOR</h5>
                         </span>
                     </a>
                 </div>

@@ -29,7 +29,7 @@
                         <span key="t-authentication">Proyectos</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href=" {{ route('authCheck') }} " class="waves-effect">
                         <i class="bx bx-task"></i>
                         <span key="t-file-manager">Checador</span>
@@ -46,7 +46,7 @@
                         <i class="bx bx-calendar"></i>
                         <span key="t-file-manager">Calendarios</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <!-- Sidebar -->
