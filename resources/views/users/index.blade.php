@@ -102,13 +102,13 @@
                             <div class="col-md-6">                                
                                 <div class="mb-3">
                                     <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                                    <input type="text" name="name" id="name" class="form-control" id="formrow-firstname-input" placeholder="Ej: juan perez santos">
+                                    <input type="text" name="name" id="name" class="form-control" id="formrow-firstname-input" placeholder="Ej: Daniel" maxlength="50" onkeypress="return soloLetras(event)" required>
                                 </div>
                             </div>
                             <div class="col-md-6">                                
                                 <div class="mb-3">
                                     <label for="formrow-firstname-input" class="form-label">Usuario</label>
-                                    <input type="text"  name="username" id="username" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC">
+                                    <input type="text"  name="username" id="username" class="form-control" id="formrow-firstname-input" placeholder="Ej: juanPC" maxlength="50" onkeypress="return soloLetrasynumeros(event)" required>
                                 </div>                                
                             </div>
                         </div>
@@ -118,14 +118,14 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="formrow-email-input" class="form-label">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" id="formrow-email-input" placeholder="Ej: ejemplo@gmail.com">
+                                    <input type="email" name="email" id="email" class="form-control" id="formrow-email-input" placeholder="Ej: ejemplo@gmail.com" maxlength="50" onkeypress="return soloLetrascorreo(event)" required>
                                 </div>
                             </div>
     
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="formrow-password-input" class="form-label">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control" id="formrow-password-input" placeholder="************">
+                                    <input type="password" name="password" id="password" class="form-control" id="formrow-password-input" placeholder="************" required>
                                 </div>
                             </div>  
                         </div>    
@@ -133,30 +133,30 @@
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label for="formrow-inputZip" class="form-label">Telefono</label>
-                                <input class="form-control" type="tel" value="" id="phone" name="phone" placeholder="ej: 6121072052" id="phone">
+                                <input class="form-control" type="tel" value="" id="phone" name="phone" placeholder="ej: 6121072052" id="phone" maxlength="10" onkeypress="return solonumeros(event)" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Direccion</label>
                             <div>
-                                <textarea id="address" name="address" class="form-control" rows="3"></textarea>
+                                <textarea id="address" name="address" class="form-control" rows="3" maxlength="100" onkeypress="return soloLetrasnumerosygato(event)" required></textarea>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">NSS</label>
-                            <input type="text" class="form-control" id="NSS" name="NSS" id="formrow-firstname-input" placeholder="Ej: 90806083439">
+                            <input type="text" class="form-control" id="NSS" name="NSS" id="formrow-firstname-input" placeholder="Ej: 90806083439" maxlength="50" onkeypress="return solonumeros(event)" required>
                         </div>       
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Posicion</label>
-                            <input type="text" class="form-control" name="position" id="position" id="formrow-firstname-input" placeholder="Ej: 90806083439">
+                            <input type="text" class="form-control" name="position" id="position" id="formrow-firstname-input" placeholder="Ej: 90806083439" maxlength="50" onkeypress="return solonumeros(event)" required>
                         </div>  
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Salario</label>
-                            <input type="text" class="form-control"  id="salary" name='salary' id="formrow-firstname-input" placeholder="Ej: 8900">
+                            <input type="text" class="form-control"  id="salary" name='salary' id="formrow-firstname-input" placeholder="Ej: 8900" maxlength="50" onkeypress="return solonumeros(event)" required>
                         </div> 
                           <div class="mb-3" >
                             <label for="formrow-firstname-input" class="form-label">Token</label>
-                            <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802">
+                            <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802" maxlength="50" onkeypress="return solonumeros(event)" required>
                         </div>
                         <div class="col-sm-12">
                             <div class="mt-4">
