@@ -152,7 +152,7 @@
                         </div>  
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Salario</label>
-                            <input type="text" class="form-control"  id="salary" name='salary' id="formrow-firstname-input" placeholder="Ej: 8900" maxlength="50" onkeypress="return solonumeros(event)" required>
+                            <input type="text" class="form-control"  id="salary" name='salary' id="formrow-firstname-input" placeholder="Ej: 8900" maxlength="5" onkeypress="return solonumeros(event)" required>
                         </div> 
                           <div class="mb-3" >
                             <label for="formrow-firstname-input" class="form-label">Token</label>
@@ -220,6 +220,8 @@
                         "previous":   "Anterior"
                     },
                     "emptyTable": "Sin datos para mostrar",
+                    "zeroRecords": "No se encontraron resultados",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
                 }
             });
         });
