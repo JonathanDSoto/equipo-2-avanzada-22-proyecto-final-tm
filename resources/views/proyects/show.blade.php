@@ -118,7 +118,13 @@
                                 {{-- @foreach($module->users as $user) --}}
                                     <tr>
                                         <td style="width: 50px;">
-                                            <a href=" {{route('showUser', $user->id)}}" class=" text-primary"><img src="{{asset('images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt=""></a>
+                                            <a href=" {{route('showUser', $user->id)}}" class=" text-primary">
+                                                @if($user->avatar!=null)
+                                                    <img src="{{asset('images/users/')}}/{{$user->avatar}}" alt="" class="img-thumbnail rounded-circle">
+                                                @else
+                                                    <img src="{{asset('images/users/avatar-1.jpg')}}" alt="" class="img-thumbnail rounded-circle">
+                                                @endif
+                                            </a>
                                         </td>
                                         <td>
                                             <h5 class="font-size-14 m-0"><a href=" {{route('showUser', $user->id)}}" class=" text-primary">{{$user->name}}</a></h5>

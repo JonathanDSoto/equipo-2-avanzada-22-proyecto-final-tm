@@ -183,41 +183,39 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Mis proyectos</h4>
-                            <div class="table-responsive">
-                                <table class="table table-nowrap table-hover mb-0">
-                                    <thead>
+                            <h4 class="card-title">Usuarios</h4>
+                            <button type="button" onclick="createUser()" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-user-plus label-icon"></i>Crear usuario</button>
+                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">id</th>
+                                        <th scope="col">Proyecto</th>
+                                        <th scope="col">Compañia</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Fecha de inicio</th>
+                                        <th scope="col">Detalles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user->projects as $project)
                                         <tr>
-                                            <th scope="col">id</th>
-                                            <th scope="col">Proyecto</th>
-                                            <th scope="col">Compañia</th>
-                                            <th scope="col">Estado</th>
-                                            <th scope="col">Fecha de inicio</th>
-                                            <th scope="col">Accion</th>
+                                            <th>{{$project->id}}</th>
+                                            <td>{{$project->name}}</td>
+                                            <td>{{$project->company}}</td>
+                                            <td>{{$project->status}}</td>
+                                            <td>{{$project->start_date}}</td>
+                                            <td>
+                                                <a href=" {{route('showProyect', $project->id)}}" type="button" class="btn btn-primary waves-effect waves-light"><i class="bx bx-show"></i></a>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($user->projects as $project)
-                                            <tr>
-                                                <th>{{$project->id}}</th>
-                                                <td>{{$project->name}}</td>
-                                                <td>{{$project->company}}</td>
-                                                <td>{{$project->status}}</td>
-                                                <td>{{$project->start_date}}</td>
-                                                <td>
-                                                    <a href=" {{route('showProyect', $project->id)}}" type="button" class="btn btn-primary waves-effect waves-light">
-                                                        <i class="mdi mdi-folder-information font-size-16 align-middle me-2"></i> Detalles
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach                                      
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @endforeach                                      
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
+                    
             <!-- end row -->
 
         </div> <!-- container-fluid -->
@@ -347,6 +345,24 @@
             });  
         })
 
+        $(document).ready(function() {
+            $('#datatable').DataTable( {
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "search": "Buscar:",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sin registros",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "Sin datos para mostrar",
+                }
+            });
+        });
+
         function editUser(val){
             let boton = document.getElementById(val);
             let user = JSON.parse(boton.getAttribute('data-user'));
@@ -402,5 +418,12 @@
 
     <!-- Sweet alert init js-->
     <script src="{{asset('js/pages/sweet-alerts.init.js')}}"></script>
+
+
+    <!-- Required datatable js -->
+    <script src="{{asset('libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <!-- Datatable init js -->
+    <script src="{{asset('js/pages/datatables.init.js')}}"></script>
 
 @endsection
