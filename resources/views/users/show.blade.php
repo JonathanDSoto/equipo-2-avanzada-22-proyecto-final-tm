@@ -185,28 +185,38 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Mis Proyectos</h4>
+                            <h4 class="card-title">Mis Modulos</h4>
                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th scope="col">id</th>
-                                        <th scope="col">Proyecto</th>
-                                        <th scope="col">Compañia</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Fecha de inicio</th>
+                                        <th scope="col">Modulo</th>
+                                        <th scope="col">Prioridad</th>
+                                        <th scope="col">ID Proyecto</th>
                                         <th scope="col">Detalles</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($user->projects as $project)
+                                    @foreach ($user->modules as $module)
                                         <tr>
-                                            <th>{{$project->id}}</th>
-                                            <td>{{$project->name}}</td>
-                                            <td>{{$project->company}}</td>
-                                            <td>{{$project->status}}</td>
-                                            <td>{{$project->start_date}}</td>
+                                            <th>{{$module->id}}</th>
+                                            <td>{{$module->name}}</td>
                                             <td>
-                                                <a href=" {{route('showProyect', $project->id)}}" type="button" class="btn btn-primary waves-effect waves-light"><i class="bx bx-show"></i></a>
+                                                <!-- SWITCH PARA ASIGNAR PRIORIDAD -->
+                                                @switch($module->priority)
+                                                    @case($module->priority < 4)
+                                                        <span class="badge badge-soft-info">Baja</span>
+                                                        @break
+                                                    @case($module->priority < 8)
+                                                        <span class="badge badge-soft-info">Media</span>
+                                                        @break
+                                                    @default
+                                                        <span class="badge badge-soft-info">Alta</span>
+                                                @endswitch
+                                            </td>
+                                            <td>{{$module->project_id}}</td>
+                                            <td>
+                                                <a href=" {{route('showModules', $module->id)}}" type="button" class="btn btn-primary waves-effect waves-light"><i class="bx bx-show"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach                                      
@@ -287,7 +297,7 @@
                         </div>       
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Posicion</label>
-                            <input type="text" class="form-control" name="position" id="position" id="formrow-firstname-input" placeholder="Ej: Jefe" maxlength="50" onkeypress="return soloLetras(event)" required>
+                            <input type="text" class="form-control" name="position" id="position" id="formrow-firstname-input" placeholder="Ej: 90806083439" maxlength="50" onkeypress="return solonumeros(event)" required>
                         </div>  
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Salario</label>
@@ -295,7 +305,7 @@
                         </div> 
                           <div class="mb-3" >
                             <label for="formrow-firstname-input" class="form-label">Token</label>
-                            <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802" maxlength="4" onkeypress="return solonumeros(event)" required>
+                            <input type="text" class="form-control" id="verify_code" name='verify_code' placeholder="Ej: 230802" maxlength="50" onkeypress="return solonumeros(event)" required>
                         </div>   
                         <div class="col-sm-12">
                             <div class="mt-4">
@@ -358,6 +368,8 @@
                         "previous":   "Anterior"
                     },
                     "emptyTable": "Sin datos para mostrar",
+                    "zeroRecords": "No se encontraron resultados",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
                 }
             });
         });
@@ -385,7 +397,6 @@
         }
 
         function loadInfo(){
-
             <?php 
                 $allProjects=0;
                 $pendingsProjects=0; 
@@ -406,7 +417,6 @@
             document.getElementById("pendignProjects").innerHTML = "{{$pendingsProjects}}";
              //Cambiar total de horas
             document.getElementById("totalHours").innerHTML = "{{$allhours}} hrs";
-            console.log('sexo');
         }
     </script>
 
