@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\module;
+use App\Models\Module;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -95,7 +95,7 @@ class ModuleController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'name' => 'required',
             'priority' => 'required|numeric',
             'project_id' => 'required|exists:projects,id'
         ]);
@@ -119,8 +119,7 @@ class ModuleController extends Controller
         if($module)
             $module->delete();
 
-     //   return redirect()->back()->with('info', 'Registro eliminado correctamente');
-     return redirect()->action([ModuleController::class, 'index'])->with('info', 'Registro eliminado correctamente');
+        return redirect()->back()->with('info', 'Registro eliminado correctamente');
 
     }
 
