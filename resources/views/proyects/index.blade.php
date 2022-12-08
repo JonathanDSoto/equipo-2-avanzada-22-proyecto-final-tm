@@ -97,7 +97,7 @@
                                 <th>Presupuesto</th>
                                 <th>Estado</th>
                                 <th>Fecha finalizacion</th>                       
-                                <th>accion</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
 
@@ -285,6 +285,8 @@
                             "previous":   "Anterior"
                         },
                         "emptyTable": "Sin datos para mostrar",
+                        "zeroRecords": "No se encontraron resultados",
+                        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
                     }
                 });
             });
