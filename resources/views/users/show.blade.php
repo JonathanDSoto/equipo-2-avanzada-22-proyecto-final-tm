@@ -185,8 +185,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Usuarios</h4>
-                            <button type="button" onclick="createUser()" class="btn btn-primary waves-effect waves-light btn-label" data-bs-toggle="modal" data-bs-target="#modalUsuarios"><i class="bx bxs-user-plus label-icon"></i>Crear usuario</button>
+                            <h4 class="card-title">Mis Proyectos</h4>
                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                 <thead>
                                     <tr>
