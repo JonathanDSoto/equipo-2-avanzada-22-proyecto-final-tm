@@ -34,13 +34,13 @@
                                         @csrf
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="text" class="form-control" id="email" placeholder="Email" name="email">
+                                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" maxlength="50" onkeypress="return soloLetrascorreo(event)" required>
                                         </div>
                 
                                         <div class="mb-3">
                                             <label class="form-label">Contraseña</label>
                                             <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" placeholder="*********" aria-label="Password" aria-describedby="password-addon" name="password">
+                                                <input type="password" class="form-control" placeholder="*********" aria-label="Password" aria-describedby="password-addon" name="password" required>
                                                 <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                         </div>
@@ -70,6 +70,8 @@
 
         <!-- JAVASCRIPT -->
         @include('layouts.scripts')
+        <script src="public/js/app.js"></script>
+
 
     </body>
 
