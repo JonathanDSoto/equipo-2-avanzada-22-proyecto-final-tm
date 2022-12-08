@@ -13,6 +13,13 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
+                    @foreach($errors->all() as $error)
+                            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                                <i class=" mdi mdi-block-helper me-2"></i>
+                                error! Datos incorrectos.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endforeach
                         <div class="card overflow-hidden">
                             <div class="bg-primary bg-soft">
                                 <div class="row">
