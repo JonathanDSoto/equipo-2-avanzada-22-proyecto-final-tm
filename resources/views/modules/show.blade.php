@@ -61,7 +61,7 @@
                 </div>
                 
                 <div>
-                    <button type="button" class="btn btn-primary waves-effect waves-light btn-label" onclick="addUser()" data-bs-toggle="modal" data-bs-target="#modalUser"><i class="bx bxs-folder-plus label-icon"></i>Asignar usuario</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light btn-label" onclick="addUser()" data-bs-toggle="modal" data-bs-target="#modalUser"><i class="bx bxs-user-plus label-icon"></i>Asignar usuario</button>
                 </div>
 
                 <h5 class="font-size-15 mt-4">Usuarios del modulo :</h5>
