@@ -269,6 +269,25 @@
                     }
                 });  
             })
+
+            $(document).ready(function() {
+                $('#datatable').DataTable( {
+                    "language": {
+                        "lengthMenu": "Mostrar _MENU_ registros por página",
+                        "search": "Buscar:",
+                        "info": "Mostrando página _PAGE_ de _PAGES_",
+                        "infoEmpty": "Sin registros",
+                        "paginate": {
+                            "first": "First",
+                            "last": "Last",
+                            "next":       "Siguiente",
+                            "previous":   "Anterior"
+                        },
+                        "emptyTable": "Sin datos para mostrar",
+                    }
+                });
+            });
+
             function editProject(val){
 
                 let boton = document.getElementById(val);

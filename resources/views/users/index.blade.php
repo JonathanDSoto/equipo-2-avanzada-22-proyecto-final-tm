@@ -30,12 +30,11 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Usuario</th>
-                        <th>telefono</th>
-                   {{--      <th>Direccion</th> --}}
+                        <th>Telefono</th>
                         <th>NSS</th>
-                        <th>Posision</th>
+                        <th>Posición</th>
                         <th>Salario</th>                        
-                        <th>accion</th>
+                        <th>Accion</th>
                     </tr>
                     </thead>
 
@@ -206,6 +205,24 @@
                 }
             });  
         })
+
+        $(document).ready(function() {
+            $('#datatable').DataTable( {
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "search": "Buscar:",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sin registros",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "Sin datos para mostrar",
+                }
+            });
+        });
 
         function editUser(val){
             let boton = document.getElementById(val);

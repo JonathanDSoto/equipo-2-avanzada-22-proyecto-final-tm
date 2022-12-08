@@ -145,7 +145,6 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-    
                 <h4 class="card-title">Modulos del proyecto</h4>
                 <button type="button" class="btn btn-primary waves-effect waves-light btn-label" onclick="createModule()" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-folder-plus label-icon"></i>Crear nuevo Modulo</button>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
