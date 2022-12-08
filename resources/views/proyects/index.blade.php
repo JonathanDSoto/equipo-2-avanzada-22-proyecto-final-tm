@@ -158,7 +158,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="name" placeholder="Ej: Daniel" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
+                                <input type="text" class="form-control" id="name" placeholder="Ej: E-commerce" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
                             </div>                        
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Descripción</label>
@@ -230,7 +230,7 @@
                             </div> 
                             
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Guardar Cambios</button>
                             </div>
 
                             <input type="hidden" id="id" name="id">
