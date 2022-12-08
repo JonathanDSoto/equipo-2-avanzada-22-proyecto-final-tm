@@ -55,7 +55,20 @@
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
                         <h5 class="text-truncate font-size-15">Estado</h5>
-                        <p class="text-muted"><span class="badge bg-info">Activo</span></p>
+                        <!-- SWITCH PARA ASIGNAR PRIORIDAD -->
+                        @switch($project[0]->status)
+                            @case($project[0]->status == 'Pendiente')
+                                <span class="badge badge-soft-warning">Pendiente</span>
+                                @break
+                            @case($project[0]->status == 'Aprobado')
+                                <span class="badge badge-soft-info">Aprobado</span>
+                                @break
+                            @case($project[0]->status == 'Finalizado')
+                                <span class="badge badge-soft-success">Finalizado</span>
+                                @break
+                            @default
+                                <span class="badge badge-soft-danger">Cancelado</span>
+                        @endswitch
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
                         <h5 class="text-truncate font-size-15">Presupuesto</h5>
@@ -105,8 +118,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($project->users as $user)
-                                {{-- @foreach($module->users as $user) --}}
+                            @foreach($project[0]->modules as $module)
+                                @foreach($module->users as $user)
                                     <tr>
                                         <td style="width: 50px;">
                                             <a href=" {{route('showUser', $user->id)}}" class=" text-primary">
@@ -130,7 +143,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             @endforeach
                         </tbody>
                     </table>
@@ -151,8 +164,8 @@
                         <th>Nombre</th>
                         <th>Prioridad</th>
                         <th>Proyecto</th>
-                        <th>NO.usuarios</th>                     
-                        <th>accion</th>
+                        <th>No. Usuarios</th>                     
+                        <th>Acción</th>
                     </tr>
                     </thead>
     
@@ -204,8 +217,7 @@
                                     <i class="mdi mdi-dots-horizontal font-size-18"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
-                                    <button class="dropdown-item" id="{{ $module->id }}" data-module='{{ json_encode($module) }}' onclick="editModule({{ $module->id }})" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-pencil label-icon"></i>Editar</button>  
-                                    
+                                    <button class="dropdown-item" id="{{ $module->id }}" data-module='{{ json_encode($module) }}' onclick="editModule({{ $module->id }})" data-bs-toggle="modal" data-bs-target="#modalModules"><i class="bx bxs-pencil label-icon"></i>Editar</button>
                                     <form class="eliminar" action="{{route('destroyModule', $module->id)}}" method="POST">
                                         @method('delete')
                                         @csrf
@@ -247,27 +259,27 @@
                         
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nombre del modulo" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
+                            <input type="text" class="form-control" id="nameM" placeholder="Nombre del modulo" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
                         </div>      
 
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
-                                <select id="priority" class="form-select" name="priority" required>
-                                    <option value="10">Alta</option>
+                                <select id="priorityM" class="form-select" name="priority" required>
+                                    <option value="3">Alta</option>
                                     <option value="7">Media</option>
-                                    <option value="3">Baja</option>
+                                    <option value="10">Baja</option>
                                 </select>
                             </div>
                         </div>  
 
-                        <input type="hidden" id="project_id" name="project_id" value={{$project[0]->id}}>                                             
+                        <input type="hidden" id="project_idM" name="project_id" value="{{$project[0]->id}}">                                             
                          
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                         </div>
 
-                        <input type="hidden" id="id" name="id">
+                        <input type="hidden" id="idM" name="id">
                     </form>
 
                 </div>
@@ -438,15 +450,17 @@
                         "previous":   "Anterior"
                     },
                     "emptyTable": "Sin datos para mostrar",
+                    "zeroRecords": "No se encontraron resultados",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
                 }
             } );
         } );
 
         function createModule(){
 
-            document.getElementById("id").value = "";
-            document.getElementById("name").value = "";
-            document.getElementById("priority").value = "";
+            document.getElementById("idM").value = "";
+            document.getElementById("nameM").value = "";
+            document.getElementById("priorityM").value = "";
 
             //Cambiar url del form
             formulario.setAttribute('action', "{{route('storeModule')}}");
@@ -461,9 +475,9 @@
 
             let boton = document.getElementById(val);
             let module = JSON.parse(boton.getAttribute("data-module"));
-
-            document.getElementById("id").value = module.id;
-            document.getElementById("name").value = module.name;
+            console.log(module)
+            document.getElementById("idM").value = module.id;
+            document.getElementById("nameM").value = module.name;
 
             var valModule = module.priority;
             switch (true) {
@@ -474,7 +488,7 @@
                 default:
                     valModule = 10; break;
             }
-            document.getElementById("priority").value = valModule;
+            document.getElementById("priorityM").value = valModule;
 
             //Cambiar url del form
             formulario.setAttribute('action', "{{route('updateModule', '')}}"+"/"+module.id);
