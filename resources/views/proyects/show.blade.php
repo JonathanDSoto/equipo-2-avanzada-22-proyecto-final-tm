@@ -67,16 +67,7 @@
                 <h5 class="font-size-15 mt-4">Descripcion del proyecto:</h5>
                 <p class="text-muted">{{$project[0]->description}}</p>
 
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Progreso del proyecto</h4>
-                        <div class="">
-                            <div class="progress progress-xl">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="row task-dates">
                     <div class="col-sm-4 col-6">

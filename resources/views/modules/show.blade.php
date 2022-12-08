@@ -108,28 +108,7 @@
                     </tbody>
                 </table>
                 
-                <div class="card">
-                    <div class="card-body">
-
-                        <h4 class="card-title">Progreso del modulo</h4>
-
-                        @if($module[0]->users->count() != 0)
-                            @foreach($module[0]->users as $user)
-                                <div class="">
-                                    <div class="progress progress-xl">
-                                        <div class="progress-bar" role="progressbar" style="width: {{$user->pivot->percentage_advance}}%;" aria-valuenow="{{$user->pivot->percentage_advance}}" aria-valuemin="0" aria-valuemax="100">{{$user->pivot->percentage_advance}}</div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                                <div class="">
-                                    <div class="progress progress-xl">
-                                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                    </div>
-                                </div>
-                        @endif
-                    </div>
-                </div>
+                
                 
                 <div class="row task-dates">
                     <div class="col-sm-4 col-6">
