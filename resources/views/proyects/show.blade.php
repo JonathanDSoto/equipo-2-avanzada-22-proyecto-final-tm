@@ -256,13 +256,13 @@
                         
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nombre del modulo" name="name">
+                            <input type="text" class="form-control" id="name" placeholder="Nombre del modulo" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
                         </div>      
 
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Prioridad</label>
                             <div class="col-md-10">
-                                <select id="priority" class="form-select" name="priority">
+                                <select id="priority" class="form-select" name="priority" required>
                                     <option value="10">Alta</option>
                                     <option value="7">Media</option>
                                     <option value="3">Baja</option>
@@ -304,36 +304,36 @@
                         @csrf
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name2" placeholder="Ej: 230802" name="name">
+                            <input type="text" class="form-control" id="name2" placeholder="Ej: Daniel" name="name" maxlength="50" onkeypress="return soloLetras(event)" required>
                         </div>                        
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Descripcion</label>
-                            <input type="text" class="form-control" id="description" placeholder="Ej: 230802" name="description">
+                            <input type="text" class="form-control" id="description" placeholder="Ej: Este proyecto es..." name="description" maxlength="100" onkeypress="return soloLetras(event)" required>
                         </div>
                                                     
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Lider del proyecto</label>
-                            <input type="text" class="form-control" id="leader" placeholder="Ej: juanPC" name="leader">
+                            <input type="text" class="form-control" id="leader" placeholder="Ej: Ignacio" name="leader" maxlength="50" onkeypress="return soloLetras(event)" required>
                         </div>                     
                         <div class="row">
                             <div class="col-md-6">                                
                                 <div class="mb-3">
                                     <label for="formrow-firstname-input" class="form-label">compania</label>
-                                    <input type="text" class="form-control" id="company" placeholder="Ej: juan perez santos" name="company">
+                                    <input type="text" class="form-control" id="company" placeholder="Ej: Microsoft" name="company" maxlength="50" onkeypress="return soloLetras(event)" required>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">                                  
                                     <div class="mb-4">
                                         <label for="formrow-firstname-input" class="form-label">Numero de usuarios</label>
-                                        <input type="text" class="form-control" id="user_amount" placeholder="Ej: juanPC" name="user_amount">
+                                        <input type="text" class="form-control" id="user_amount" placeholder="Ej: 5" name="user_amount" maxlength="5" onkeypress="return solonumeros(event)" required>
                                     </div>                                 
                             </div>
 
                             <div class="col-md-6">                                  
                                 <div class="mb-4">
                                     <label for="formrow-firstname-input" class="form-label">Presupuesto</label>
-                                    <input type="text" class="form-control" id="budget" placeholder="Ej: 50000" name="budget">
+                                    <input type="text" class="form-control" id="budget" placeholder="Ej: 50000" name="budget" maxlength="10" onkeypress="return solonumeros(event)" required>
                                 </div>                                 
                         </div>
                         </div>
@@ -341,22 +341,22 @@
                             <div class="col-md-6">                                
                                 <div class="mb-3">
                                     <label for="formrow-firstname-input" class="form-label">Fecha inicio</label>
-                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <input class="form-control" type="date" id="start_date" name="start_date" required>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">                                  
                                     <div class="mb-4">
                                         <label for="formrow-firstname-input" class="form-label">Fecha fin</label>
-                                        <input class="form-control" type="date" id="end_date" name="end_date">
+                                        <input class="form-control" type="date" id="end_date" name="end_date" required>
                                     </div>                                 
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Estado</label>
                             <div class="col-md-10">
-                                <select class="form-select" id="projectStatus" name="status">
-                                    
+                                <select class="form-select" id="projectStatus" name="status" required>
+                                     
                                     <option value="Pendiente">Pendiente</option>
                                     <option value="Aprobado">Aprobado</option>
                                     <option value="Cancelado">Cancelado</option>
@@ -392,6 +392,7 @@
 @endsection
 
 @section('scripts')
+<script src="public/js/app.js"></script>
         <script type="text/javascript">
             $('.deleteProject').submit(function(ev){
                 ev.preventDefault();

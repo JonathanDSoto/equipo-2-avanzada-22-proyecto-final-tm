@@ -187,7 +187,7 @@
                                 <div class="col-md-6">                                  
                                     <div class="mb-4">
                                         <label for="formrow-firstname-input" class="form-label">Presupuesto</label>
-                                        <input type="text" class="form-control" id="budget" placeholder="Ej: 50000" name="budget" maxlength="5" onkeypress="return solonumeros(event)" required>
+                                        <input type="text" class="form-control" id="budget" placeholder="Ej: 50000" name="budget" maxlength="10" onkeypress="return solonumeros(event)" required>
                                     </div>                                 
                             </div>
                             </div>
