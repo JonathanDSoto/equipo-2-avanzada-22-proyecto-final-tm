@@ -284,7 +284,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">NSS</label>
-                            <input type="text" class="form-control" id="NSS" name="NSS" id="formrow-firstname-input" placeholder="Ej: 90806083439" maxlength="11" onkeypress="return solonumeros(event)" required>
+                            <input type="text" class="form-control" id="NSS" name="NSS" id="formrow-firstname-input" placeholder="Ej: 90806083439" maxlength="10" onkeypress="return solonumeros(event)" required>
                         </div>       
                         <div class="mb-3">
                             <label for="formrow-firstname-input" class="form-label">Posicion</label>
